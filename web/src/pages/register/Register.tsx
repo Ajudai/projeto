@@ -4,8 +4,6 @@ import styles from './register.module.scss'
 
 const Register = () => {
     const [nome, setNome] = useState<string>();
-    
-    useEffect(() => {}, []);
 
     return (
         <main>

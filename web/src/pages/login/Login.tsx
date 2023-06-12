@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./login.module.scss";
 import Input from "../../components/input/Input";
+import Button from "../../components/button/Button";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,6 +18,7 @@ const Login = () => {
         <Input label="Email" onChange={(e) => setEmail(e.target.value)} />
         <Input label="Senha" onChange={(e) => setPassword(e.target.value)} />
       </div>
+      <Button size="medium" disabled rounded onClick={() => console.log('Logado')} label="Login"/>
     </main>
   );
 };
