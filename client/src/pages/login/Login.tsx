@@ -8,7 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   return (
-    <main>
+    <main className={styles.loginPageMain}>
       <div className={styles.loginPageImg}>
         <h1 className={styles.loginPageH1}>
           Recife registra alta poluição no Rio Capibaribe
@@ -17,8 +17,17 @@ const Login = () => {
       <div>
         <Input label="Email" onChange={(e) => setEmail(e.target.value)} />
         <Input label="Senha" onChange={(e) => setPassword(e.target.value)} />
+        <p className={styles.loginPageForgetPasswordP}>Esqueci minha senha</p>
+        <div className={styles.loginPageLoginButton}>
+          <Button
+            size="medium"
+            disabled
+            rounded
+            onClick={() => console.log("Logado")}
+            label="Login"
+          />
+        </div>
       </div>
-      <Button size="medium" disabled rounded onClick={() => console.log('Logado')} label="Login"/>
     </main>
   );
 };

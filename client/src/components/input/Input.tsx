@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import styles from "./input.module.scss";
 
 interface IInput {
@@ -19,4 +19,4 @@ const Input: React.FC<IInput> = ({ label, onChange }) => {
   );
 };
 
-export default Input
+export default Input;
