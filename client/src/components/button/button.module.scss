@@ -1,3 +1,5 @@
+@import "../../styles/colors";
+
 .buttonComponentDiv {
   width: 100%;
   padding: 8px 12px;
@@ -11,7 +13,7 @@
 
 .buttonComponentEnabled {
   color: white;
-  background-color: #16161d;
+  background-color: $fonte-cor-primaria;
   cursor: pointer;
   border: none;
   display: flex;
