@@ -14,6 +14,7 @@ const Input: React.FC<IInput> = ({ label, onChange }) => {
         className={styles.inputComponentInput}
         onChange={onChange}
         type="text"
+        maxLength={40}
       />
     </div>
   );

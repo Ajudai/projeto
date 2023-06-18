@@ -1,0 +1,105 @@
+@import "../../styles/colors";
+@import "../../styles/fonts";
+
+*{
+    outline: none;
+}
+
+.registerPageMain {
+    width: 100%;
+    background-color: $background-pages-default;
+}
+
+.registerPageImg {
+    width: 100%;
+    height: 180px;
+    background-image: url("../../assets/imgLogin.png");
+    object-fit: cover;
+    background-repeat: no-repeat;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.registerPageH1 {
+    font-size: 1rem;
+    font-family: $font-family-principal;
+    color: $fonte-cor-secundaria;
+    padding: 8px;
+    line-height: 21px;
+}
+
+.registerPageH2{
+    font-size: 0.5rem;
+    font-family: $font-family-principal;
+    color: $fonte-cor-secundaria;
+    font-weight: 300;
+    padding: 8px;
+    line-height: 10px;
+}
+
+.registerPagePasswordIcon{
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    top: -12px;
+    left: -8px;
+}
+
+.registerCheckbox {
+    font-size: 0.7rem;
+    font-family: $font-family-principal;
+    color: $fonte-cor-primaria;
+    padding: 12px;
+    display: flex;
+    gap: 4px;
+}
+
+.registerPageRegisterButton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 32px;
+}
+
+.registerPageH3 {
+    font-size: 1rem;
+    font-family: $font-family-principal;
+    color: $fonte-cor-primaria;
+    text-align: center;
+    width: 50%;
+}
+
+.registerPageRegisterMedia{
+    display: flex;
+    align-items: center;
+}
+
+.registerPageRegisterBorder{
+    height: 1px;
+    width: 50%;
+    border-bottom: 1px solid $fonte-cor-primaria;
+}
+
+.registerPageRegisterSocialMedia{
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    padding: 24px;
+}
+
+.registerPageRegisterSocialMedia>.registerPageGoogleMedia,
+.registerPageRegisterSocialMedia>.registerPageFacebookMedia{
+    cursor: pointer;
+}
+
+.registerPageLogin{
+    text-align: center;
+    font-family: $font-family-secundaria;
+    font-size: 0.7rem;
+    padding: 24px;
+}
+
+.registerPageLogin a{
+    color: $fonte-cor-primaria;
+}
