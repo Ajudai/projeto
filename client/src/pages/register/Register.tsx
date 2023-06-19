@@ -3,7 +3,6 @@ import axios from "axios";
 import styles from './register.module.scss';
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
-import passwordIcon from "../../assets/passwordIcon.svg";
 import facebookMedia from "../../assets/facebookMedia.svg";
 import googleMedia from "../../assets/googleMedia.svg";
 
@@ -21,12 +20,7 @@ const Register = () => {
             <div>
                 <Input label="Nome" onChange={(e) => setNome(e.target.value)} />
                 <Input label="Email" onChange={(e) => setEmail(e.target.value)} />
-                <div className={styles.registerPagePassword}>
                     <Input label="Senha" onChange={(e) => setPassword(e.target.value)}/>
-                    <div className={styles.registerPagePasswordIcon}>
-                    <img src={passwordIcon} className={styles.registerPagePasswordIcon}/>
-                    </div>
-                </div>
                 <div className={styles.registerCheckbox}>
                 <input type="checkbox" id="registerCheckbox"></input>
                 <label htmlFor="registerCheckbox">Concordo com os termos de uso</label>

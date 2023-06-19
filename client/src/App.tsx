@@ -1,11 +1,11 @@
-import './App.scss'
-import Register from './pages/register/Register'
+import './App.scss';
+import ForgotPassword from './pages/token/ForgotPassword';
 
 function App() {
 
   return (
     <>
-    <Register />
+    <ForgotPassword />
     </>
   )
 }

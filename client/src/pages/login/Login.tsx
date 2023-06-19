@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./login.module.scss";
-import Input from "../../components/input/Input";
+import Input from "../../components/input/inputPassword";
 import Button from "../../components/button/Button";
 
 const Login = () => {
