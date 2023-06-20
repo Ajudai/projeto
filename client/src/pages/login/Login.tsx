@@ -3,6 +3,7 @@ import styles from "./login.module.scss";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import axios from "axios";
+import logo from '../../assets/logo.svg'
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -26,10 +27,12 @@ const Login = () => {
     <main className={styles.loginPageMain}>
       <div className={styles.loginPageImg}>
         <h1 className={styles.loginPageH1}>
-          Recife registra alta poluição no Rio Capibaribe
+          Recife registra alta poluição <br/> no Rio Capibaribe
         </h1>
+        <img src={logo} alt="Ajudaí logo" className={styles.loginPageLogoImg} />
       </div>
-      <div>
+      <div className={styles.loginPageinputsBox}>
+        <div className={styles.inputsBoxContainer}>
         <Input label="Email" onChange={(e) => setEmail(e.target.value)} />
         <Input label="Senha" onChange={(e) => setPassword(e.target.value)} />
         <p className={styles.loginPageForgetPasswordP}>Esqueci minha senha</p>
@@ -41,6 +44,7 @@ const Login = () => {
             onClick={login}
             label="Login"
           />
+        </div>
         </div>
       </div>
     </main>

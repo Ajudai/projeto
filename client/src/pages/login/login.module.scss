@@ -11,10 +11,15 @@
   height: 181px;
   background-image: url("../../assets/imgLogin.png");
   object-fit: cover;
+  background-size: cover;
   background-repeat: no-repeat;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+}
+
+.loginPageLogoImg {
+  display: none;
 }
 
 .loginPageH1 {
@@ -36,3 +41,65 @@
   justify-content: flex-end;
   padding: 12px;
 }
+
+@media (min-width: 576px) {
+  .loginPageH1 {
+    font-size: 1.4rem;
+    font-family: $font-family-principal;
+    color: $fonte-cor-secundaria;
+    padding: 8px;
+  }
+
+  .loginPageinputsBox {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .inputsBoxContainer {
+    width: 80%;
+  }
+}
+
+@media (min-width: 768px) {
+  .loginPageMain {
+    min-height: 100vh;
+    background-image: url("../../assets/imgLogin.png");
+    object-fit: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+  }
+
+  .loginPageImg {
+    width: 50%;
+    background-image: unset;
+    justify-content: center;
+  }
+
+  .loginPageH1 {
+    display: none;
+  }
+
+  .loginPageLogoImg {
+    display: block;
+  }
+
+  .loginPageinputsBox {
+    width: 50%;
+    background-color: $background-pages-default;
+    height: 50vh;
+  }
+}
+
+@media (min-width: 992px) {
+  .loginPageinputsBox {
+    width: 40%;
+    height: 70vh;
+  }
+ }
