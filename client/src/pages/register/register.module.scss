@@ -21,21 +21,16 @@
     flex-direction: column;
 }
 
-.registerPageH1 {
+.registerPageLogoImg{
+    display: none;
+}
+
+.registerPageMobileH1 {
     font-size: 1rem;
     font-family: $font-family-principal;
     color: $fonte-cor-secundaria;
     padding: 8px;
     line-height: 21px;
-}
-
-.registerPageH2{
-    font-size: 0.5rem;
-    font-family: $font-family-principal;
-    color: $fonte-cor-secundaria;
-    font-weight: 300;
-    padding: 8px;
-    line-height: 10px;
 }
 
 .registerCheckbox {
