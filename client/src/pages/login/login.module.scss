@@ -22,11 +22,15 @@
   display: none;
 }
 
-.loginPageH1 {
+.loginPageMobileP {
   font-size: 1rem;
   font-family: $font-family-principal;
   color: $fonte-cor-secundaria;
   padding: 8px;
+}
+
+.loginPageDesktopContentContainer {
+  display: none;
 }
 
 .loginPageForgetPasswordP {
@@ -43,7 +47,7 @@
 }
 
 @media (min-width: 576px) {
-  .loginPageH1 {
+  .loginPageMobileP {
     font-size: 1.4rem;
     font-family: $font-family-principal;
     color: $fonte-cor-secundaria;
@@ -66,7 +70,7 @@
 @media (min-width: 768px) {
   .loginPageMain {
     min-height: 100vh;
-    background-image: url("../../assets/imgLogin.png");
+    background-image: url("../../assets/login-photo-bg.png");
     object-fit: cover;
     background-size: cover;
     background-repeat: no-repeat;
@@ -82,8 +86,38 @@
     justify-content: center;
   }
 
-  .loginPageH1 {
+  .loginPageMobileP {
     display: none;
+  }
+
+  .loginPageDesktopContentContainerP {
+    font-family: $font-family-principal;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 2;
+  }
+
+  .loginPageDesktopContentContainerSpan {
+    display: flex;
+    gap: 8px;
+  }
+
+  .loginPageDesktopContentContainerSpanP {
+    font-family: $font-family-principal;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+
+  .loginPageDesktopContentContainerSpanA {
+    font-family: $font-family-principal;
+    font-weight: 700;
+    border-bottom: 1px solid #000000;
+    letter-spacing: 1px;
+  }
+
+  .loginPageDesktopContentContainer {
+    display: block;
   }
 
   .loginPageLogoImg {
@@ -93,13 +127,12 @@
   .loginPageinputsBox {
     width: 50%;
     background-color: $background-pages-default;
-    height: 50vh;
+    height: 70vh;    border-radius: 5px;
   }
 }
 
 @media (min-width: 992px) {
   .loginPageinputsBox {
-    width: 40%;
-    height: 70vh;
+    width: 45%;
   }
- }
+}

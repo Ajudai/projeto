@@ -14,39 +14,50 @@ const Login = () => {
       userEmail: email,
       userPassword: password
     })
-    .then((res) => {
-      localStorage.setItem("userData", JSON.stringify(res?.data));
-      console.log(res.data)
-    })
-    .catch((error) => {
-      console.error("Erro ao logar", error.response.data.message)
-    })
+      .then((res) => {
+        localStorage.setItem("userData", JSON.stringify(res?.data));
+        console.log(res.data)
+      })
+      .catch((error) => {
+        console.error("Erro ao logar", error.response.data.message)
+      })
   }
 
   return (
     <main className={styles.loginPageMain}>
-      <div className={styles.loginPageImg}>
-        <h1 className={styles.loginPageH1}>
-          Recife registra alta poluição <br/> no Rio Capibaribe
-        </h1>
+
+      <header className={styles.loginPageImg}>
+        <p className={styles.loginPageMobileP}>
+          Recife registra alta poluição <br /> no Rio Capibaribe
+        </p>
         <img src={logo} alt="Ajudaí logo" className={styles.loginPageLogoImg} />
-      </div>
+      </header>
+
       <div className={styles.loginPageinputsBox}>
+
         <div className={styles.inputsBoxContainer}>
-        <Input label="Email" onChange={(e) => setEmail(e.target.value)} />
-        <Input label="Senha" onChange={(e) => setPassword(e.target.value)} />
-        <p className={styles.loginPageForgetPasswordP}>Esqueci minha senha</p>
-        <div className={styles.loginPageLoginButton}>
-          <Button
-            size="medium"
-            disabled={false}
-            rounded
-            onClick={login}
-            label="Login"
-          />
+        <div className={styles.loginPageDesktopContentContainer}>
+          <p className={styles.loginPageDesktopContentContainerP}>Bem vindo(a)</p>
+          <span className={styles.loginPageDesktopContentContainerSpan}>
+            <p className={styles.loginPageDesktopContentContainerSpanP}>Não tem uma conta?</p>
+            <p className={styles.loginPageDesktopContentContainerSpanA}>Abra uma</p>
+          </span>
         </div>
+          <Input label="Email" onChange={(e) => setEmail(e.target.value)} />
+          <Input label="Senha" onChange={(e) => setPassword(e.target.value)} />
+          <p className={styles.loginPageForgetPasswordP}>Esqueci minha senha</p>
+          <div className={styles.loginPageLoginButton}>
+            <Button
+              size="medium"
+              disabled={false}
+              rounded
+              onClick={login}
+              label="Login"
+            />
+          </div>
         </div>
       </div>
+
     </main>
   );
 };
