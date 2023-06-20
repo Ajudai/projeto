@@ -1,11 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./login.module.scss";
-import Input from "../../components/input/inputPassword";
+import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const login = async () => {
+    await axios.post('http://localhost:5000/login', {
+      userEmail: email,
+      userPassword: password
+    })
+    .then((res) => {
+      localStorage.setItem("userData", JSON.stringify(res?.data));
+      console.log(res.data)
+    })
+    .catch((error) => {
+      console.error("Erro ao logar", error.response.data.message)
+    })
+  }
 
   return (
     <main className={styles.loginPageMain}>
@@ -21,9 +36,9 @@ const Login = () => {
         <div className={styles.loginPageLoginButton}>
           <Button
             size="medium"
-            disabled
+            disabled={false}
             rounded
-            onClick={() => console.log("Logado")}
+            onClick={login}
             label="Login"
           />
         </div>
