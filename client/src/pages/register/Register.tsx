@@ -1,42 +1,43 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
 import styles from './register.module.scss';
-import Input from "../../components/input/Input";
-import Button from "../../components/button/Button";
-import logo from "../../assets/logo.svg"
+import Input from '../../components/input/Input';
+import Button from '../../components/button/Button';
+import logo from '../../assets/logo.svg';
 
 const Register = () => {
-  const [name, setName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const register = async () => {
-    await axios.post('http://localhost:5000/login', {
-      userName: name,
-      userPhoneNumber: phoneNumber,
-      userEmail: email,
-      userPassword: password
-    })
+    await axios
+      .post('http://localhost:5000/login', {
+        userName: name,
+        userPhoneNumber: phoneNumber,
+        userEmail: email,
+        userPassword: password,
+      })
       .then((res) => {
-        localStorage.setItem("userData", JSON.stringify(res?.data));
-        console.log(res.data)
+        localStorage.setItem('userData', JSON.stringify(res?.data));
+        console.log(res.data);
       })
       .catch((error) => {
-        console.error("Erro ao logar", error.response.data.message)
-      })
-  }
+        console.error('Erro ao logar', error.response.data.message);
+      });
+  };
 
   return (
     <main className={styles.registerPageMain}>
-
       <header className={styles.registerPageImg}>
-        <h1 className={styles.registerPageMobileH1}>Recife registra alta poluição <br /> no Rio Capibaribe</h1>
+        <h1 className={styles.registerPageMobileH1}>
+          Recife registra alta poluição <br /> no Rio Capibaribe
+        </h1>
         <img src={logo} alt="Ajudaí logo" className={styles.registerPageLogoImg} />
       </header>
 
       <div className={styles.registerPageinputsBox}>
-
         <div className={styles.inputsBoxContainer}>
           <div className={styles.registerPageDesktopContentContainer}>
             <p className={styles.registerPageDesktopContentContainerP}>Criar conta</p>
@@ -56,17 +57,10 @@ const Register = () => {
             <label htmlFor="registerCheckbox">Concordo com os termos de uso</label>
           </div>
           <div className={styles.registerPageRegisterButton}>
-            <Button
-              size="medium"
-              disabled
-              rounded
-              onClick={register}
-              label="Criar conta"
-            />
+            <Button size="medium" disabled rounded onClick={register} label="Criar conta" />
           </div>
           <p className={styles.registerPagePP}>Política de Privacidade</p>
         </div>
-
       </div>
     </main>
   );
