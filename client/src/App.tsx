@@ -3,13 +3,12 @@ import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 
 function App() {
-
   return (
     <>
-    <Login />
-    <Register />
+      <Login />
+      <Register />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

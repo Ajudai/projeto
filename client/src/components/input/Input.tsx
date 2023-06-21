@@ -1,19 +1,22 @@
-import React from "react";
-import styles from "./input.module.scss";
+import React from 'react';
+import styles from './input.module.scss';
 
 interface IInput {
   label: string;
+  // eslint-disable-next-line no-unused-vars
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  password?: boolean;
+  error?: boolean;
 }
 
-const Input: React.FC<IInput> = ({ label, onChange }) => {
+const Input: React.FC<IInput> = ({ label, onChange, password, error }) => {
   return (
     <div className={styles.inputComponentDiv}>
-      <p className={styles.inputComponentLabel}>{label}</p>
+      <p className={error ? styles.inputComponentLabelError : styles.inputComponentLabel}>{label}</p>
       <input
-        className={styles.inputComponentInput}
+        className={error ? styles.inputComponentInputError : styles.inputComponentInput}
         onChange={onChange}
-        type="text"
+        type={password ? 'password' : 'text'}
         maxLength={40}
       />
     </div>

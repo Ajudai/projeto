@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from './imageChanger.module.scss'
+import styles from './imageChanger.module.scss';
 const Componente = () => {
   const [background, setBackground] = useState('#000'); // Define a cor de fundo inicial
 
