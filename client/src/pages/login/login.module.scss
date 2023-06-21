@@ -29,6 +29,26 @@
   padding: 8px;
 }
 
+.inputsBoxContainer {
+  padding: 16px;
+  margin-top: 12%;
+}
+
+.inputsBoxContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.loginPageErrorP {
+  font-size: 1rem;
+  font-family: $font-family-principal;
+  color: $color-error-default;
+}
+
 .loginPageDesktopContentContainer {
   display: none;
 }
@@ -36,7 +56,10 @@
 .loginPageForgetPasswordP {
   font-family: $font-family-principal;
   font-size: 0.7rem;
-  padding: 12px 12px;
+}
+
+.loginPageForgetPasswordP:hover {
+  cursor: pointer;
 }
 
 .loginPageLoginButton {
@@ -89,7 +112,10 @@
   .loginPageMobileP {
     display: none;
   }
-
+  .loginPageForgetPasswordP {
+    font-family: $font-family-principal;
+    font-size: 1rem;
+  }
   .loginPageDesktopContentContainerP {
     font-family: $font-family-principal;
     font-size: 1.5rem;
@@ -101,6 +127,7 @@
   .loginPageDesktopContentContainerSpan {
     display: flex;
     gap: 8px;
+    cursor: pointer;
   }
 
   .loginPageDesktopContentContainerSpanP {
@@ -112,8 +139,12 @@
   .loginPageDesktopContentContainerSpanA {
     font-family: $font-family-principal;
     font-weight: 700;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid $fonte-cor-primaria;
     letter-spacing: 1px;
+  }
+
+  .loginPageDesktopContentContainerSpanA > a {
+    color: $fonte-cor-primaria;
   }
 
   .loginPageDesktopContentContainer {

@@ -3,7 +3,6 @@
 
 .inputComponentDiv {
   width: 100%;
-  padding: 64px 12px 0;
 }
 
 .inputComponentLabel {
@@ -13,9 +12,24 @@
   color: $fonte-cor-primaria;
 }
 
+.inputComponentLabelError {
+  font-family: $font-family-principal;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: $color-error-default;
+}
+
 .inputComponentInput {
   border: none;
   border-bottom: 0.5px solid $fonte-cor-primaria;
+  width: 100%;
+  padding: 8px;
+  background-color: $background-pages-default;
+}
+
+.inputComponentInputError {
+  border: none;
+  border-bottom: 0.5px solid $color-error-default;
   width: 100%;
   padding: 8px;
   background-color: $background-pages-default;
