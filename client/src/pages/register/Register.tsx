@@ -3,18 +3,18 @@ import axios from "axios";
 import styles from './register.module.scss';
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
-import facebookMedia from "../../assets/facebookMedia.svg";
-import googleMedia from "../../assets/googleMedia.svg";
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/logo.svg"
 
 const Register = () => {
-    const [nome, setNome] = useState<string>();
+    const [name, setName] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const register = async () => {
-        await axios.post('http://localhost:5000/register', {
-          userName: nome,
+        await axios.post('http://localhost:5000/login', {
+          userName: name,
+          userPhoneNumber: phoneNumber,
           userEmail: email,
           userPassword: password
         })
@@ -23,46 +23,52 @@ const Register = () => {
             console.log(res.data)
           })
           .catch((error) => {
-            console.error("Erro ao cadastrar", error.response.data.message)
+            console.error("Erro ao logar", error.response.data.message)
           })
       }
 
     return (
         <main className={styles.registerPageMain}>
-            <div className={styles.registerPageImg}>
-                <h1 className={styles.registerPageH1}>Recife registra alta poluição no Rio Capibaribe</h1>
+            
+          <header className={styles.registerPageImg}>
+            <h1 className={styles.registerPageMobileH1}>Recife registra alta poluição <br/> no Rio Capibaribe</h1>
+            <img src={logo} alt="Ajudaí logo" className={styles.registerPageLogoImg} />
+          </header>
+
+          <div className={styles.registerPageinputsBox}>
+
+            <div className={styles.inputsBoxContainer}>
+            <div className={styles.registerPageDesktopContentContainer}>
+              <p className={styles.registerPageDesktopContentContainerP}>Criar conta</p>
+              <span className={styles.registerPageDesktopContentContainerSpan}>
+                <p className={styles.registerPageDesktopContentContainerSpanP}>Já tem conta?</p>
+                <p className={styles.registerPageDesktopContentContainerSpanA}>Faça login</p>
+              </span>
             </div>
-            <img src={logo} alt="Ajudaí logo" className={styles.PageLogoImg} />
-            <div>
-                <Input label="Nome" onChange={(e) => setNome(e.target.value)} />
-                <Input label="Telefone" onChange={(e) => setPassword(e.target.value)}/>
-                <Input label="Email" onChange={(e) => setEmail(e.target.value)} />
-                <Input label="Senha" onChange={(e) => setPassword(e.target.value)}/>
-                <div className={styles.registerCheckbox}>
+
+              <Input label="Nome" onChange={(e) => setName(e.target.value)} />
+              <Input label="Telefone" onChange={(e) => setPhoneNumber(e.target.value)} />
+              <Input label="Email" onChange={(e) => setEmail(e.target.value)} />
+              <Input label="Senha" onChange={(e) => setPassword(e.target.value)}/>
+
+              <div className={styles.registerCheckbox}>
                 <input type="checkbox" id="registerCheckbox"></input>
                 <label htmlFor="registerCheckbox">Concordo com os termos de uso</label>
-                </div>
-                <div className={styles.registerPageRegisterButton}>
-                    <Button
-                    size="medium"
-                    disabled
-                    rounded
-                    onClick={register}
-                    label="Continuar"
-                    />
-                </div>
-                <div className={styles.registerPageRegisterMedia}>
-                    <div className={styles.registerPageRegisterBorder}></div>
-                    <h3 className={styles.registerPageH3}>ou</h3>
-                    <div className={styles.registerPageRegisterBorder}></div>
-                </div>
-                <nav className={styles.registerPageRegisterSocialMedia}>
-                    <img src={googleMedia} className={styles.registerPageGoogleMedia}/>
-                    <img src={facebookMedia} className={styles.registerPageFacebookMedia}/>
-                </nav>
-                <p className={styles.registerPageLogin}>Já tem uma conta? <a href="#Faça login">Faça login</a></p>
+              </div>
+              <div className={styles.registerPageRegisterButton}>
+                <Button
+                  size="medium"
+                  disabled
+                  rounded
+                  onClick={register}
+                  label="Criar conta"
+                />
+              </div>
+              <p className={styles.registerPagePP}>Política de Privacidade</p>
             </div>
-        </main>
+            
+          </div>
+      </main>
     );
 };
 
