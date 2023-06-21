@@ -1,29 +1,29 @@
-@import "../../styles/colors";
-@import "../../styles/fonts";
+@import '../../styles/colors';
+@import '../../styles/fonts';
 
-*{
-    outline: none;
+* {
+  outline: none;
 }
 
-.registerPageMain{
-    width: 100%;
-    background-color: $background-pages-default;
+.registerPageMain {
+  width: 100%;
+  background-color: $background-pages-default;
 }
 
 .registerPageImg {
-    width: 100%;
-    height: 180px;
-    background-image: url("../../assets/imgLogin.png");
-    object-fit: cover;
-    background-repeat: no-repeat;
-    justify-content: flex-start;
-    display: flex;
-    align-items: center;
-    background-size: cover;
+  width: 100%;
+  height: 180px;
+  background-image: url('../../assets/imgLogin.png');
+  object-fit: cover;
+  background-repeat: no-repeat;
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  background-size: cover;
 }
 
 .registerPageLogoImg {
-    display: none;
+  display: none;
 }
 
 .registerPageDesktopContentContainer {
@@ -31,30 +31,30 @@
 }
 
 .registerPageMobileH1 {
-    font-size: 1rem;
-    font-family: $font-family-principal;
-    color: $fonte-cor-secundaria;
-    padding: 8px;
-    line-height: 40px;
+  font-size: 1rem;
+  font-family: $font-family-principal;
+  color: $fonte-cor-secundaria;
+  padding: 8px;
+  line-height: 40px;
 }
 
 .registerCheckbox {
-    font-size: 0.7rem;
-    font-family: $font-family-principal;
-    color: $fonte-cor-primaria;
-    padding: 24px 12px;
-    display: flex;
-    gap: 4px;
+  font-size: 0.7rem;
+  font-family: $font-family-principal;
+  color: $fonte-cor-primaria;
+  padding: 24px 12px;
+  display: flex;
+  gap: 4px;
 }
 
 .registerPageRegisterButton {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 12px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 12px;
 }
 
-.registerPagePP{
+.registerPagePP {
   font-family: $font-family-principal;
   color: $fonte-cor-primaria;
   font-weight: 300;
@@ -64,7 +64,7 @@
 }
 
 @media (min-width: 576px) {
-  .registerPageMobileH1{
+  .registerPageMobileH1 {
     font-size: 1.4rem;
     font-family: $font-family-principal;
     color: $fonte-cor-secundaria;
@@ -77,8 +77,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    }
-    
+  }
+
   .inputsBoxContainer {
     width: 80%;
   }
@@ -87,7 +87,7 @@
 @media (min-width: 768px) {
   .registerPageMain {
     min-height: 100vh;
-    background-image: url("../../assets/register-photo-bg.png");
+    background-image: url('../../assets/register-photo-bg.png');
     object-fit: cover;
     background-size: cover;
     background-repeat: no-repeat;
@@ -102,11 +102,11 @@
     background-image: unset;
     justify-content: center;
   }
-    
+
   .registerPageMobileH1 {
     display: none;
   }
-    
+
   .registerPageDesktopContentContainerP {
     font-family: $font-family-principal;
     font-size: 1.5rem;
@@ -114,33 +114,33 @@
     letter-spacing: 1px;
     line-height: 2;
   }
-    
+
   .registerPageDesktopContentContainerSpan {
     display: flex;
     gap: 8px;
   }
-    
+
   .registerPageDesktopContentContainerSpanP {
     font-family: $font-family-principal;
     font-weight: 300;
     letter-spacing: 1px;
   }
-    
+
   .registerPageDesktopContentContainerSpanA {
     font-family: $font-family-principal;
     font-weight: 700;
     border-bottom: 1px solid #000000;
     letter-spacing: 1px;
   }
-    
+
   .registerPageDesktopContentContainer {
     display: block;
   }
-    
+
   .registerPageLogoImg {
     display: block;
   }
-    
+
   .registerPageinputsBox {
     width: 50%;
     background-color: $background-pages-default;
@@ -148,7 +148,7 @@
     border-radius: 5px;
   }
 }
-    
+
 @media (min-width: 992px) {
   .registerPageinputsBox {
     width: 45%;

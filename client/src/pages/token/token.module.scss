@@ -1,55 +1,54 @@
-@import "../../styles/colors";
-@import "../../styles/fonts";
+@import '../../styles/colors';
+@import '../../styles/fonts';
 
-*{
-    outline: none;
+* {
+  outline: none;
 }
-.registerTokenPageMain{
-    width: 100%;
-    height: 100dvh;
-    background: $background-pages-default;
-}
-
-.registerTokenPageImg{
-    background-image: url("../../assets/imgToken.png");
-    background-repeat: no-repeat;
-    height: 350px;
-    object-fit: cover;
+.registerTokenPageMain {
+  width: 100%;
+  height: 100dvh;
+  background: $background-pages-default;
 }
 
-.registerTokenReturn{
-    width: 100%;
-    height: 72px;
-    display: flex;
-    align-items: flex-end;
-    padding-left: 24px;
+.registerTokenPageImg {
+  background-image: url('../../assets/imgToken.png');
+  background-repeat: no-repeat;
+  height: 350px;
+  object-fit: cover;
 }
 
-.registerTokenPageMail{
-    width: 100%;
-    height: calc(350px - 72px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.registerTokenReturn {
+  width: 100%;
+  height: 72px;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 24px;
 }
 
-.registerTokenEnvelope{
-    padding-top: 40px;
-    padding-bottom: 40px;
+.registerTokenPageMail {
+  width: 100%;
+  height: calc(350px - 72px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.registerTokenH1{
-    font-size: 2rem;
-    font-family: $font-family-principal;
-    color: $fonte-cor-secundaria;
-    font-weight: 700;
-    line-height: 40px;
+.registerTokenEnvelope {
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
-.registerTokenPageButton{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding-top: 168px;
+.registerTokenH1 {
+  font-size: 2rem;
+  font-family: $font-family-principal;
+  color: $fonte-cor-secundaria;
+  font-weight: 700;
+  line-height: 40px;
 }
 
+.registerTokenPageButton {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 168px;
+}
