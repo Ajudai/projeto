@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from './token.module.scss';
 import Input from "../../components/input/Input";
@@ -8,7 +8,7 @@ import envelopeIcon from "../../assets/envelopeIcon.svg";
 
 const TokenConfirmation = () => {
     const [codigo, setCodigo] = useState("");
-    
+
     return (
         <main className={styles.registerTokenPageMain}>
             <div className={styles.registerTokenPageImg}>
@@ -22,15 +22,15 @@ const TokenConfirmation = () => {
 
             </div>
             <div className={styles.registerTokenPageInput}>
-            <Input label="Código" onChange={(e) => setCodigo(e.target.value)} />
+                <Input label="Código" onChange={(e) => setCodigo(e.target.value)} />
             </div>
             <div className={styles.registerTokenPageButton}>
                 <Button
-                size="medium"
-                disabled
-                rounded
-                onClick={() => {}}
-                label="Validar"
+                    size="medium"
+                    disabled
+                    rounded
+                    onClick={() => { }}
+                    label="Validar"
                 />
             </div>
         </main>
