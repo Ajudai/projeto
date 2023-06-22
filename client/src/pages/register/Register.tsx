@@ -4,6 +4,7 @@ import styles from './register.module.scss';
 import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
 import logo from '../../assets/logo.svg';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -13,14 +14,13 @@ const Register = () => {
 
   const register = async () => {
     await axios
-      .post('http://localhost:5000/login', {
+      .post('http://localhost:5000/register', {
         userName: name,
         userPhoneNumber: phoneNumber,
         userEmail: email,
         userPassword: password,
       })
       .then((res) => {
-        localStorage.setItem('userData', JSON.stringify(res?.data));
         console.log(res.data);
       })
       .catch((error) => {
@@ -43,7 +43,9 @@ const Register = () => {
             <p className={styles.registerPageDesktopContentContainerP}>Criar conta</p>
             <span className={styles.registerPageDesktopContentContainerSpan}>
               <p className={styles.registerPageDesktopContentContainerSpanP}>Já tem conta?</p>
-              <p className={styles.registerPageDesktopContentContainerSpanA}>Faça login</p>
+              <Link to={'/'}>
+                <p className={styles.registerPageDesktopContentContainerSpanA}>Faça login</p>
+              </Link>
             </span>
           </div>
 
