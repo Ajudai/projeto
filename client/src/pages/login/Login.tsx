@@ -5,6 +5,7 @@ import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
 import axios from 'axios';
 import logo from '../../assets/logo.svg';
+import Header from '../../components/header/Header';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -34,12 +35,9 @@ const Login = () => {
 
   return (
     <main className={styles.loginPageMain}>
-      <header className={styles.loginPageImg}>
-        <p className={styles.loginPageMobileP}>
-          Recife registra alta poluição <br /> no Rio Capibaribe
-        </p>
+      <Header>
         <img src={logo} alt="Ajudaí logo" className={styles.loginPageLogoImg} />
-      </header>
+      </Header>
 
       <div className={styles.loginPageinputsBox}>
         <div className={styles.inputsBoxContainer}>
