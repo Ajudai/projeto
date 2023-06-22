@@ -12,7 +12,7 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const register = async () => {
+  const handleRegister = async () => {
     await axios
       .post('http://localhost:5000/register', {
         userName: name,
@@ -24,7 +24,7 @@ const Register = () => {
         console.log(res.data);
       })
       .catch((error) => {
-        console.error('Erro ao logar', error.response.data.message);
+        console.error('Erro ao registrar', error.response.data.message);
       });
   };
 
@@ -59,7 +59,7 @@ const Register = () => {
             <label htmlFor="registerCheckbox">Concordo com os termos de uso</label>
           </div>
           <div className={styles.registerPageRegisterButton}>
-            <Button size="medium" disabled rounded onClick={register} label="Criar conta" />
+            <Button size="medium" rounded onClick={() => handleRegister()} label="Criar conta" />
           </div>
           <p className={styles.registerPagePP}>Política de Privacidade</p>
         </div>
