@@ -2,19 +2,10 @@ import mongoose from "mongoose";
 import { IPedidoModel } from "../../@types/pedidos";
 
 const PedidoModel = new mongoose.Schema<IPedidoModel>({
-  nomeDoPedido: {
+  titulo: {
     type: String,
     required: true,
     minlength: 2,
-  },
-
-  tipoDeAjuda: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
-    match:
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
   },
 
   descricao: {
@@ -23,7 +14,22 @@ const PedidoModel = new mongoose.Schema<IPedidoModel>({
     minlength: 8,
   },
 
-  fotosParaPedido: [
+  contato: {
+    type: String,
+    required: true,
+  },
+
+  categoria: {
+    type: String,
+    required: true,
+  },
+
+  validado: {
+    type: Boolean,
+    required: true,
+  },
+
+  fotos: [
     {
       _id: {
         type: String,
@@ -32,14 +38,13 @@ const PedidoModel = new mongoose.Schema<IPedidoModel>({
     }
   ],
 
-  _id: {
+  userId: {
     type: String,
     required: true,
-    unique: true,
   },
 
   createdAt: { type: Date }
 });
 
-const User = mongoose.model<IPedidoModel>("User", PedidoModel);
-export default User;
+const Pedido = mongoose.model<IPedidoModel>("Pedido", PedidoModel);
+export default Pedido;

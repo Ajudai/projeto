@@ -11,6 +11,7 @@ const Register = () => {
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
+  const [cpf, setCPF] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -20,20 +21,26 @@ const Register = () => {
     await axios
       .post('http://localhost:5000/register', {
         userName: name,
-        userPhoneNumber: phoneNumber,
         userEmail: email,
+        userPhoneNumber: phoneNumber,
+        userCpf: cpf,
         userPassword: password,
+        createdAt: new Date(),
       })
       .then((res) => {
-        navigate('/');
         console.log(res.data);
+        setName('');
+        setPhoneNumber('');
+        setPassword('');
+        setCPF('');
       })
       .catch((errorMessage) => {
         const errorMessageFromServer = errorMessage.response.data.message;
         console.error('Erro ao cadastrar', errorMessageFromServer);
         setError(!error);
         setErrorMessage(errorMessageFromServer);
-      });
+      })
+      .finally(() => {});
   };
 
   return (
@@ -56,8 +63,10 @@ const Register = () => {
 
           {error && <p className={styles.registerPageErrorP}>{errorMessage}</p>}
           <Input error={error} label="Nome" onChange={(e) => setName(e.target.value)} />
-          <Input error={error} password label="Telefone" onChange={(e) => setPhoneNumber(e.target.value)} />
           <Input error={error} label="Email" onChange={(e) => setEmail(e.target.value)} />
+          <Input error={error} label="Telefone" onChange={(e) => setPhoneNumber(e.target.value)} />
+          <Input error={error} label="CPF" onChange={(e) => setCPF(e.target.value)} />
+
           <Input error={error} password label="Senha" onChange={(e) => setPassword(e.target.value)} />
           <div className={styles.registerCheckbox}>
             <input type="checkbox" id="registerCheckbox"></input>

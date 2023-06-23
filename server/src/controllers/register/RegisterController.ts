@@ -17,27 +17,21 @@ const hashPassword = async (userPassword: string) => {
 export default {
   async register(req: Request, res: Response) {
     try {
-      const { userName, userEmail, userPassword }: IUserModel = req.body;
-      if(!userEmail && !userName && !userPassword) {
-        return res.status(400).send({message: 'Preencha os campos'})
+      const { userName, userEmail, userPhoneNumber, userCpf, userPassword, createdAt }: IUserModel = req.body;
+
+      if (!userEmail && !userName && !userPassword && !userPhoneNumber) {
+        return res.status(400).send({ message: 'Preencha os campos' })
+      };
+
+      if (!userPhoneNumber) {
+        return res.status(404).send({ message: 'Insira um número de telefone' });
       }
-      let email = userEmail.trim();
+
+      let userPhoneNumberNoCarachter = userPhoneNumber.replace(/\(.*?\)|\-/g, '');
       let password = userPassword.replace(/\s/g, "");
-      const specialCharactersRegex: RegExp = /[!@#$%^&*(),.?":{}|<>]/;
-      
-      if (/\d/.test(userName) || specialCharactersRegex.test(userName) || userName.length < 2) {
-        return res.status(400).send({ message: 'Insira um nome válido' });
-      };
-      
-      if (password.length < 8 && password.length > 0) {
-        return res.status(400).send({ message: "A senha deve ter mais de 8 caracteres" });
-      };
 
-      if (!userName || !email || !password) {
-        return res.status(400).send({ message: "Por favor preencha todos os campos!" });
-      };
+      const searchEmail = await User.findOne<Promise<IUserModel>>({ userEmail });
 
-      const searchEmail = await User.findOne<Promise<IUserModel>>({ userEmail: email });
       if (searchEmail) {
         return res.status(400).send({ message: "Email em uso!" });
       };
@@ -46,8 +40,11 @@ export default {
 
       const newUser = new User({
         userName,
-        userEmail: email,
+        userEmail,
+        userPhoneNumber: userPhoneNumberNoCarachter,
+        userCpf,
         userPassword: hashedPassword,
+        createdAt
       });
 
       await newUser.save();

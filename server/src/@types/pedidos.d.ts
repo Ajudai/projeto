@@ -1,8 +1,10 @@
 export interface IPedidoModel {
-    nomeDoPedido: string;
-    tipoDeAjuda: string;
+    titulo: string;
     descricao: string;
-    _id: string;
-    fotosParaPedido: {id: string, url: string}[]
+    contato: string;
+    categoria: string;
+    validado: boolean;
+    userId: string;
+    fotos: { id: string, url: string }[]
     createdAt: any;
 }
