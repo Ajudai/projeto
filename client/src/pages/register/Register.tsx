@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './register.module.scss';
 import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
 import logo from '../../assets/logo.svg';
-import { Link } from 'react-router-dom';
+import Header from '../../components/header/Header';
 
 const Register = () => {
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
-  const handleRegister = async () => {
+  const register = async () => {
     await axios
       .post('http://localhost:5000/register', {
         userName: name,
@@ -21,21 +25,23 @@ const Register = () => {
         userPassword: password,
       })
       .then((res) => {
+        localStorage.setItem('userData', JSON.stringify(res?.data));
+        navigate('/');
         console.log(res.data);
       })
-      .catch((error) => {
-        console.error('Erro ao registrar', error.response.data.message);
+      .catch((errorMessage) => {
+        const errorMessageFromServer = errorMessage.response.data.message;
+        console.error('Erro ao cadastrar', errorMessageFromServer);
+        setError(!error);
+        setErrorMessage(errorMessageFromServer);
       });
   };
 
   return (
     <main className={styles.registerPageMain}>
-      <header className={styles.registerPageImg}>
-        <h1 className={styles.registerPageMobileH1}>
-          Recife registra alta poluição <br /> no Rio Capibaribe
-        </h1>
+      <Header>
         <img src={logo} alt="Ajudaí logo" className={styles.registerPageLogoImg} />
-      </header>
+      </Header>
 
       <div className={styles.registerPageinputsBox}>
         <div className={styles.inputsBoxContainer}>
@@ -43,23 +49,23 @@ const Register = () => {
             <p className={styles.registerPageDesktopContentContainerP}>Criar conta</p>
             <span className={styles.registerPageDesktopContentContainerSpan}>
               <p className={styles.registerPageDesktopContentContainerSpanP}>Já tem conta?</p>
-              <Link to={'/'}>
-                <p className={styles.registerPageDesktopContentContainerSpanA}>Faça login</p>
-              </Link>
+              <p className={styles.registerPageDesktopContentContainerSpanA}>
+                <Link to={'/'}>Faça login</Link>
+              </p>
             </span>
           </div>
 
-          <Input label="Nome" onChange={(e) => setName(e.target.value)} />
-          <Input label="Telefone" onChange={(e) => setPhoneNumber(e.target.value)} />
-          <Input label="Email" onChange={(e) => setEmail(e.target.value)} />
-          <Input label="Senha" onChange={(e) => setPassword(e.target.value)} />
-
+          {error && <p className={styles.registerPageErrorP}>{errorMessage}</p>}
+          <Input error={error} label="Nome" onChange={(e) => setName(e.target.value)} />
+          <Input error={error} password label="Telefone" onChange={(e) => setPhoneNumber(e.target.value)} />
+          <Input error={error} label="Email" onChange={(e) => setEmail(e.target.value)} />
+          <Input error={error} password label="Senha" onChange={(e) => setPassword(e.target.value)} />
           <div className={styles.registerCheckbox}>
             <input type="checkbox" id="registerCheckbox"></input>
             <label htmlFor="registerCheckbox">Concordo com os termos de uso</label>
           </div>
           <div className={styles.registerPageRegisterButton}>
-            <Button size="medium" rounded onClick={() => handleRegister()} label="Criar conta" />
+            <Button size="medium" disabled={false} rounded onClick={() => register()} label="Criar conta" />
           </div>
           <p className={styles.registerPagePP}>Política de Privacidade</p>
         </div>
