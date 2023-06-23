@@ -16,7 +16,7 @@ const Register = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  const register = async () => {
+  const handleRegister = async () => {
     await axios
       .post('http://localhost:5000/register', {
         userName: name,
@@ -25,7 +25,6 @@ const Register = () => {
         userPassword: password,
       })
       .then((res) => {
-        localStorage.setItem('userData', JSON.stringify(res?.data));
         navigate('/');
         console.log(res.data);
       })
@@ -65,7 +64,7 @@ const Register = () => {
             <label htmlFor="registerCheckbox">Concordo com os termos de uso</label>
           </div>
           <div className={styles.registerPageRegisterButton}>
-            <Button size="medium" disabled={false} rounded onClick={() => register()} label="Criar conta" />
+            <Button size="medium" disabled={false} rounded onClick={() => handleRegister()} label="Criar conta" />
           </div>
           <p className={styles.registerPagePP}>Política de Privacidade</p>
         </div>
