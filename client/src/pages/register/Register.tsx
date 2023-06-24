@@ -5,7 +5,7 @@ import styles from './register.module.scss';
 import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
 import logo from '../../assets/logo.svg';
-import Header from '../../components/header/Header';
+import LoginRegisterHeader from '../../components/loginRegisterHeader/LoginRegisterHeader';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -45,9 +45,9 @@ const Register = () => {
 
   return (
     <main className={styles.registerPageMain}>
-      <Header>
+      <LoginRegisterHeader>
         <img src={logo} alt="Ajudaí logo" className={styles.registerPageLogoImg} />
-      </Header>
+      </LoginRegisterHeader>
 
       <div className={styles.registerPageinputsBox}>
         <div className={styles.inputsBoxContainer}>

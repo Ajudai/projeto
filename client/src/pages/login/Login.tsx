@@ -5,7 +5,7 @@ import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
 import axios from 'axios';
 import logo from '../../assets/logo.svg';
-import Header from '../../components/header/Header';
+import LoginRegisterHeader from '../../components/loginRegisterHeader/LoginRegisterHeader';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -35,9 +35,9 @@ const Login = () => {
 
   return (
     <main className={styles.loginPageMain}>
-      <Header>
+      <LoginRegisterHeader>
         <img src={logo} alt="Ajudaí logo" className={styles.loginPageLogoImg} />
-      </Header>
+      </LoginRegisterHeader>
 
       <div className={styles.loginPageinputsBox}>
         <div className={styles.inputsBoxContainer}>
