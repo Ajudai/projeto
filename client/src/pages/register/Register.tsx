@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styles from './register.module.scss';
 import Input from '../../components/input/Input';
@@ -15,7 +15,6 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();
 
   const handleRegister = async () => {
     await axios

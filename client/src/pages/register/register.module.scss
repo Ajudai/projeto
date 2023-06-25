@@ -44,17 +44,16 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  padding: 8px;
 }
 
 .registerPagePP{
-  width: 100%;
   font-family: $font-family-principal;
   color: $fonte-cor-primaria;
   font-weight: 300;
   font-size: 0.8rem;
-  text-align: center;
-  padding: 16px;
   cursor: pointer;
+  align-self: center;
 }
 
 @media (min-width: 576px) {
