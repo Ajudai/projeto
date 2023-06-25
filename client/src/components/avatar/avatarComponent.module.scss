@@ -1,0 +1,25 @@
+@import '../../styles/colors';
+@import '../../styles/fonts';
+
+.avatarComponentInfoContainer {
+  width: 100%;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatarComponentInfoContainerNome,
+.avatarComponentInfoContainerEmail {
+  font-family: $font-family-principal;
+  color: $fonte-cor-secundaria;
+}
+
+.avatarComponentInfoContainerNome {
+  font-weight: 700;
+}
+
+.avatarComponentInfoContainerEmail {
+  font-weight: 300;
+}

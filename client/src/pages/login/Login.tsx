@@ -23,7 +23,6 @@ const Login = () => {
       .then((res) => {
         localStorage.setItem('userData', JSON.stringify(res?.data));
         navigate('/home');
-        console.log(res.data);
       })
       .catch((errorMessage) => {
         const errorMessageFromServer = errorMessage.response.data.message;

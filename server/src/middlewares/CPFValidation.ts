@@ -41,7 +41,6 @@ function isCPFValid(req: Request, res: Response, next: NextFunction) {
     return res.status(403).send({ message: 'CPF inválido' });
   }
 
-  // Atualiza o valor do CPF no corpo da requisição para o CPF limpo
   req.body.userCpf = cleanedCPF;
 
   next();
