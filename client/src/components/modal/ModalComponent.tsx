@@ -4,9 +4,20 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter,
 interface ModalComponent {
   isOpen: boolean;
   onClose: () => void;
+  modalTitle: string;
+  modalBody: string;
+  buttonSuccessLabel: string;
+  buttonCloseLabel: string;
 }
 
-function ModalComponent({ isOpen, onClose }: ModalComponent) {
+function ModalComponent({
+  isOpen,
+  onClose,
+  modalTitle,
+  modalBody,
+  buttonSuccessLabel,
+  buttonCloseLabel,
+}: ModalComponent) {
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -21,14 +32,14 @@ function ModalComponent({ isOpen, onClose }: ModalComponent) {
           <ModalContent>
             <div>
               <ModalHeader>
-                <h1>Cadastro realizado!</h1>
+                <h1>{modalTitle}</h1>
               </ModalHeader>
               <ModalBody>
-                <p>Deseja fazer login agora?</p>
+                <p>{modalBody}</p>
               </ModalBody>
               <ModalFooter>
-                <Button onClick={handleLogin}>Logar</Button>
-                <Button onClick={onClose}>Mais tarde</Button>
+                <Button onClick={handleLogin}>{buttonSuccessLabel}</Button>
+                <Button onClick={onClose}>{buttonCloseLabel}</Button>
               </ModalFooter>
             </div>
           </ModalContent>

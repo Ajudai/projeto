@@ -77,7 +77,14 @@ const Register = () => {
           <p className={styles.registerPagePP}>Política de Privacidade</p>
         </div>
       </div>
-      <ModalComponent isOpen={isRegisterOpen} onClose={onRegisterClose} />
+      <ModalComponent
+        modalTitle="Cadastro realizado!"
+        modalBody="Deseja fazer login agora?"
+        buttonSuccessLabel="Logar"
+        buttonCloseLabel="Mais tarde"
+        isOpen={isRegisterOpen}
+        onClose={onRegisterClose}
+      />
     </main>
   );
 };
