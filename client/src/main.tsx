@@ -4,6 +4,7 @@ import './App.scss';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import Home from './pages/home/Home';
+import ForgotPassword from './pages/forgotpassword/ForgotPassword';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
 
   { path: '/register', element: <Register /> },
   { path: '/home', element: <Home /> },
+  { path: '/forgotpassword', element: <ForgotPassword /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<RouterProvider router={router} />);
