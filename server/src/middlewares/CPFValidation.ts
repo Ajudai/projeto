@@ -7,14 +7,18 @@ interface IValidateCPF extends Request {
 function isCPFValid(req: Request, res: Response, next: NextFunction) {
   const { userCpf }: IValidateCPF = req.body;
 
+  if (!userCpf) {
+    return res.status(400).send({ message: "Insira o CPF!" });
+  }
+
   const cleanedCPF = userCpf.replace(/\D/g, "");
 
   if (cleanedCPF.length !== 11) {
-    return res.status(403).send({ message: 'CPF menor que 11 caracteres' });
+    return res.status(403).send({ message: "CPF menor que 11 caracteres" });
   }
 
   if (/^(\d)\1+$/.test(cleanedCPF)) {
-    return res.status(403).send({ message: 'CPF inválido' });
+    return res.status(403).send({ message: "CPF inválido" });
   }
 
   let sum = 0;
@@ -26,7 +30,7 @@ function isCPFValid(req: Request, res: Response, next: NextFunction) {
     remainder = 0;
   }
   if (remainder !== parseInt(cleanedCPF.charAt(9))) {
-    return res.status(403).send({ message: 'CPF inválido' });
+    return res.status(403).send({ message: "CPF inválido" });
   }
 
   sum = 0;
@@ -38,7 +42,7 @@ function isCPFValid(req: Request, res: Response, next: NextFunction) {
     remainder = 0;
   }
   if (remainder !== parseInt(cleanedCPF.charAt(10))) {
-    return res.status(403).send({ message: 'CPF inválido' });
+    return res.status(403).send({ message: "CPF inválido" });
   }
 
   req.body.userCpf = cleanedCPF;

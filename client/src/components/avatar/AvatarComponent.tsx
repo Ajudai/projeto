@@ -2,10 +2,10 @@ import React from 'react';
 import { Avatar, Wrap, WrapItem } from '@chakra-ui/react';
 import styles from './avatarComponent.module.scss';
 interface IAvatar {
-  nome: string;
+  nome?: string;
   src?: string;
   size: '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
-  email: string;
+  email?: string;
 }
 
 const AvatarComponent: React.FC<IAvatar> = ({ nome, src, size, email }) => {

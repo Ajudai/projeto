@@ -23,7 +23,7 @@ const ForgotPassword = () => {
         </div>
       </div>
       <div className={styles.registerTokenPageInput}>
-        <Input label="Email" onChange={(e) => setEmail(e.target.value)} />
+        <Input value={email} label="Email" onChange={(e) => setEmail(e.target.value)} />
       </div>
       <div className={styles.registerTokenPageButton}>
         <Button
