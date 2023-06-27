@@ -4,8 +4,8 @@ import './App.scss';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import Home from './pages/home/Home';
-import ForgotPassword from './pages/forgotpassword/ForgotPassword';
-import HelpRequest from './pages/helpRequest/HelpRequest';
+import HelpRequest from './pages/HelpRequest/HelpRequest';
+import ForgetPassword from './pages/forgetPassword/ForgetPassword';
 
 const router = createBrowserRouter([
   {
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
 
   { path: '/register', element: <Register /> },
   { path: '/home', element: <Home /> },
-  { path: '/forgotpassword', element: <ForgotPassword /> },
+  { path: '/forgetpassword', element: <ForgetPassword /> },
   { path: '/helprequest', element: <HelpRequest /> },
 ]);
 

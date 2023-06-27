@@ -1,4 +1,4 @@
-import styles from "./helprequest.module.scss";
+import styles from './helpRequest.module.scss';
 import logo from '../../assets/logo.svg';
 import { useState } from 'react';
 import { MdClose } from 'react-icons/md';
@@ -25,7 +25,7 @@ const HelpRequest = (async) => {
             <div className={styles.helpRequestHomeMenu}>
               <div className={styles.helpRequestHomeMenuBanner}>
                 <input type="file" className={styles.helpRequestHomeMenuBannerInput} />
-                <PiMountainsFill className={styles.helpRequestHomeMenuBannerVector} color="#000" size={40} />
+                <PiMountainsFill className={styles.forgetPasswordPageDesktopArrow} color="#000" size={40} />
                 <p className={styles.helpRequestHomeMenuBannerP}>Insira uma foto para banner</p>
               </div>
             </div>

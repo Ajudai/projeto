@@ -168,6 +168,11 @@
 }
 
 @media (min-width: 768px) {
+  .helpRequestLeft,
+  .helpRequestHomePage{
+    width: 33.3%;
+  }
+  
   .helpRequestHomeMenuBanner {
     height: 150px;
   }
@@ -189,10 +194,6 @@
   }
   .helpRequestPageMain{
     display: flex;
-  }
-  .helpRequestLeft,
-  .helpRequestHomePage{
-    width: 33.3%;
   }
 }
 
