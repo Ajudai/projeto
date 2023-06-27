@@ -34,3 +34,9 @@
   padding: 8px;
   background-color: $background-pages-default;
 }
+
+.inputComponentInput.requestHelp {
+  background-color: $background-page-help;
+  border-bottom: 0.5px solid $fonte-cor-secundaria;
+  color: $fonte-cor-secundaria;
+}

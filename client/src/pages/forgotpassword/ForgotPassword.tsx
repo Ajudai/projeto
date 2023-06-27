@@ -7,7 +7,7 @@ import arrowLeftIcon from '../../assets/arrowLeftIcon.svg';
 import arrowLeftIconBlack from '../../assets/arrowLeftIconBlack.svg';
 import envelopeIcon from '../../assets/envelopeIcon.svg';
 
-const ForgotPassword = () => {
+const ForgotPassword = async => {
   const [email, setEmail] = useState('');
 
   return (
