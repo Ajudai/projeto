@@ -1,0 +1,76 @@
+@import '../../styles/colors';
+
+.headerContainer {
+  width: 100%;
+  height: 64px;
+  background-color: $fonte-cor-primaria;
+}
+
+.headerContainerDiv {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px;
+}
+
+.headerContainerImg {
+  width: 96px;
+  height: 100%;
+}
+
+.headerContainerMdMenu {
+  width: 32px;
+  height: 32px;
+  color: $fonte-cor-secundaria;
+  cursor: pointer;
+}
+
+.closeMenuOutside {
+  width: 30%;
+}
+
+.mobileHamburguerMenuOpened {
+  width: 100%;
+  height: 95vh;
+  position: absolute;
+  display: flex;
+  justify-content: right;
+  z-index: 1;
+  background-color: rgba(10, 10, 10, 0.616);
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.mobileHamburguerMenuClosed {
+  width: 0;
+  position: unset;
+  overflow: hidden;
+  transition: width 0.3s ease-in-out;
+}
+
+.mobileHamburguerMenuNavOpened {
+  width: 70%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  background-color: $fonte-cor-primaria;
+  overflow: hidden;
+  transition: width 0.3s ease-in-out;
+}
+
+.mobileHamburguerMenuNavClosed {
+  width: 0%;
+  position: unset;
+  overflow: hidden;
+  transition: width 0.3s ease-in-out;
+}
+
+.mobileHamburguerMenuUlOpened {
+  width: 100%;
+}
+
+.mobileHamburguerMenuUlClosed {
+  display: none;
+}

@@ -7,9 +7,10 @@ interface IInput {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   password?: boolean;
   error?: boolean;
+  value: string;
 }
 
-const Input: React.FC<IInput> = ({ label, onChange, password, error }) => {
+const Input: React.FC<IInput> = ({ label, onChange, password, error, value }) => {
   return (
     <div className={styles.inputComponentDiv}>
       <p className={error ? styles.inputComponentLabelError : styles.inputComponentLabel}>{label}</p>
@@ -18,6 +19,7 @@ const Input: React.FC<IInput> = ({ label, onChange, password, error }) => {
         onChange={onChange}
         type={password ? 'password' : 'text'}
         maxLength={40}
+        value={value}
       />
     </div>
   );

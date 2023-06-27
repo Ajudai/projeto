@@ -33,8 +33,21 @@ const UserModelSchema = new mongoose.Schema<IUserModel>({
       categoria: String,
       validado: Boolean,
       userId: String,
-      fotos: [{ id: String, url: String }]
-    }
+      fotos: [{ id: String, url: String }],
+    },
+  ],
+
+  endereco: [
+    {
+      _id: String,
+      rua: String,
+      bairro: String,
+      cidade: String,
+      complemento: String,
+      numero: Number,
+      estado: String,
+      cep: String,
+    },
   ],
 
   userPassword: {
@@ -43,7 +56,7 @@ const UserModelSchema = new mongoose.Schema<IUserModel>({
     minlength: 8,
   },
 
-  createdAt: { type: Date }
+  createdAt: { type: Date },
 });
 
 const User = mongoose.model<IUserModel>("User", UserModelSchema);

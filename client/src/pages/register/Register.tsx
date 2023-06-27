@@ -6,6 +6,8 @@ import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
 import logo from '../../assets/logo.svg';
 import LoginRegisterHeader from '../../components/loginRegisterHeader/LoginRegisterHeader';
+import ModalComponent from '../../components/modal/ModalComponent';
+import { useDisclosure } from '@chakra-ui/react';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -15,6 +17,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const { isOpen: isRegisterOpen, onOpen: onRegisterOpen, onClose: onRegisterClose } = useDisclosure();
 
   const handleRegister = async () => {
     await axios
@@ -26,20 +29,18 @@ const Register = () => {
         userPassword: password,
         createdAt: new Date(),
       })
-      .then((res) => {
-        console.log(res.data);
+      .then(() => {
         setName('');
         setPhoneNumber('');
         setPassword('');
         setCPF('');
+        onRegisterOpen();
       })
       .catch((errorMessage) => {
         const errorMessageFromServer = errorMessage.response.data.message;
-        console.error('Erro ao cadastrar', errorMessageFromServer);
         setError(!error);
         setErrorMessage(errorMessageFromServer);
-      })
-      .finally(() => {});
+      });
   };
 
   return (
@@ -61,12 +62,11 @@ const Register = () => {
           </div>
 
           {error && <p className={styles.registerPageErrorP}>{errorMessage}</p>}
-          <Input error={error} label="Nome" onChange={(e) => setName(e.target.value)} />
-          <Input error={error} label="Email" onChange={(e) => setEmail(e.target.value)} />
-          <Input error={error} label="Telefone" onChange={(e) => setPhoneNumber(e.target.value)} />
-          <Input error={error} label="CPF" onChange={(e) => setCPF(e.target.value)} />
-
-          <Input error={error} password label="Senha" onChange={(e) => setPassword(e.target.value)} />
+          <Input error={error} value={name} label="Nome" onChange={(e) => setName(e.target.value)} />
+          <Input error={error} value={email} label="Email" onChange={(e) => setEmail(e.target.value)} />
+          <Input error={error} value={phoneNumber} label="Telefone" onChange={(e) => setPhoneNumber(e.target.value)} />
+          <Input error={error} value={cpf} label="CPF" onChange={(e) => setCPF(e.target.value)} />
+          <Input value={password} error={error} password label="Senha" onChange={(e) => setPassword(e.target.value)} />
           <div className={styles.registerCheckbox}>
             <input type="checkbox" id="registerCheckbox"></input>
             <label htmlFor="registerCheckbox">Concordo com os termos de uso</label>
@@ -77,6 +77,14 @@ const Register = () => {
           <p className={styles.registerPagePP}>Política de Privacidade</p>
         </div>
       </div>
+      <ModalComponent
+        modalTitle="Cadastro realizado!"
+        modalBody="Deseja fazer login agora?"
+        buttonSuccessLabel="Logar"
+        buttonCloseLabel="Mais tarde"
+        isOpen={isRegisterOpen}
+        onClose={onRegisterClose}
+      />
     </main>
   );
 };
