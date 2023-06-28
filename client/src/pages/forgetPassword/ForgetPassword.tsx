@@ -10,34 +10,26 @@ const ForgetPassword = () => {
 
   return (
     <main className={styles.forgetPasswordPageMain}>
-      <div className={styles.forgetPasswordPageImg}>
-        <BsArrowLeft className={styles.forgetPasswordPageArrow} color="#fff" size={48} />
+      <header className={styles.forgetPasswordPageHeader}>
+        <BsArrowLeft className={styles.forgetPasswordPageArrow} color="#fff" size={56} />
         <div className={styles.forgetPasswordPagePageMail}>
-          <FaEnvelope className={styles.forgetPasswordPageEnvelope} color="#fff" size={120} />
-          <h2 className={styles.forgetPasswordPageH1}>Informe seu email</h2>
+          <FaEnvelope className={styles.forgetPasswordPageEnvelope} color="#fff" size={100} />
+          <h2 className={styles.forgetPasswordPageH2}>Informe seu email</h2>
         </div>
-      </div>
+      </header>
 
       <div className={styles.forgetPasswordPageinputsBox}>
-        <div className={styles.forgetPasswordPageDesktopHeader}>
-          <div className={styles.forgetPasswordPageReturnPageDesktop}>
-            <BsArrowLeft className={styles.forgetPasswordPageArrow} color="#000" size={48} />
-          </div>
-          <div className={styles.forgetPasswordPageDesktopContentContainer}>
-            <p className={styles.forgetPasswordPageDesktopContentContainerP}>
+        <BsArrowLeft className={styles.forgetPasswordPageDesktopArrow} color="#000" size={56} />
+        <div className={styles.inputsBoxContainer}>
+          <span className={styles.forgetPasswordPageContent}>
+            <h2 className={styles.forgetPasswordPageDesktopContentH2}>
               Esqueceu sua <br /> senha?
+            </h2>
+            <p className={styles.forgetPasswordPageDesktopContentP}>
+              Tudo bem, podemos te ajudar! <br /> <strong>Primeiro, insira seu email</strong>
             </p>
-            <span className={styles.forgetPasswordPageDesktopContentContainerSpan}>
-              <p className={styles.forgetPasswordPageDesktopContentContainerSpanP}>Tudo bem, podemos te ajudar!</p>
-              <p className={styles.forgetPasswordPageDesktopContentContainerSpanPP}>Primeiro, insira seu email</p>
-            </span>
-          </div>
-        </div>
-
-        <div className={styles.forgetPasswordPageFormContainer}>
-          <div className={styles.forgetPasswordPageForm}>
-            <Input label="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          </div>
+          </span>
+          <Input label="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
           <div className={styles.forgetPasswordPageButton}>
             <Button
               size="medium"
