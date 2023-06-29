@@ -22,7 +22,7 @@ const RequestHelp = (async) => {
           <h1 className={styles.requestHelpHomeMenuH1}>Peça uma Ajudaí</h1>
           <div className={styles.requestHelpHomeMenuBanner}>
             <input type="file" className={styles.requestHelpHomeMenuBannerInput} />
-            <PiMountainsFill className={styles.requestHelpPageDesktopArrow} color="#000" size={40} />
+            <PiMountainsFill color="#000" size={40} />
             <p className={styles.requestHelpHomeMenuBannerP}>Insira uma foto para banner</p>
           </div>
         </section>
