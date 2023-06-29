@@ -5,45 +5,45 @@
   outline: none;
 }
 
-.helpRequestPageMain{
+.requestHelpPageMain{
   width: 100%;
   min-height: 100vh;
   background: $background-page-help;
 }
 
-.helpRequestPageHeader{
+.requestHelpPageHeader{
   display: flex;
   justify-content: center;
 }
 
-.helpRequestPageHeaderDiv{
+.requestHelpPageHeaderDiv{
   width: 90%;
   margin-top: 12px;
   display: flex;
   justify-content: space-between;
 }
 
-.helpRequestPageLogoImg{
+.requestHelpPageLogoImg{
   width: 88px;
   height: 24px;
 }
 
-.helpRequestPageMenu{
+.requestHelpPageMenu{
   cursor: pointer;
 }
 
-.helpRequestHomeRequest,
-.helpRequestHomeCategories,
-.helpRequestHomeDescription{
+.requestHelpHomeRequest,
+.requestHelpHomeCategories,
+.requestHelpHomeDescription{
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 12px 0;
 }
 
-.helpRequestHomeMenuH1,
-.helpRequestHomeCategoriesH2,
-.helpRequestHomeMenuH3{
+.requestHelpHomeMenuH1,
+.requestHelpHomeCategoriesH2,
+.requestHelpHomeMenuH3{
   width: 90%;
   padding-bottom: 8px;
   font-size: 2rem;
@@ -53,7 +53,7 @@
 
 }
 
-.helpRequestHomeMenuBanner{
+.requestHelpHomeMenuBanner{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -63,14 +63,14 @@
   height: 120px;
 }
 
-.helpRequestHomeTextArea,
-.helpRequestHomeMenuBanner{
+.requestHelpHomeTextArea,
+.requestHelpHomeMenuBanner{
   background-color: $background-disable-default;
   border-radius: 8px;
   width: 90%;
 }
 
-.helpRequestHomeMenuBannerInput {
+.requestHelpHomeMenuBannerInput {
   position: absolute;
   top: 0;
   left: 0;
@@ -80,20 +80,20 @@
   cursor: pointer;
 }
 
-.helpRequestHomeMenuBannerP{
+.requestHelpHomeMenuBannerP{
   font-size: 1rem;
   font-weight: 700;
   font-family: $font-family-principal;
   color: $fonte-cor-primaria;
 }
 
-.helpRequestHomeCategoriesContainer{
+.requestHelpHomeCategoriesContainer{
   width: 90%;
   display: flex;
   flex-direction: column;
 }
 
-.helpRequestHomeCategoriesDiv{
+.requestHelpHomeCategoriesDiv{
   display: flex;
   padding-bottom: 6px;
   font-family: $font-family-principal;
@@ -103,7 +103,7 @@
   font-size: 1rem;
 }
 
-.helpRequestHomeTextArea{
+.requestHelpHomeTextArea{
   height: 80px;
   padding: 6px;
   resize: none;
@@ -121,19 +121,27 @@
 }
 
 @media (min-width: 576px) {
-  .helpRequestHomeMenuBanner{
+  .requestHelpHomeMenuBanner{
     height: 150px;
   }
 }
 
 @media (min-width: 768px) {
-  .helpRequestPageMain{
+  .requestHelpPageMain{
     display: flex;
     justify-content: center;
   }
 
-  .helpRequestPage{
+  .requestHelpPage{
     width: 75%;
+  }
+
+  .requestHelpHomeMenuBanner {
+    height: 180px;
+  }
+
+  .requestHelpHomeTextArea{
+    height: 100px;
   }
 
   .requestHelpHomeButton{
@@ -142,19 +150,7 @@
 }
 
 @media (min-width: 992px) {
-  .helpRequestPage{
+  .requestHelpPage{
     width: 70%;
-  }
-
-  .helpRequestHomeMenuBanner {
-    height: 180px;
-  }
-
-  .helpRequestHomeTextArea{
-    height: 100px;
-  }
-
-  .requestHelpHomeButton{
-    max-width: 40%;
   }
 }
