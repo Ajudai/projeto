@@ -34,16 +34,18 @@ const PedidoModel = new mongoose.Schema<IPedidoModel>({
       _id: {
         type: String,
       },
-      url: { type: String }
-    }
+      url: { type: String },
+    },
   ],
+
+  endereco: [],
 
   userId: {
     type: String,
     required: true,
   },
 
-  createdAt: { type: Date }
+  createdAt: { type: Date },
 });
 
 const Pedido = mongoose.model<IPedidoModel>("Pedido", PedidoModel);

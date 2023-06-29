@@ -11,20 +11,14 @@
   background: $background-page-help;
 }
 
-.helpRequestPageLeft{
-  height: 100%;
-  width: 33.3%;
-}
-
 .helpRequestPageHeader{
-  width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.helpRequestPageMenu{
-  margin-top: 16px;
+.helpRequestPageHeaderDiv{
   width: 90%;
+  margin-top: 12px;
   display: flex;
   justify-content: space-between;
 }
@@ -34,32 +28,29 @@
   height: 24px;
 }
 
-.helpRequestPageClose{
+.helpRequestPageMenu{
   cursor: pointer;
 }
 
-.helpRequestHome{
-  width: 100%;
-}
-
-.helpRequestHomeMenu{
-  min-width: 100%;
+.helpRequestHomeRequest,
+.helpRequestHomeCategories,
+.helpRequestHomeDescription{
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding-bottom: 8px;
-  padding-top: 8px;
+  padding: 12px 0;
 }
 
 .helpRequestHomeMenuH1,
 .helpRequestHomeCategoriesH2,
 .helpRequestHomeMenuH3{
+  width: 90%;
+  padding-bottom: 8px;
   font-size: 2rem;
   font-weight: 700;
   font-family: $font-family-principal;
   color: $fonte-cor-secundaria;
-  width: 90%;
+
 }
 
 .helpRequestHomeMenuBanner{
@@ -77,17 +68,6 @@
   background-color: $background-disable-default;
   border-radius: 8px;
   width: 90%;
-}
-
-.helpRequestHomeTextArea{
-  padding: 8px;
-  padding-top: 12px;
-  resize: none;
-  color: $fonte-cor-primaria;
-  font-weight: 400;
-  font-family: $font-family-text-area;
-  font-size: 0.8rem;
-  height: 60px;
 }
 
 .helpRequestHomeMenuBannerInput {
@@ -111,93 +91,61 @@
   width: 90%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
 }
 
 .helpRequestHomeCategoriesDiv{
   display: flex;
-  flex-direction: row;
-  padding-bottom: 4px;
+  padding-bottom: 6px;
   font-family: $font-family-principal;
   color: $fonte-cor-secundaria;
-  gap: 4px;
+  gap: 6px;
   font-weight: 700;
-  font-size: 0.7rem;
+  font-size: 1rem;
 }
 
-.helpRequestHomeDescription,
-.helpRequestHomeH,
-.helpRequestHomeCategories,
-.helpRequestPage{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.helpRequestPageForm{
-  width: 100%;
-  display: flex;
-  align-self: center;
-  justify-content: center;
-  padding-bottom: 24px;
-  padding-top: 8px;
+.helpRequestHomeTextArea{
+  height: 80px;
+  padding: 6px;
+  resize: none;
+  color: $fonte-cor-primaria;
+  font-weight: 400;
+  font-family: $font-family-text-area;
+  font-size: 0.8rem;
 }
 
 .requestHelpHomeButton{
-  width: 60%;
+  width: 80%;
   display: flex;
   justify-content: center;
-  padding: 8px;
-}
-
-.helpRequestHomeH,
-.helpRequestHomeCategories,
-.helpRequestHomeDescription{
-  padding: 8px 0;
+  padding-top: 32px;
 }
 
 @media (min-width: 576px) {
-  .helpRequestHomeTextArea {
-    height: 60px;
-  }
-
   .helpRequestHomeMenuBanner{
     height: 150px;
   }
 }
 
 @media (min-width: 768px) {
-  .helpRequestLeft,
-  .helpRequestHomePage{
-    width: 33.3%;
-  }
-  
-  .helpRequestHomeMenuBanner {
-    height: 150px;
+  .helpRequestPageMain{
+    display: flex;
+    justify-content: center;
   }
 
-  .helpRequestHomeTextArea {
-    height: 80px;
+  .helpRequestPage{
+    width: 75%;
   }
 
   .requestHelpHomeButton{
     width: 50%;
   }
-
-  .helpRequestHomeCategoriesDiv{
-    font-size: 1rem;
-  }
-  
-  .requestHelpHomeButton{
-    min-width: 40%;
-  }
-  .helpRequestPageMain{
-    display: flex;
-  }
 }
 
 @media (min-width: 992px) {
+  .helpRequestPage{
+    width: 70%;
+  }
+
   .helpRequestHomeMenuBanner {
     height: 180px;
   }
