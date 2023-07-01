@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import axios from 'axios';
-import styles from './ForgetPassword.module.scss';
+import styles from './forgetPassword.module.scss';
 import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
 import { BsArrowLeft } from 'react-icons/bs';
 import { FaEnvelope } from 'react-icons/fa';
 
-const ForgetPassword = (async) => {
+const ForgetPassword = () => {
   const [email, setEmail] = useState('');
 
   return (
@@ -39,7 +38,7 @@ const ForgetPassword = (async) => {
 
         <div className={styles.forgetPasswordPageFormContainer}>
           <div className={styles.forgetPasswordPageForm}>
-            <Input label="Email" onChange={(e) => setEmail(e.target.value)} />
+            <Input value={email} label="Email" type="text" onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div className={styles.forgetPasswordPageButton}>
             <Button

@@ -13,6 +13,7 @@ interface IHomeComponent {
 
 const HomeComponent: React.FC<IHomeComponent> = ({ url, titulo, categoria, bairro, createdAt, _id }) => {
   const [dataFormatada, setDataFormatada] = useState('');
+
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -62,11 +62,23 @@ const Register = () => {
           </div>
 
           {error && <p className={styles.registerPageErrorP}>{errorMessage}</p>}
-          <Input error={error} value={name} label="Nome" onChange={(e) => setName(e.target.value)} />
-          <Input error={error} value={email} label="Email" onChange={(e) => setEmail(e.target.value)} />
-          <Input error={error} value={phoneNumber} label="Telefone" onChange={(e) => setPhoneNumber(e.target.value)} />
-          <Input error={error} value={cpf} label="CPF" onChange={(e) => setCPF(e.target.value)} />
-          <Input value={password} error={error} password label="Senha" onChange={(e) => setPassword(e.target.value)} />
+          <Input error={error} value={name} label="Nome" onChange={(e) => setName(e.target.value)} type={'text'} />
+          <Input error={error} value={email} label="Email" onChange={(e) => setEmail(e.target.value)} type={'text'} />
+          <Input
+            error={error}
+            value={phoneNumber}
+            label="Telefone"
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            type={'text'}
+          />
+          <Input error={error} value={cpf} label="CPF" onChange={(e) => setCPF(e.target.value)} type={'text'} />
+          <Input
+            value={password}
+            error={error}
+            type="password"
+            label="Senha"
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <div className={styles.registerCheckbox}>
             <input type="checkbox" id="registerCheckbox"></input>
             <label htmlFor="registerCheckbox">Concordo com os termos de uso</label>

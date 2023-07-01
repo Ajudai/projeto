@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import styles from './token.module.scss';
 import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
-import arrowLeftIcon from '../../assets/arrowLeftIcon.svg';
 import envelopeIcon from '../../assets/envelopeIcon.svg';
+import { BiLeftArrowAlt } from 'react-icons/bi';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -13,17 +12,15 @@ const ForgotPassword = () => {
     <main className={styles.registerTokenPageMain}>
       <div className={styles.registerTokenPageImg}>
         <div className={styles.registerTokenReturn}>
-          <a>
-            <img src={arrowLeftIcon} alt="svg-icon-left" className={styles.registerTokenArrowLeft}></img>
-          </a>
+          <BiLeftArrowAlt />
         </div>
         <div className={styles.registerTokenPageMail}>
-          <img src={envelopeIcon} alt="svg-icon-envelop" className={styles.registerTokenEnvelope}></img>
+          <img src={envelopeIcon} alt="svg-icon-envelop" className={styles.registerTokenEnvelope} />
           <h1 className={styles.registerTokenH1}>Verifique seu email</h1>
         </div>
       </div>
       <div className={styles.registerTokenPageInput}>
-        <Input value={email} label="Email" onChange={(e) => setEmail(e.target.value)} />
+        <Input value={email} label="Email" onChange={(e) => setEmail(e.target.value)} type={'text'} />
       </div>
       <div className={styles.registerTokenPageButton}>
         <Button

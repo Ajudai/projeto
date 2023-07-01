@@ -6,11 +6,12 @@ import logo from '../../assets/logo.svg';
 import { MdMenu, MdClose } from 'react-icons/md';
 import AvatarComponent from '../avatar/AvatarComponent';
 import { IUserData } from '../../@types/user';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [userData, setUserData] = useState<IUserData>();
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (openMenu) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'unset';
@@ -28,7 +29,13 @@ const Header = () => {
   return (
     <header className={styles.headerContainer}>
       <div className={styles.headerContainerDiv}>
-        <img src={logo} alt="Ajudaí logo" className={styles.headerContainerImg} />
+        <img
+          src={logo}
+          aria-hidden
+          onClick={() => navigate('/home')}
+          alt="Ajudaí logo"
+          className={styles.headerContainerImg}
+        />
         {!openMenu ? (
           <MdMenu className={styles.headerContainerMdMenu} onClick={() => setOpenMenu(!openMenu)} />
         ) : (

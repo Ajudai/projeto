@@ -51,8 +51,14 @@ const Login = () => {
           </div>
 
           {error && <p className={styles.loginPageErrorP}>{errorMessage}</p>}
-          <Input value={email} error={error} label="Email" onChange={(e) => setEmail(e.target.value)} />
-          <Input value={password} error={error} password label="Senha" onChange={(e) => setPassword(e.target.value)} />
+          <Input value={email} error={error} label="Email" type="text" onChange={(e) => setEmail(e.target.value)} />
+          <Input
+            value={password}
+            error={error}
+            type="password"
+            label="Senha"
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <p className={styles.loginPageForgetPasswordP}>Esqueci minha senha</p>
           <div className={styles.loginPageLoginButton}>
             <Button size="medium" disabled={false} rounded onClick={() => login()} label="Login" />

@@ -7,7 +7,6 @@
   margin-top: 4px;
   background-color: #fff;
   border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -50,4 +49,45 @@
 .homeComponentInfoContainerH4 {
   font-size: 0.7rem;
   font-weight: 300;
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+}
+@media (min-width: 992px) {
+  .homeComponentContainer {
+    width: 200px;
+    height: 120px;
+    margin-top: 4px;
+    background-color: #fff;
+    border-radius: unset;
+    display: block;
+  }
+
+  .homeComponentImg {
+    width: 100%;
+  }
+
+  .homeComponentInfoContainer {
+    width: 100%;
+  }
+
+  .homeComponentInfoContainerH2 {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .homeComponentInfoContainerH3 {
+    font-size: 0.7rem;
+    font-weight: 400;
+  }
+
+  .homeComponentInfoContainerH4 {
+    font-size: 0.6rem;
+    font-weight: 300;
+  }
+}
+@media (min-width: 1200px) {
 }
