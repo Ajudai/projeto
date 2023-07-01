@@ -1,0 +1,140 @@
+@import '../../styles/colors';
+@import '../../styles/fonts';
+
+* {
+  outline: none;
+}
+
+.requestHelpPageMain{
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: $fonte-cor-secundaria;
+}
+
+.requestHelpHomeRequest,
+.requestHelpHomeCategories,
+.requestHelpHomeDescription{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 16px;
+}
+
+.requestHelpHomeMenuH1,
+.requestHelpHomeCategoriesH2,
+.requestHelpHomeMenuH3{
+  width: 90%;
+  padding-bottom: 8px;
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: $font-family-principal;
+  color: $fonte-cor-primaria;
+}
+
+.requestHelpHomeMenuBanner{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  height: 120px;
+}
+
+.requestHelpHomeTextArea,
+.requestHelpHomeMenuBanner{
+  background-color: $background-disable-default;
+  border-radius: 8px;
+  width: 90%;
+}
+
+.requestHelpHomeMenuBannerInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.requestHelpHomeMenuBannerP{
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: $font-family-principal;
+  color: $fonte-cor-primaria;
+}
+
+.requestHelpHomeCategoriesContainer{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.requestHelpHomeCategoriesDiv{
+  display: flex;
+  padding-bottom: 6px;
+  font-family: $font-family-principal;
+  color: $fonte-cor-primaria;
+  gap: 4px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.requestHelpHomeTextArea{
+  height: 80px;
+  padding: 6px;
+  resize: none;
+  color: $fonte-cor-primaria;
+  font-weight: 400;
+  font-family: $font-family-text-area;
+  font-size: 0.8rem;
+}
+
+.requestHelpHomeButton{
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  padding-top: 32px;
+}
+
+@media (min-width: 576px) {
+  .requestHelpHomeMenuBanner{
+    height: 150px;
+  }
+}
+
+@media (min-width: 768px) {
+  .requestHelpPageMain{
+    display: flex;
+    align-items: center;
+  }
+
+  .requestHelpHomeRequest,
+  .requestHelpHomeCategories,
+  .requestHelpHomeDescription{
+    width: 70%;
+  }
+
+  .requestHelpHomeMenuBanner {
+    height: 200px;
+  }
+
+  .requestHelpHomeTextArea{
+    height: 100px;
+  }
+
+  .requestHelpHomeButton{
+    width: 50%;
+  }
+}
+
+@media (min-width: 992px) {
+  .requestHelpHomeRequest,
+  .requestHelpHomeCategories,
+  .requestHelpHomeDescription{
+    width: 65%;
+  }
+}
