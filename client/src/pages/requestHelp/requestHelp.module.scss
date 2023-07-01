@@ -132,7 +132,9 @@
 }
 
 @media (min-width: 992px) {
-  .requestHelpPage{
-    width: 70%;
+  .requestHelpHomeRequest,
+  .requestHelpHomeCategories,
+  .requestHelpHomeDescription{
+    width: 65%;
   }
 }

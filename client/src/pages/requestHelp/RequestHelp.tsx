@@ -23,13 +23,8 @@ const RequestHelp = (async) => {
         <h2 className={styles.requestHelpHomeCategoriesH2}>Categorias</h2>
         <div className={styles.requestHelpHomeCategoriesContainer}>
           <div className={styles.requestHelpHomeCategoriesDiv}>
-            <input
-              className={styles.requestHelpHomeCategoriesInput}
-              type="radio"
-              name="categoria"
-              value="alimentação"
-            />
-            Alimentação
+            <input className={styles.requestHelpHomeCategoriesInput} type="radio" name="categoria" value="Comida" />
+            Comida
           </div>
           <div className={styles.requestHelpHomeCategoriesDiv}>
             <input className={styles.requestHelpHomeCategoriesInput} type="radio" name="categoria" value="roupas" />
