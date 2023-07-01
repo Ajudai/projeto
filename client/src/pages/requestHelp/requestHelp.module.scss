@@ -8,28 +8,9 @@
 .requestHelpPageMain{
   width: 100%;
   min-height: 100vh;
-  background: $background-page-help;
-}
-
-.requestHelpPageHeader{
   display: flex;
-  justify-content: center;
-}
-
-.requestHelpPageHeaderDiv{
-  width: 90%;
-  margin-top: 12px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.requestHelpPageLogoImg{
-  width: 88px;
-  height: 24px;
-}
-
-.requestHelpPageMenu{
-  cursor: pointer;
+  flex-direction: column;
+  background: $fonte-cor-secundaria;
 }
 
 .requestHelpHomeRequest,
@@ -38,7 +19,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 12px 0;
+  padding-top: 16px;
 }
 
 .requestHelpHomeMenuH1,
@@ -49,8 +30,7 @@
   font-size: 2rem;
   font-weight: 700;
   font-family: $font-family-principal;
-  color: $fonte-cor-secundaria;
-
+  color: $fonte-cor-primaria;
 }
 
 .requestHelpHomeMenuBanner{
@@ -97,7 +77,7 @@
   display: flex;
   padding-bottom: 6px;
   font-family: $font-family-principal;
-  color: $fonte-cor-secundaria;
+  color: $fonte-cor-primaria;
   gap: 4px;
   font-weight: 700;
   font-size: 1rem;
@@ -129,15 +109,17 @@
 @media (min-width: 768px) {
   .requestHelpPageMain{
     display: flex;
-    justify-content: center;
+    align-items: center;
   }
 
-  .requestHelpPage{
-    width: 75%;
+  .requestHelpHomeRequest,
+  .requestHelpHomeCategories,
+  .requestHelpHomeDescription{
+    width: 70%;
   }
 
   .requestHelpHomeMenuBanner {
-    height: 180px;
+    height: 200px;
   }
 
   .requestHelpHomeTextArea{
