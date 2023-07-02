@@ -3,6 +3,33 @@ import User from "../../models/user/User";
 import Endereco from "../../models/endereco/Endereco";
 
 export default {
+
+  async editarDadosUsuario(req: Request, res: Response) {
+    try {
+      const { _id } = req.params;
+      const { userName, userEmail, userPhoneNumber } = req.body
+      await User.findById(_id)
+        .then((user) => {
+          if (user) {
+            user.userName = userName ?? user.userName;
+            user.userEmail = userEmail ?? user.userEmail;
+            user.userPhoneNumber = userPhoneNumber ?? user.userPhoneNumber;
+
+            return user.save();
+          }
+
+        }
+        ).catch((error) => {
+          return res.status(401).send({ message: "Erro ao atualizar dados", error });
+        })
+      res.status(200).send({ message: "Dados atualizados com sucesso" });
+
+    } catch (error) {
+      return res.status(500).send({ message: "Internal server error" });
+    }
+  },
+
+
   async editarEnderecoUsuario(req: Request, res: Response) {
     try {
       const { rua, bairro, cidade, complemento, numero, estado, cep } =
