@@ -19,11 +19,13 @@ router.post(
   passwordValidator,
   registerController.register
 );
-
+// USUÁRIOS
 router.get("/user/:_id", UserController.buscarUserPorId);
 router.put("/address/:_id", UserController.editarEnderecoUsuario);
-
+router.put('/editarDados/:_id', userNameValidation, emailValidator, UserController.editarDadosUsuario)
+// PEDIDOS 
 router.get("/pedidos", PedidoController.buscarTodosOsPedidos);
 router.get("/pedidos/:_id", PedidoController.buscarPedidoPorId);
 router.post("/ajuda/:userId", PedidoController.novoPedido);
+
 export default router;

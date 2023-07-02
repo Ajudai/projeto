@@ -4,14 +4,10 @@
 .avatarComponentInfoContainer {
   width: 100%;
   padding: 4px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .avatarComponentInfoContainerNome,
-.avatarComponentInfoContainerEmail {
+.avatarComponentProfileRedirect {
   font-family: $font-family-principal;
   color: $fonte-cor-secundaria;
 }
@@ -20,6 +16,9 @@
   font-weight: 700;
 }
 
-.avatarComponentInfoContainerEmail {
+.avatarComponentProfileRedirect {
   font-weight: 300;
+  border-bottom: 1px solid $fonte-cor-secundaria;
+  line-height: 20px;
+  cursor: pointer;
 }
