@@ -1,13 +1,12 @@
-import styles from './ajuda.module.scss';
+import styles from './requestHelpDetails.module.scss';
 import { useEffect, useState } from 'react';
 import { getPedidoById } from '../../api/pedidos';
 import { useParams } from 'react-router-dom';
 import { IPedidoModel } from '../../@types/pedido';
 import logo from '../../assets/logo.svg';
-import { StylesProvider } from '@chakra-ui/react';
 import Header from '../../components/header/Header';
 
-const Ajuda = () => {
+const Help = () => {
   const [data, setData] = useState<IPedidoModel[]>();
   const { _id } = useParams();
 
@@ -41,4 +40,4 @@ const Ajuda = () => {
   );
 };
 
-export default Ajuda;
+export default Help;
