@@ -1,0 +1,134 @@
+@import '../../styles/colors';
+@import '../../styles/fonts';
+
+.ajudaPageMain{
+    width: 100%;
+    min-height: 100vh;
+    background: $fonte-cor-secundaria;
+}
+
+.ajudaPageBanner{
+    width: 100%;
+    height: 380px;
+    background: $background-banner;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.ajudaPageBannerIcon{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.ajudaPageContainerTitle{
+    font-family: $font-family-principal;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: $fonte-cor-secundaria;
+}
+
+.ajudaPageContainerLocal{
+    font-family: $font-family-principal;
+    font-size: 0.8rem;
+    color: $fonte-cor-secundaria;
+}
+
+.ajudaPageDetails{
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+.ajudaPageDetailsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ajudaPageDetailsCategoria{
+    font-family: $font-family-principal;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $fonte-cor-primaria;
+}
+
+.ajudaPageDetailsDescription{
+    font-family: $font-family-text-area;
+    font-size: 1rem;
+    color: $fonte-cor-primaria;
+}
+
+.ajudaPageDetailsButtons{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    padding: 32px 0px;
+}
+
+.ajudaPageDetailsWhatsapp,
+.ajudaPageDetailsInstagram{
+    background: $fonte-cor-primaria;
+    border-radius: 50%;
+    padding: 8px;
+}
+
+.ajudaPageBannerArrow:hover,
+.ajudaPageDetailsWhatsapp:hover,
+.ajudaPageDetailsInstagram:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+@media (min-width: 576px) {
+    .ajudaPageBanner{
+        height: 400px;
+    }
+}
+
+@media (min-width: 768px) {
+    .ajudaPageMain{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ajudaPageDetails{
+        display: flex;
+        flex-direction: row;
+    }
+
+   .ajudaPageBanner,
+   .ajudaPageDetails{
+        width: 85%;
+   }
+
+   .ajudaPageBanner{
+        height: 420px;
+        margin-top: 32px;
+   }
+
+   .ajudaPageDetailsContainer,
+   .ajudaPageDetailsButtons{
+        width: 50%;
+   }
+
+   .ajudaPageDetailsButtons{
+        justify-content: space-evenly;
+   }
+}
+
+@media (min-width: 992px) {
+    .ajudaPageBanner,
+    .ajudaPageDetails{
+        width: 70%;
+    }
+
+   .ajudaPageBanner{
+        height: 450px;
+   }
+}
