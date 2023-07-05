@@ -1,14 +1,39 @@
+import { useEffect, useState } from 'react';
 import styles from './requestHelp.module.scss';
-import { useState } from 'react';
 import { PiMountainsFill } from 'react-icons/pi';
 import Button from '../../components/button/Button';
 import Header from '../../components/header/Header';
 import { Select } from '@chakra-ui/react';
+import { IUserData } from '../../@types/user';
+import { pedirAjuda } from '../../api/pedidos';
 
 const RequestHelp = () => {
   const [titulo, setTitulo] = useState('');
   const [contato, setContato] = useState('');
   const [descricao, setDescricao] = useState('');
+  const [userData, setUserData] = useState<IUserData>();
+  const [categoria, setCategoria] = useState('');
+  const [resFromServer, setResFromServer] = useState({});
+
+  useEffect(() => {
+    const getUserDataFromStorage = () => {
+      const getFromStorage = localStorage.getItem('userData');
+      const parseUserData = getFromStorage && JSON.parse(getFromStorage);
+      setUserData(parseUserData);
+    };
+    getUserDataFromStorage();
+  }, [resFromServer]);
+
+  const handlePedirAjuda = async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
+    const { data, error } = await pedirAjuda({ titulo, contato, descricao, categoria, _id: userData?._id! });
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
+      setResFromServer(data!);
+    } catch (err) {
+      console.error(error);
+    }
+  };
 
   return (
     <main className={styles.requestHelpPageMain}>
@@ -20,19 +45,6 @@ const RequestHelp = () => {
           <input type="file" className={styles.requestHelpHomeMenuBannerInput} />
           <PiMountainsFill color="#000" size={40} />
           <p className={styles.requestHelpHomeMenuBannerP}>Insira uma foto para banner</p>
-        </div>
-      </div>
-
-      <div className={styles.requestHelpHomeCategories}>
-        <h2 className={styles.requestHelpHomeCategoriesH2}>Categorias</h2>
-        <div className={styles.requestHelpHomeCategoriesContainer}>
-          <Select placeholder="Escolha uma categoria">
-            <option value="Comida">Comida</option>
-            <option value="Roupas">Roupas</option>
-            <option value="Educação">Educação</option>
-            <option value="Brinquedos">Brinquedos</option>
-            <option value="Outros">Outros</option>
-          </Select>
         </div>
       </div>
 
@@ -58,10 +70,23 @@ const RequestHelp = () => {
           placeholder="Introduza uma breve descrição aqui..."
           onChange={(e) => setDescricao(e.target.value)}
         />
+      </div>
 
-        <div className={styles.requestHelpHomeButton}>
-          <Button size="medium" rounded disabled={false} onClick={() => console.log('Publicado')} label="Salvar" />
+      <div className={styles.requestHelpHomeCategories}>
+        <h2 className={styles.requestHelpHomeCategoriesH2}>Categoria</h2>
+        <div className={styles.requestHelpHomeCategoriesContainer}>
+          <Select placeholder="Escolha uma categoria" onChange={(e) => setCategoria(e.target.value)}>
+            <option value="Comida">Comida</option>
+            <option value="Roupas">Roupas</option>
+            <option value="Educação">Educação</option>
+            <option value="Brinquedos">Brinquedos</option>
+            <option value="Outros">Outros</option>
+          </Select>
         </div>
+      </div>
+
+      <div className={styles.requestHelpHomeButton}>
+        <Button size="medium" rounded disabled={false} onClick={() => handlePedirAjuda()} label="Salvar" />
       </div>
     </main>
   );
