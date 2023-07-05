@@ -83,10 +83,19 @@
   font-size: 1rem;
 }
 
+.requestInput {
+  width: 90%;
+  color: $fonte-cor-primaria;
+  padding: 8px;
+  font-family: $font-family-text-area;
+  font-size: 0.8rem;
+  background-color: $background-disable-default;
+  border-radius: 8px;
+}
+
 .requestHelpHomeTextArea {
   height: 80px;
   padding: 8px;
-  resize: none;
   color: $fonte-cor-primaria;
   font-weight: 400;
   font-family: $font-family-text-area;

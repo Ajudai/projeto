@@ -6,6 +6,8 @@ import Header from '../../components/header/Header';
 import { Select } from '@chakra-ui/react';
 
 const RequestHelp = () => {
+  const [titulo, setTitulo] = useState('');
+  const [contato, setContato] = useState('');
   const [descricao, setDescricao] = useState('');
 
   return (
@@ -35,6 +37,20 @@ const RequestHelp = () => {
       </div>
 
       <div className={styles.requestHelpHomeDescription}>
+        <h3 className={styles.requestHelpHomeMenuH3}>Título</h3>
+        <input className={styles.requestInput} placeholder="Título" onChange={(e) => setTitulo(e.target.value)} />
+      </div>
+
+      <div className={styles.requestHelpHomeDescription}>
+        <h3 className={styles.requestHelpHomeMenuH3}>Contato</h3>
+        <input
+          className={styles.requestInput}
+          placeholder="(DDD)987654321"
+          onChange={(e) => setContato(e.target.value)}
+        />
+      </div>
+
+      <div className={styles.requestHelpHomeDescription}>
         <h3 className={styles.requestHelpHomeMenuH3}>Descrição</h3>
         <textarea
           className={styles.requestHelpHomeTextArea}
@@ -42,6 +58,7 @@ const RequestHelp = () => {
           placeholder="Introduza uma breve descrição aqui..."
           onChange={(e) => setDescricao(e.target.value)}
         />
+
         <div className={styles.requestHelpHomeButton}>
           <Button size="medium" rounded disabled={false} onClick={() => console.log('Publicado')} label="Salvar" />
         </div>
