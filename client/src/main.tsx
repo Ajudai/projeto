@@ -8,6 +8,9 @@ import ForgetPassword from './pages/forgetPassword/ForgetPassword';
 import { ChakraProvider } from '@chakra-ui/react';
 import RequestHelp from './pages/requestHelp/RequestHelp';
 import Ajuda from './pages/ajuda/Ajuda';
+import MyAccount from './pages/myAccount/MyAccount';
+import ChangePassword from './pages/changePassword/ChangePassword';
+import Conta from './pages/conta/Conta';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +24,8 @@ const router = createBrowserRouter([
   { path: '/forgetPassword/:_id', element: <ForgetPassword /> },
   { path: '/requestHelp/:_id', element: <RequestHelp /> },
   { path: '/ajuda/:_id', element: <Ajuda /> },
+  { path: 'conta', element: <Conta /> },
+  { path: 'changePassword', element: <ChangePassword /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

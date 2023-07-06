@@ -1,0 +1,108 @@
+@import '../../styles/colors';
+@import '../../styles/fonts';
+
+.contaPageMain {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $background-pages-default;
+}
+
+.contaPageProfile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 24px;
+    gap: 16px;
+}
+
+.contaPagePhoto{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    background: $background-banner;
+    border-radius: 50%;
+}
+
+.contaPageUserName{
+    font-family: $font-family-principal;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.contaPageError{
+  font-family: $font-family-principal;
+  font-size: 0.7rem;
+}
+
+.contaPageData{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px 16px;
+}
+
+.contaPageButton{
+    width: 100%;
+    display: flex;
+    padding-top: 48px;
+    justify-content: center;
+}
+
+@media (min-width: 576px) {
+    .contaPageData{
+        padding: 48px;
+    }
+}
+
+@media (min-width: 768px) {
+    .contaPageMain{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .contaPageProfile,
+    .contaPageData{
+        width: 90%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .contaPageData{
+        gap: 16px;
+    }
+
+    .contaPageProfile{
+        margin-top: 48px;
+    }
+
+    .contaPagePhoto{
+        width: 150px;
+        height: 150px;
+    }
+
+    .contaPageButton{
+        width: 70%;
+        display: flex;
+        justify-content: center;
+        align-self: center;
+    }
+}
+
+@media (min-width: 992px) {
+    .contaPageProfile,
+    .contaPageData{
+        width: 70%;
+    }
+
+    .contaPagePhoto{
+        width: 170px;
+        height: 170px;
+    }
+
+    .contaPageButton{
+        width: 50%;
+    }
+}
