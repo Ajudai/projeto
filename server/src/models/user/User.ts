@@ -33,7 +33,7 @@ const UserModelSchema = new mongoose.Schema<IUserModel>({
       categoria: String,
       validado: Boolean,
       userId: String,
-      fotos: [{ id: String, url: String }],
+      fotos: String,
     },
   ],
 

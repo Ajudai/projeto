@@ -29,14 +29,7 @@ const PedidoModel = new mongoose.Schema<IPedidoModel>({
     required: true,
   },
 
-  fotos: [
-    {
-      _id: {
-        type: String,
-      },
-      url: { type: String },
-    },
-  ],
+  fotos: { type: String },
 
   endereco: [],
 
