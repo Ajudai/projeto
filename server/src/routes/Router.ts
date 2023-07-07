@@ -28,6 +28,7 @@ router.post(
   passwordValidator,
   registerController.register
 );
+
 // USUÁRIOS
 router.get("/user/:_id", UserController.buscarUserPorId);
 router.put("/address/:_id", UserController.editarEnderecoUsuario);
@@ -37,6 +38,7 @@ router.put(
   emailValidator,
   UserController.editarDadosUsuario
 );
+
 // PEDIDOS
 router.get("/pedidos", PedidoController.buscarTodosOsPedidos);
 router.get("/pedidos/:_id", PedidoController.buscarPedidoPorId);
@@ -46,5 +48,13 @@ router.post(
   uploadImage,
   PedidoController.novoPedido
 );
+router.post("/validarAjuda/:_id", PedidoController.validarPedido);
+router.put(
+  "/editarAjuda/:_id",
+  Multer.single("fotos"),
+  uploadImage,
+  PedidoController.editarPedido
+);
+router.delete("/deletarPedido/:_id", PedidoController.deletarPedido);
 
 export default router;
