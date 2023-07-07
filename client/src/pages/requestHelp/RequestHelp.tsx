@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+import { useEffect, useRef, useState } from 'react';
 import styles from './requestHelp.module.scss';
 import { PiMountainsFill } from 'react-icons/pi';
 import Button from '../../components/button/Button';
@@ -11,9 +13,11 @@ const RequestHelp = () => {
   const [titulo, setTitulo] = useState('');
   const [contato, setContato] = useState('');
   const [descricao, setDescricao] = useState('');
+  const [fotos, setFotos] = useState(null);
   const [userData, setUserData] = useState<IUserData>();
   const [categoria, setCategoria] = useState('');
   const [resFromServer, setResFromServer] = useState({});
+  const inputFile = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const getUserDataFromStorage = () => {
@@ -24,11 +28,25 @@ const RequestHelp = () => {
     getUserDataFromStorage();
   }, [resFromServer]);
 
+  const selectImage = () => {
+    inputFile.current?.click();
+  };
+
   const handlePedirAjuda = async () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
-    const { data, error } = await pedirAjuda({ titulo, contato, descricao, categoria, _id: userData?._id! });
+    const formData = new FormData();
+
+    const ajudaData = {
+      titulo,
+      fotos,
+      contato,
+      descricao,
+      categoria,
+    };
+    Object.entries(ajudaData).forEach(([key, value]) => {
+      return formData.append(key, value!);
+    });
+    const { data, error } = await pedirAjuda(formData, { _id: userData?._id! });
     try {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
       setResFromServer(data!);
     } catch (err) {
       console.error(error);
@@ -42,7 +60,12 @@ const RequestHelp = () => {
       <div className={styles.requestHelpHomeRequest}>
         <h1 className={styles.requestHelpHomeMenuH1}>Peça uma Ajudaí</h1>
         <div className={styles.requestHelpHomeMenuBanner}>
-          <input type="file" className={styles.requestHelpHomeMenuBannerInput} />
+          <input
+            type="file"
+            onClick={selectImage}
+            onChange={(e: any) => setFotos(e.target.files[0])}
+            className={styles.requestHelpHomeMenuBannerInput}
+          />
           <PiMountainsFill color="#000" size={40} />
           <p className={styles.requestHelpHomeMenuBannerP}>Insira uma foto para banner</p>
         </div>
