@@ -9,6 +9,7 @@ import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 
 const Home = () => {
   const [data, setData] = useState<IPedidoModel[]>();
+  console.log(data);
   const scrollContainerRef: any = useRef(null);
 
   useEffect(() => {
@@ -61,12 +62,12 @@ const Home = () => {
 
           <div className={styles.homeItensBox} ref={scrollContainerRef}>
             {data
-              ?.filter((pedido) => pedido.categoria === 'Alimentação')
+              ?.filter((pedido) => pedido.categoria === 'Comida')
               .map((pedido: IPedidoModel) => (
                 <HomeComponent
                   key={pedido._id}
                   titulo={pedido.titulo}
-                  url={pedido.fotos?.[0]?.url ? pedido.fotos?.[0]?.url : logo}
+                  url={pedido.fotos ? pedido.fotos : logo}
                   bairro={pedido.endereco[0].bairro}
                   categoria={pedido.categoria}
                   createdAt={pedido.createdAt}
@@ -81,12 +82,12 @@ const Home = () => {
 
           <div className={styles.homeItensBox}>
             {data
-              ?.filter((pedido) => pedido.categoria === 'Infância')
+              ?.filter((pedido) => pedido.categoria === 'Brinquedos')
               .map((pedido: IPedidoModel) => (
                 <HomeComponent
                   key={pedido._id}
                   titulo={pedido.titulo}
-                  url={pedido.fotos?.[0]?.url ? pedido.fotos?.[0]?.url : logo}
+                  url={pedido.fotos ? pedido.fotos : logo}
                   bairro={pedido.endereco[0].bairro}
                   categoria={pedido.categoria}
                   createdAt={pedido.createdAt}
@@ -108,7 +109,7 @@ const Home = () => {
                   <HomeComponent
                     key={pedido._id}
                     titulo={pedido.titulo}
-                    url={pedido.fotos?.[0]?.url ? pedido.fotos?.[0]?.url : logo}
+                    url={pedido.fotos ? pedido.fotos : logo}
                     bairro={pedido.endereco[0].bairro}
                     categoria={pedido.categoria}
                     createdAt={pedido.createdAt}
