@@ -7,7 +7,7 @@ export interface IPedidoModel {
   categoria: string;
   validado: boolean;
   userId: string;
-  fotos: { id: string; url: string }[];
+  fotos: any;
   endereco: IEnderecoModel[];
   createdAt: any;
 }

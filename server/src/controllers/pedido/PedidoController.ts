@@ -6,11 +6,12 @@ import User from "../../models/user/User";
 export default {
   async novoPedido(req: Request, res: Response) {
     try {
-      const { titulo, fotos, descricao, contato, categoria }: IPedidoModel =
-        req.body;
+      const { titulo, descricao, contato, categoria }: IPedidoModel = req.body;
       const { userId } = req.params;
+      const { fireBaseUrl }: any = req.file ? req.file : "";
+      console.log(fireBaseUrl);
 
-      if (!titulo && !fotos && !descricao && !contato && !categoria) {
+      if (!titulo && !descricao && !contato && !categoria) {
         return res.status(400).send({ message: "Insira informações válidas" });
       }
 
@@ -18,7 +19,7 @@ export default {
         .then(async (user) => {
           const pedidoDeAjuda = new Pedido({
             titulo,
-            fotos,
+            fotos: fireBaseUrl,
             descricao,
             contato,
             categoria,

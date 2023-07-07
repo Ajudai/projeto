@@ -8,7 +8,16 @@ import userNameValidation from "../middlewares/UserNameValidation";
 import emailValidator from "../middlewares/emailValidation";
 import PedidoController from "../controllers/pedido/PedidoController";
 import UserController from "../controllers/user/UserController";
+import { uploadImage } from "../services/firebase";
+import multer, { memoryStorage } from "multer";
+
 const router = Router();
+const Multer = multer({
+  storage: memoryStorage(),
+  limits: {
+    fileSize: 1024 * 1024 * 5,
+  },
+});
 
 router.post("/login", SessionController.login);
 router.post(
@@ -22,10 +31,20 @@ router.post(
 // USUÁRIOS
 router.get("/user/:_id", UserController.buscarUserPorId);
 router.put("/address/:_id", UserController.editarEnderecoUsuario);
-router.put('/editarDados/:_id', userNameValidation, emailValidator, UserController.editarDadosUsuario)
-// PEDIDOS 
+router.put(
+  "/editarDados/:_id",
+  userNameValidation,
+  emailValidator,
+  UserController.editarDadosUsuario
+);
+// PEDIDOS
 router.get("/pedidos", PedidoController.buscarTodosOsPedidos);
 router.get("/pedidos/:_id", PedidoController.buscarPedidoPorId);
-router.post("/ajuda/:userId", PedidoController.novoPedido);
+router.post(
+  "/ajuda/:userId",
+  Multer.single("fotos"),
+  uploadImage,
+  PedidoController.novoPedido
+);
 
 export default router;
