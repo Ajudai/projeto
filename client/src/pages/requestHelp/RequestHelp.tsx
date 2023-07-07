@@ -8,6 +8,7 @@ import Header from '../../components/header/Header';
 import { Select } from '@chakra-ui/react';
 import { IUserData } from '../../@types/user';
 import { pedirAjuda } from '../../api/pedidos';
+import { handlePhoneNumberChange } from '../../utils/formatPhoneNumber';
 
 const RequestHelp = () => {
   const [titulo, setTitulo] = useState('');
@@ -53,6 +54,10 @@ const RequestHelp = () => {
     }
   };
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    handlePhoneNumberChange(event, setContato);
+  };
+
   return (
     <main className={styles.requestHelpPageMain}>
       <Header />
@@ -60,14 +65,35 @@ const RequestHelp = () => {
       <div className={styles.requestHelpHomeRequest}>
         <h1 className={styles.requestHelpHomeMenuH1}>Peça uma Ajudaí</h1>
         <div className={styles.requestHelpHomeMenuBanner}>
-          <input
-            type="file"
-            onClick={selectImage}
-            onChange={(e: any) => setFotos(e.target.files[0])}
-            className={styles.requestHelpHomeMenuBannerInput}
-          />
-          <PiMountainsFill color="#000" size={40} />
-          <p className={styles.requestHelpHomeMenuBannerP}>Insira uma foto para banner</p>
+          {fotos ? (
+            <div className={styles.requestHelpSelectedBanner}>
+              <input
+                type="file"
+                onClick={selectImage}
+                onChange={(e: any) => setFotos(e.target.files[0])}
+                className={styles.requestHelpHomeMenuBannerInput}
+              />
+              <img
+                aria-hidden
+                onClick={selectImage}
+                onChange={(e: any) => setFotos(e.target.files[0])}
+                className={styles.requestHelpSelectedBanner}
+                src={fotos ? URL.createObjectURL(fotos) : ''}
+                alt="Seleção de imagem"
+              />
+            </div>
+          ) : (
+            <>
+              <input
+                type="file"
+                onClick={selectImage}
+                onChange={(e: any) => setFotos(e.target.files[0])}
+                className={styles.requestHelpHomeMenuBannerInput}
+              />
+              <PiMountainsFill color="#000" size={40} />
+              <p className={styles.requestHelpHomeMenuBannerP}>Insira uma foto para banner</p>
+            </>
+          )}
         </div>
       </div>
 
@@ -80,8 +106,10 @@ const RequestHelp = () => {
         <h3 className={styles.requestHelpHomeMenuH3}>Contato</h3>
         <input
           className={styles.requestInput}
-          placeholder="(DDD)987654321"
-          onChange={(e) => setContato(e.target.value)}
+          placeholder="(DDD) 98765-4321"
+          onChange={handleChange}
+          value={contato}
+          type="text"
         />
       </div>
 
@@ -98,7 +126,11 @@ const RequestHelp = () => {
       <div className={styles.requestHelpHomeCategories}>
         <h2 className={styles.requestHelpHomeCategoriesH2}>Categoria</h2>
         <div className={styles.requestHelpHomeCategoriesContainer}>
-          <Select placeholder="Escolha uma categoria" onChange={(e) => setCategoria(e.target.value)}>
+          <Select
+            backgroundColor={'#d9d9d9'}
+            placeholder="Escolha uma categoria"
+            onChange={(e) => setCategoria(e.target.value)}
+          >
             <option value="Comida">Comida</option>
             <option value="Roupas">Roupas</option>
             <option value="Educação">Educação</option>
