@@ -8,15 +8,18 @@ import Button from '../../components/button/Button';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { FaWhatsapp, FaInstagram } from 'react-icons/fa';
 import Header from '../../components/header/Header';
+import formatarData from '../../utils/formatDate';
 
 const Ajuda = () => {
   const [data, setData] = useState<IPedidoModel[]>();
+  const [dataFormatada, setDataFormatada] = useState('');
   const { _id } = useParams();
 
   useEffect(() => {
     const getPedido = async () => {
       const { data, error } = await getPedidoById(_id!);
       try {
+        console.log(data);
         setData(data);
       } catch (err) {
         console.error(error);
@@ -25,16 +28,25 @@ const Ajuda = () => {
     getPedido();
   }, []);
 
+  useEffect(() => {
+    try {
+      const formatarDataFunção = formatarData(data?.[0]?.createdAt);
+      setDataFormatada(formatarDataFunção);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   return (
     <main className={styles.ajudaPageMain}>
       <Header />
       <div className={styles.ajudaPageBanner}>
-        <img className={styles.ajudaPageBannerImage} src={data?.[0]?.fotos[0]?.url} alt="" />
+        <img className={styles.ajudaPageBannerImage} src={data?.[0]?.fotos} alt="" />
         <div className={styles.ajudaPageContentContainer}>
           <MdArrowBackIosNew className={styles.ajudaPageArrow} color="#fff" size={40} />
           <span className={styles.ajudaPageContent}>
             <p className={styles.ajudaPageContainerTitle}>{data?.[0]?.titulo}</p>
-            <p className={styles.ajudaPageContainerDate}>{data?.[0].createdAt}</p>
+            <p className={styles.ajudaPageContainerDate}>{dataFormatada}</p>
           </span>
         </div>
       </div>
