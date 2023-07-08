@@ -3,33 +3,27 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './login.module.scss';
 import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
-import axios from 'axios';
 import logo from '../../assets/logo.svg';
 import LoginRegisterHeader from '../../components/loginRegisterHeader/LoginRegisterHeader';
+import { userLogin } from '../../api/usuario';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const login = async () => {
-    await axios
-      .post('http://localhost:5000/login', {
-        userEmail: email,
-        userPassword: password,
-      })
-      .then((res) => {
-        localStorage.setItem('userData', JSON.stringify(res?.data));
-        navigate('/home');
-      })
-      .catch((errorMessage) => {
-        const errorMessageFromServer = errorMessage.response.data.message;
-        console.error('Erro ao logar', errorMessageFromServer);
-        setError(!error);
-        setErrorMessage(errorMessageFromServer);
-      });
+    const { data, error } = await userLogin({ userEmail: email, userPassword: password });
+    try {
+      console.log(data);
+      navigate('/home');
+    } catch (err) {
+      console.log(error);
+      setIsError(!isError);
+      setErrorMessage('Erro ao logar');
+    }
   };
 
   return (
@@ -50,11 +44,11 @@ const Login = () => {
             </span>
           </div>
 
-          {error && <p className={styles.loginPageErrorP}>{errorMessage}</p>}
-          <Input value={email} error={error} label="Email" type="text" onChange={(e) => setEmail(e.target.value)} />
+          {isError && <p className={styles.loginPageErrorP}>{errorMessage}</p>}
+          <Input value={email} error={isError} label="Email" type="text" onChange={(e) => setEmail(e.target.value)} />
           <Input
             value={password}
-            error={error}
+            error={isError}
             type="password"
             label="Senha"
             onChange={(e) => setPassword(e.target.value)}
