@@ -3,19 +3,13 @@ import { api } from '../service/api';
 
 interface IAjuda {
   _id: string;
-  titulo: string;
-  contato: string;
-  descricao: string;
-  categoria: string;
 }
 
-export const pedirAjuda = async ({ _id, titulo, contato, descricao, categoria }: IAjuda) => {
+export const pedirAjuda = async (formData: FormData, _id: IAjuda) => {
+  console.log(_id._id);
   try {
-    const res = await api.post<IAjuda>(`/ajuda/${_id}`, {
-      titulo,
-      contato,
-      descricao,
-      categoria,
+    const res = await api.post<IAjuda>(`/ajuda/${_id._id}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
     return { data: res.data };
   } catch (error: any) {

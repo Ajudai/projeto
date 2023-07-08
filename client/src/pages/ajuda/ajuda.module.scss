@@ -13,15 +13,27 @@
     background: $background-banner;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 16px;
+    position: relative;
 }
 
-.ajudaPageBannerIcon{
+.ajudaPageBannerImage{
+    width: 100%;
+    height: 100%;
+    opacity: 32%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.ajudaPageContentContainer{
+    height: 90%;
     display: flex;
-    justify-content: center;
-    align-self: center;
+    flex-direction: column;
+    position: absolute;
+    justify-content: space-between;
 }
 
 .ajudaPageContainerTitle{
@@ -31,8 +43,9 @@
     color: $fonte-cor-secundaria;
 }
 
-.ajudaPageContainerLocal{
+.ajudaPageContainerDate{
     font-family: $font-family-principal;
+    font-weight: 500;
     font-size: 0.8rem;
     color: $fonte-cor-secundaria;
 }
@@ -76,7 +89,6 @@
     padding: 8px;
 }
 
-.ajudaPageBannerArrow:hover,
 .ajudaPageDetailsWhatsapp:hover,
 .ajudaPageDetailsInstagram:hover{
     cursor: pointer;
@@ -123,6 +135,14 @@
 }
 
 @media (min-width: 992px) {
+    .ajudaPageContentContainer{
+        justify-content: flex-end;
+    }
+
+    .ajudaPageArrow{
+        display: none;
+    }
+
     .ajudaPageBanner,
     .ajudaPageDetails{
         width: 70%;
