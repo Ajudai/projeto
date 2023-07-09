@@ -10,6 +10,7 @@ import PedidoController from "../controllers/pedido/PedidoController";
 import UserController from "../controllers/user/UserController";
 import { uploadImage } from "../services/firebase";
 import multer, { memoryStorage } from "multer";
+import transformPhoneNumber from "../middlewares/phoneNumberParser";
 
 const router = Router();
 const Multer = multer({
@@ -25,6 +26,7 @@ router.post(
   userNameValidation,
   emailValidator,
   isCPFValid,
+  transformPhoneNumber,
   passwordValidator,
   registerController.register
 );
@@ -36,6 +38,8 @@ router.put(
   "/editarDados/:_id",
   userNameValidation,
   emailValidator,
+  transformPhoneNumber,
+  passwordValidator,
   UserController.editarDadosUsuario
 );
 
