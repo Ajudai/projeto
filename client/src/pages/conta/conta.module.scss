@@ -18,12 +18,65 @@
 }
 
 .contaPagePhoto{
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     display: flex;
+    justify-content: center;
+    align-items: center;
     background: $background-banner;
     border-radius: 50%;
+    position: relative;
+    overflow: hidden;
 }
+
+.contaPageInputPhoto{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 5;
+}
+
+.contaPageSelectedPhoto{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    cursor: pointer;
+}
+
+.contaPagePhotoWrapper{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.contaPagePhoto:hover .contaPageUserIcon,
+.contaPageSelectedPhoto:hover .contaPagePhotoWrapper{
+    filter: brightness(0.5);
+    transition: 0.3s;
+}
+
+.contaPageChangePhoto{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3.5vh;
+}
+
+.contaPagePhoto:hover .contaPageChangePhoto,
+.contaPageSelectedPhoto:hover .contaPageChangePhoto {
+    display: flex;
+}
+
+.contaPageUserIcon{
+    font-size: 7vh;
+} 
 
 .contaPageUserName{
     font-family: $font-family-principal;
@@ -70,6 +123,14 @@
         justify-content: center;
     }
 
+    .contaPageUserIcon{
+        font-size: 10vh;
+    }
+
+    .contaPageChangePhoto{
+        font-size: 5vh;
+    }
+
     .contaPageData{
         gap: 16px;
     }
@@ -95,6 +156,10 @@
     .contaPageProfile,
     .contaPageData{
         width: 70%;
+    }
+
+    .contaPageUserIcon{
+        font-size: 12vh;
     }
 
     .contaPagePhoto{

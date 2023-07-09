@@ -9,7 +9,7 @@ interface IUserDataUpdate {
 
 export const editarUsuario = async ({ nome, email, telefone, _id }: IUserDataUpdate) => {
   try {
-    const res = await api.put<IUserDataUpdate>(`pedidos/${_id}`, {
+    const res = await api.put<IUserDataUpdate>(`myAccount/${_id}`, {
       userName: nome,
       userEmail: email,
       userPhoneNumber: telefone,
