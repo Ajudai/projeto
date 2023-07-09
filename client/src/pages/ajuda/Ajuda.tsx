@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { getPedidoById } from '../../api/pedidos';
 import { useParams } from 'react-router-dom';
 import { IPedidoModel } from '../../@types/pedido';
-import { StylesProvider } from '@chakra-ui/react';
 import Button from '../../components/button/Button';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { FaWhatsapp, FaInstagram } from 'react-icons/fa';
@@ -14,6 +13,7 @@ const Ajuda = () => {
   const [data, setData] = useState<IPedidoModel[]>();
   const [dataFormatada, setDataFormatada] = useState('');
   const { _id } = useParams();
+  const dataUndefinedNan = 'undefined/NaN - NaN:NaN';
 
   useEffect(() => {
     const getPedido = async () => {
@@ -29,13 +29,19 @@ const Ajuda = () => {
   }, []);
 
   useEffect(() => {
-    try {
-      const formatarDataFunção = formatarData(data?.[0]?.createdAt);
-      setDataFormatada(formatarDataFunção);
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
+    const FormatDate = async () => {
+      try {
+        const dateFormater = formatarData(data?.[0]?.createdAt);
+        setDataFormatada(dateFormater);
+        console.log(dateFormater);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    setTimeout(() => {
+      FormatDate();
+    }, 1000);
+  }, [dataFormatada]);
 
   return (
     <main className={styles.ajudaPageMain}>
@@ -46,7 +52,7 @@ const Ajuda = () => {
           <MdArrowBackIosNew className={styles.ajudaPageArrow} color="#fff" size={40} />
           <span className={styles.ajudaPageContent}>
             <p className={styles.ajudaPageContainerTitle}>{data?.[0]?.titulo}</p>
-            <p className={styles.ajudaPageContainerDate}>{dataFormatada}</p>
+            {dataFormatada !== dataUndefinedNan && <p className={styles.ajudaPageContainerDate}>{dataFormatada}</p>}
           </span>
         </div>
       </div>

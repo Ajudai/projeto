@@ -1,3 +1,4 @@
+import { IUserData } from '../@types/user';
 import { api } from '../service/api';
 interface ILogin {
   userEmail: string;
@@ -33,6 +34,18 @@ export const editarUsuario = async ({ nome, email, telefone, _id }: IUserDataUpd
       userEmail: email,
       userPhoneNumber: telefone,
     });
+    return { data: res.data };
+  } catch (error: any) {
+    if (error.response.data.message) {
+      return { error: error.response.data.message };
+    }
+    return { error: 'Erro desconhecido' };
+  }
+};
+
+export const getUserById = async (_id: string): Promise<{ data?: IUserData[]; error?: string }> => {
+  try {
+    const res = await api.get<IUserData[]>(`/user/${_id}`);
     return { data: res.data };
   } catch (error: any) {
     if (error.response.data.message) {

@@ -6,19 +6,20 @@ import Button from '../../components/button/Button';
 import logo from '../../assets/logo.svg';
 import LoginRegisterHeader from '../../components/loginRegisterHeader/LoginRegisterHeader';
 import { userLogin } from '../../api/usuario';
+import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const login = async () => {
+  const handleLogin = async () => {
     const { data, error } = await userLogin({ userEmail: email, userPassword: password });
     try {
-      console.log(data);
-      navigate('/home');
+      localStorage.setItem('userData', JSON.stringify(data));
+      login(true);
     } catch (err) {
       console.log(error);
       setIsError(!isError);
@@ -55,7 +56,7 @@ const Login = () => {
           />
           <p className={styles.loginPageForgetPasswordP}>Esqueci minha senha</p>
           <div className={styles.loginPageLoginButton}>
-            <Button size="medium" disabled={false} rounded onClick={() => login()} label="Login" />
+            <Button size="medium" disabled={false} rounded onClick={() => handleLogin()} label="Login" />
           </div>
         </div>
       </div>

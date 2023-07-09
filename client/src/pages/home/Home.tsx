@@ -6,13 +6,22 @@ import Header from '../../components/header/Header';
 import { getAllPedidos } from '../../api/pedidos';
 import { IPedidoModel } from '../../@types/pedido';
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
+import { getUserById } from '../../api/usuario';
+import { IUserData } from '../../@types/user';
 
 const Home = () => {
   const [data, setData] = useState<IPedidoModel[]>();
-  console.log(data);
+  const [userData, setUserData] = useState<IUserData>();
   const scrollContainerRef: any = useRef(null);
 
   useEffect(() => {
+    const getUserDataFromStorage = () => {
+      const getFromStorage = localStorage.getItem('userData');
+      const parseUserData = getFromStorage && JSON.parse(getFromStorage);
+      setUserData(parseUserData);
+    };
+    getUserDataFromStorage();
+
     const getPedidos = async () => {
       const { data, error } = await getAllPedidos();
       try {
@@ -22,6 +31,16 @@ const Home = () => {
       }
     };
     getPedidos();
+
+    const getUserData = async () => {
+      const { data, error } = await getUserById(userData?._id ? userData._id : '');
+      try {
+        console.log(data);
+      } catch (err) {
+        console.error(error);
+      }
+    };
+    getUserData();
   }, []);
 
   const scrollToLeft = () => {

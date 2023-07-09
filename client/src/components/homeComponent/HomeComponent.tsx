@@ -18,8 +18,8 @@ const HomeComponent: React.FC<IHomeComponent> = ({ url, titulo, categoria, bairr
 
   useEffect(() => {
     try {
-      const formatarDataFunção = formatarData(createdAt);
-      setDataFormatada(formatarDataFunção);
+      const dateFormater = formatarData(createdAt);
+      setDataFormatada(dateFormater);
     } catch (error) {
       console.error(error);
     }
