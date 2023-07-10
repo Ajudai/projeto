@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './login.module.scss';
 import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';

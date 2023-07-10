@@ -1,5 +1,4 @@
 import { useState, useMemo, createContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 interface IProps {
   isAuthenticated: boolean;
