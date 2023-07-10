@@ -40,6 +40,8 @@ router.put(
   emailValidator,
   transformPhoneNumber,
   passwordValidator,
+  Multer.single("fotos"),
+  uploadImage,
   UserController.editarDadosUsuario
 );
 
