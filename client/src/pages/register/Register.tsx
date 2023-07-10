@@ -21,7 +21,7 @@ const Register = () => {
 
   const handleRegister = async () => {
     await axios
-      .post('http://localhost:5000/register', {
+      .post('https://ajudai-api.onrender.com/register', {
         userName: name,
         userEmail: email,
         userPhoneNumber: phoneNumber,

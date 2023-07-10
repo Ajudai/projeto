@@ -1,37 +1,80 @@
+import styles from './ajuda.module.scss';
 import { useEffect, useState } from 'react';
 import { getPedidoById } from '../../api/pedidos';
 import { useParams } from 'react-router-dom';
 import { IPedidoModel } from '../../@types/pedido';
-import logo from '../../assets/logo.svg';
+import Button from '../../components/button/Button';
+import { MdArrowBackIosNew } from 'react-icons/md';
+import { FaWhatsapp, FaInstagram } from 'react-icons/fa';
+import Header from '../../components/header/Header';
+import formatarData from '../../utils/formatDate';
 
 const Ajuda = () => {
   const [data, setData] = useState<IPedidoModel[]>();
+  const [dataFormatada, setDataFormatada] = useState('');
   const { _id } = useParams();
+  const dataUndefinedNan = 'undefined/NaN - NaN:NaN';
 
   useEffect(() => {
-    const getPedidos = async () => {
+    const getPedido = async () => {
       const { data, error } = await getPedidoById(_id!);
       try {
+        console.log(data);
         setData(data);
       } catch (err) {
         console.error(error);
       }
     };
-    getPedidos();
+    getPedido();
   }, []);
 
+  useEffect(() => {
+    const FormatDate = async () => {
+      try {
+        const dateFormater = formatarData(data?.[0]?.createdAt);
+        setDataFormatada(dateFormater);
+        console.log(dateFormater);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    setTimeout(() => {
+      FormatDate();
+    }, 1000);
+  }, [dataFormatada]);
+
   return (
-    <div>
-      {data?.map((pedido) => (
-        <div key={pedido?._id}>
-          <img
-            style={{ width: '320px', height: '320px' }}
-            src={pedido.fotos?.[0]?.url ? pedido.fotos?.[0]?.url : logo}
-            alt={pedido.titulo}
-          />
+    <main className={styles.ajudaPageMain}>
+      <Header />
+      <div className={styles.ajudaPageBanner}>
+        <img className={styles.ajudaPageBannerImage} src={data?.[0]?.fotos} alt="" />
+        <div className={styles.ajudaPageContentContainer}>
+          <MdArrowBackIosNew className={styles.ajudaPageArrow} color="#fff" size={40} />
+          <span className={styles.ajudaPageContent}>
+            <p className={styles.ajudaPageContainerTitle}>{data?.[0]?.titulo}</p>
+            {dataFormatada !== dataUndefinedNan && <p className={styles.ajudaPageContainerDate}>{dataFormatada}</p>}
+          </span>
         </div>
-      ))}
-    </div>
+      </div>
+
+      <section className={styles.ajudaPageDetails}>
+        <span className={styles.ajudaPageDetailsContainer}>
+          <p className={styles.ajudaPageDetailsCategoria}>{data?.[0]?.categoria}</p>
+          <p className={styles.ajudaPageDetailsDescription}>{data?.[0]?.descricao}</p>
+        </span>
+        <div className={styles.ajudaPageDetailsButtons}>
+          <Button
+            size="medium"
+            disabled
+            rounded
+            onClick={() => console.log('Você clicou no botão de Quero Ajudar')}
+            label="Quero ajudar"
+          />
+          <FaWhatsapp className={styles.ajudaPageDetailsWhatsapp} color="fff" size={44} />
+          <FaInstagram className={styles.ajudaPageDetailsInstagram} color="#fff" size={44} />
+        </div>
+      </section>
+    </main>
   );
 };
 

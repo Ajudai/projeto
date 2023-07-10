@@ -32,6 +32,9 @@
 .closeMenuOutside {
   width: 30%;
   backdrop-filter: blur(2px);
+  @media (min-width: 992px) {
+    width: 70%;
+  }
 }
 
 .mobileHamburguerMenuOpened {
@@ -61,6 +64,9 @@
   background-color: $fonte-cor-primaria;
   overflow: hidden;
   transition: width 0.3s ease-in-out;
+  @media (min-width: 992px) {
+    width: 30%;
+  }
 }
 
 .mobileHamburguerMenuNavClosed {

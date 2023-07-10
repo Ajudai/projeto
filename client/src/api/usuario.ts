@@ -1,5 +1,9 @@
-import { useNavigate } from 'react-router-dom';
+import { IUserData } from '../@types/user';
 import { api } from '../service/api';
+interface ILogin {
+  userEmail: string;
+  userPassword: string;
+}
 
 interface IUserDataUpdate {
   nome: string;
@@ -8,26 +12,18 @@ interface IUserDataUpdate {
   _id: string;
 }
 
-interface IUserLogin {
-  userEmail: string;
-  userPassword: string;
-}
-
-export const login = async ({ userEmail, userPassword }: IUserLogin) => {
+export const userLogin = async ({ userEmail, userPassword }: ILogin) => {
   try {
-    const res = await api
-      .post<IUserDataUpdate>(`login`, {
-        userEmail,
-        userPassword,
-      })
-      .then(() => {
-        localStorage.setItem('userData', JSON.stringify(res?.data));
-      });
+    const res = await api.post<ILogin>('login', {
+      userEmail,
+      userPassword,
+    });
     return { data: res.data };
   } catch (error: any) {
     if (error.response.data.message) {
       return { error: error.response.data.message };
     }
+    return { error: 'Erro desconhecido' };
   }
 };
 
@@ -43,5 +39,17 @@ export const editarUsuario = async ({ nome, email, telefone, _id }: IUserDataUpd
     if (error.response.data.message) {
       return { error: error.response.data.message };
     }
+  }
+};
+
+export const getUserById = async (_id: string): Promise<{ data?: IUserData[]; error?: string }> => {
+  try {
+    const res = await api.get<IUserData[]>(`/user/${_id}`);
+    return { data: res.data };
+  } catch (error: any) {
+    if (error.response.data.message) {
+      return { error: error.response.data.message };
+    }
+    return { error: 'Erro desconhecido' };
   }
 };
