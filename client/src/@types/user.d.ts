@@ -1,5 +1,5 @@
-import { IEndereco } from "./endereco";
-import { IPedidoModel } from "./pedido";
+import { IEndereco } from './endereco';
+import { IPedidoModel } from './pedido';
 
 export interface IUserData {
   userName: string;
@@ -7,7 +7,7 @@ export interface IUserData {
   fotos: string;
   userPhoneNumber: string;
   endereco?: IEndereco[];
-  meusPedidos?: IPedidoModel[]
+  meusPedidos?: IPedidoModel[];
   _id?: string;
   token: string;
 }

@@ -8,6 +8,7 @@ import RequestHelp from './pages/requestHelp/RequestHelp';
 import Ajuda from './pages/ajuda/Ajuda';
 import useAuth from './hooks/useAuth';
 import { AuthRedirect } from './components/AuthRedirect/AuthRedirect';
+import MyRequests from './pages/myRequests/MyRequests';
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -39,6 +40,14 @@ function App() {
           element={
             <AuthRedirect>
               <Ajuda />
+            </AuthRedirect>
+          }
+        />
+        <Route
+          path="/myRequests/:_id"
+          element={
+            <AuthRedirect>
+              <MyRequests />
             </AuthRedirect>
           }
         />

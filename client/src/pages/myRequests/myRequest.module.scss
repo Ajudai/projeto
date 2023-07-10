@@ -1,0 +1,18 @@
+.myRequestMainContainer {
+  width: 100%;
+}
+
+.myRequestHomeComponentDiv {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media (min-width: 992px) {
+  .myRequestHomeComponentDiv {
+    width: 100%;
+    flex-direction: row;
+  }
+}
