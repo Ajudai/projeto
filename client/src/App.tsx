@@ -59,6 +59,14 @@ function App() {
             </AuthRedirect>
           }
         />
+        <Route
+          path="/editarDados/:_id"
+          element={
+            <AuthRedirect>
+              <Conta />
+            </AuthRedirect>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
