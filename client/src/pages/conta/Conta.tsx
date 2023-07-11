@@ -33,10 +33,8 @@ const Conta = () => {
   };
 
   const handleEditarUsuario = async () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
     const { data, error } = await editarUsuario({ nome, email, telefone, _id: userData?._id! });
     try {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
       setResFromServer(data!);
     } catch (err) {
       console.error(error);

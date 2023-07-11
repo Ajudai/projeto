@@ -16,7 +16,7 @@ export default function formatarData(dataString: string): string {
     'Dezembro',
   ];
 
-  const dataBrasilia = new Date(data.getTime() - 3 * 60 * 60 * 1000); // Ajuste para GMT-3 (Brasília)
+  const dataBrasilia = new Date(data.getTime() - 3 * 60 * 60 * 1000);
 
   const mes = meses[dataBrasilia.getMonth()];
   const ano = dataBrasilia.getFullYear();
