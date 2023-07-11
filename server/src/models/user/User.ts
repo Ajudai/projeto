@@ -25,6 +25,8 @@ const UserModelSchema = new mongoose.Schema<IUserModel>({
     required: true,
   },
 
+  profilePicture: { type: String },
+
   meusPedidos: [
     {
       titulo: String,

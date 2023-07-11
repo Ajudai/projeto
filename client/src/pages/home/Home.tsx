@@ -7,18 +7,23 @@ import { getAllPedidos } from '../../api/pedidos';
 import { IPedidoModel } from '../../@types/pedido';
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 import { getUserById } from '../../api/usuario';
-import { IUserData } from '../../@types/user';
+import useUser from '../../hooks/useUser';
 
 const Home = () => {
   const [data, setData] = useState<IPedidoModel[]>();
-  const [userData, setUserData] = useState<IUserData>();
   const scrollContainerRef: any = useRef(null);
+  const { setUser } = useUser();
 
   useEffect(() => {
-    const getUserDataFromStorage = () => {
+    const getUserDataFromStorage = async () => {
       const getFromStorage = localStorage.getItem('userData');
       const parseUserData = getFromStorage && JSON.parse(getFromStorage);
-      setUserData(parseUserData);
+      const { data, error } = await getUserById(parseUserData?._id ? parseUserData._id : '');
+      try {
+        setUser([data]);
+      } catch (err) {
+        console.error(error);
+      }
     };
     getUserDataFromStorage();
 
@@ -31,16 +36,6 @@ const Home = () => {
       }
     };
     getPedidos();
-
-    const getUserData = async () => {
-      const { data, error } = await getUserById(userData?._id ? userData._id : '');
-      try {
-        console.log(data);
-      } catch (err) {
-        console.error(error);
-      }
-    };
-    getUserData();
   }, []);
 
   const scrollToLeft = () => {

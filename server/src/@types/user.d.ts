@@ -6,6 +6,7 @@ export interface IUserModel {
   userEmail: string;
   userPhoneNumber: string;
   userCpf: string;
+  profilePicture: string;
   userPassword: string;
   meusPedidos: IPedidoModel[];
   endereco: IEnderecoModel[];

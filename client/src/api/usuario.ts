@@ -39,7 +39,6 @@ export const editarUsuario = async ({ nome, email, telefone, _id }: IUserDataUpd
     if (error.response.data.message) {
       return { error: error.response.data.message };
     }
-    return { error: 'Erro desconhecido' };
   }
 };
 
