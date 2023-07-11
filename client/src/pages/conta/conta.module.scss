@@ -78,7 +78,7 @@
     font-size: 7vh;
 } 
 
-.contaPageUserName{
+.contaPageUserData{
     font-family: $font-family-principal;
     font-weight: 700;
     font-size: 1.5rem;
@@ -99,8 +99,11 @@
 .contaPageButton{
     width: 100%;
     display: flex;
+    flex-direction: column;
     padding-top: 48px;
     justify-content: center;
+    align-items: center;
+    gap: 12px;
 }
 
 @media (min-width: 576px) {

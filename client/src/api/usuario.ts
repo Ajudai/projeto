@@ -29,7 +29,7 @@ export const userLogin = async ({ userEmail, userPassword }: ILogin) => {
 
 export const editarUsuario = async ({ nome, email, telefone, _id }: IUserDataUpdate) => {
   try {
-    const res = await api.put<IUserDataUpdate>(`myAccount/${_id}`, {
+    const res = await api.put<IUserDataUpdate>(`editarDados/${_id}`, {
       userName: nome,
       userEmail: email,
       userPhoneNumber: telefone,

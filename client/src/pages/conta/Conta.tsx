@@ -10,11 +10,11 @@ import { BsCameraFill } from 'react-icons/bs';
 import { StylesProvider } from '@chakra-ui/react';
 
 const Conta = () => {
+  const [userData, setUserData] = useState<IUserData>();
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
   const [foto, setFoto] = useState(null);
-  const [userData, setUserData] = useState<IUserData>();
   const [resFromServer, setResFromServer] = useState({});
   const [error, setError] = useState(false);
   const inputFile = useRef<HTMLInputElement>(null);
@@ -23,7 +23,11 @@ const Conta = () => {
     const getUserDataFromStorage = () => {
       const getFromStorage = localStorage.getItem('userData');
       const parseUserData = getFromStorage && JSON.parse(getFromStorage);
+      setNome(parseUserData?.userName);
+      setEmail(parseUserData?.userEmail);
+      setTelefone(parseUserData?.userPhoneNumber);
       setUserData(parseUserData);
+      console.log(parseUserData);
     };
     getUserDataFromStorage();
   }, [resFromServer]);
@@ -35,6 +39,7 @@ const Conta = () => {
   const handleEditarUsuario = async () => {
     const { data, error } = await editarUsuario({ nome, email, telefone, _id: userData?._id! });
     try {
+      console.log(data);
       setResFromServer(data!);
     } catch (err) {
       console.error(error);
@@ -78,31 +83,26 @@ const Conta = () => {
             </>
           )}
         </div>
-        <p className={styles.contaPageUserName}>{userData?.userName}</p>
+        <p className={styles.contaPageUserData}>{userData?.userName}</p>
       </div>
       <div className={styles.contaPageData}>
+        <Input value={nome} error={error} label="Nome" type="text" onChange={(e) => setNome(e.target.value)} />
+        <Input value={email} error={error} label="Email" type="text" onChange={(e) => setEmail(e.target.value)} />
         <Input
-          value={userData?.userName}
-          error={error}
-          label="Nome"
-          type="text"
-          onChange={(e) => setNome(e.target.value)}
-        />
-        <Input
-          value={userData?.userEmail}
-          error={error}
-          label="Email"
-          type="text"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <Input
-          value={userData?.userPhoneNumber}
+          value={telefone}
           error={error}
           label="Telefone"
-          type="number"
+          type="text"
           onChange={(e) => setTelefone(e.target.value)}
         />
         <div className={styles.contaPageButton}>
+          <Button
+            size="medium"
+            disabled={false}
+            rounded
+            onClick={() => console.log('Alterar endereço')}
+            label="Editar endereço"
+          />
           <Button size="medium" disabled={false} rounded onClick={handleEditarUsuario} label="Salvar" />
         </div>
       </div>

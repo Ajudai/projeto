@@ -18,7 +18,7 @@ const AvatarComponent: React.FC<IAvatar> = ({ nome, src, size, _id }) => {
         <Avatar size={size ? size : 'md'} bg="teal.500" name={nome} src={src ? src : nome} />
         <div className={styles.avatarComponentInfoContainer}>
           <p className={styles.avatarComponentInfoContainerNome}>{nome}</p>
-          <button onClick={() => navigate(`/myAccount/${_id}`)} className={styles.avatarComponentProfileRedirect}>
+          <button onClick={() => navigate(`/editarDados/${_id}`)} className={styles.avatarComponentProfileRedirect}>
             Meu perfil
           </button>
         </div>

@@ -8,6 +8,7 @@ import RequestHelp from './pages/requestHelp/RequestHelp';
 import Ajuda from './pages/ajuda/Ajuda';
 import useAuth from './hooks/useAuth';
 import { AuthRedirect } from './components/AuthRedirect/AuthRedirect';
+import Conta from './pages/conta/Conta';
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -47,6 +48,14 @@ function App() {
           element={
             <AuthRedirect>
               <ForgetPassword />
+            </AuthRedirect>
+          }
+        />
+        <Route
+          path="/editarDados/:_id"
+          element={
+            <AuthRedirect>
+              <Conta />
             </AuthRedirect>
           }
         />
