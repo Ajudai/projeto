@@ -13,4 +13,6 @@ export const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = isSupported().then((yes) => (yes ? getAnalytics(app) : null));
+const analytics = isSupported().then((yes: any) =>
+  yes ? getAnalytics(app) : null
+);
