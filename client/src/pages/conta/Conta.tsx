@@ -1,6 +1,6 @@
 import styles from './conta.module.scss';
 import { useEffect, useState, useRef } from 'react';
-import { editarUsuario } from '../../api/usuario';
+import { editarUsuario, getUserById } from '../../api/usuario';
 import { IUserData } from '../../@types/user';
 import Header from '../../components/header/Header';
 import Input from '../../components/input/Input';
@@ -29,7 +29,16 @@ const Conta = () => {
       setUserData(parseUserData);
     };
     getUserDataFromStorage();
-  }, []);
+    const fetchUserData = async () => {
+      const { data, error } = await getUserById(userData?._id ? userData._id : '');
+      try {
+        localStorage.setItem('user', JSON.stringify(data));
+      } catch (err) {
+        console.error(error);
+      }
+    };
+    fetchUserData();
+  }, [resFromServer]);
 
   const selectImage = () => {
     inputFile.current?.click();
