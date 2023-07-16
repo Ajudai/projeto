@@ -1,3 +1,4 @@
+import { IEndereco } from '../@types/endereco';
 import { IUserData } from '../@types/user';
 import { api } from '../service/api';
 interface ILogin {
@@ -6,6 +7,10 @@ interface ILogin {
 }
 
 interface IUserDataUpdate {
+  _id: string;
+}
+
+interface IEnderecoUpdate {
   _id: string;
 }
 
@@ -29,11 +34,24 @@ export const editarUsuario = async (formData: FormData, _id: IUserDataUpdate) =>
     const res = await api.put<IUserDataUpdate>(`editarDados/${_id?._id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
-      }
+      },
     });
     return { data: res.data };
   } catch (error: any) {
     if (error.response.data.message) {
+      return { error: error.response.data.message };
+    }
+    return { error: 'Erro desconhecido' };
+  }
+};
+
+export const editarEndereco = async (_id: IUserData, enderecoData: IEnderecoUpdate) => {
+  try {
+    console.log(enderecoData);
+    const res = await api.put<IEnderecoUpdate>(`address/${_id}`, enderecoData);
+    return { data: res.data };
+  } catch (error: any) {
+    if (error.response?.data?.message) {
       return { error: error.response.data.message };
     }
     return { error: 'Erro desconhecido' };
