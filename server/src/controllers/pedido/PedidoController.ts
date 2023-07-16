@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Pedido from "../../models/pedido/Pedido";
 import { IPedidoModel } from "../../@types/pedidos";
 import User from "../../models/user/User";
+import { error } from "console";
 
 export default {
   async novoPedido(req: Request, res: Response) {
@@ -9,7 +10,6 @@ export default {
       const { titulo, descricao, contato, categoria }: IPedidoModel = req.body;
       const { userId } = req.params;
       const { fireBaseUrl }: any = req.file ? req.file : "";
-      console.log(fireBaseUrl);
 
       if (!titulo && !descricao && !contato && !categoria) {
         return res.status(400).send({ message: "Insira informações válidas" });
@@ -80,24 +80,30 @@ export default {
   async editarPedido(req: Request, res: Response) {
     try {
       const { _id } = req.params;
-      const { titulo, fotos, descricao, categoria, contato }: IPedidoModel =
-        req.body;
+      const { titulo, descricao, categoria, contato, userId }: IPedidoModel = req.body;
+      const { fireBaseUrl }: any = req.file ? req.file : "";
 
       await Pedido.findByIdAndUpdate(_id, {
         titulo,
-        fotos,
+        fotos: fireBaseUrl,
         descricao,
         categoria,
         contato,
-      })
-        .then((pedido) => {
-          return res.status(200).send([pedido]);
-        })
-        .catch((error) => {
-          return res
-            .status(400)
-            .send({ message: "Erro ao atualizar pedido", error });
-        });
+      });
+
+      await User.findByIdAndUpdate(userId, {
+        $set: {
+          'meusPedidos.$[pedido].titulo': titulo,
+          'meusPedidos.$[pedido].descricao': descricao,
+          'meusPedidos.$[pedido].fotos': fireBaseUrl,
+          'meusPedidos.$[pedido].categoria': categoria,
+          'meusPedidos.$[pedido].contato': contato,
+        },
+      }, { arrayFilters: [{ 'pedido._id': _id }] });
+
+      const pedidoAtualizado = await Pedido.findById(_id);
+
+      return res.status(200).send(pedidoAtualizado);
     } catch (error) {
       return res.status(500).send({ message: "Internal server error", error });
     }

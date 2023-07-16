@@ -10,6 +10,11 @@
   flex-direction: column;
 }
 
+.myRequestCard {
+  display: flex;
+  flex-direction: column;
+}
+
 @media (min-width: 992px) {
   .myRequestHomeComponentDiv {
     width: 100%;

@@ -42,3 +42,19 @@ export const getPedidoById = async (_id: string): Promise<{ data?: IPedidoModel[
     return { error: 'Erro desconhecido' };
   }
 };
+
+export const editarPedido = async (formData: FormData, _id: string) => {
+  try {
+    const res = await api.put<IPedidoModel[]>(`editarPedido/${_id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      }
+    });
+    return { data: res.data };
+  } catch (error: any) {
+    if (error.response.data.message) {
+      return { error: error.response.data.message };
+    }
+    return { error: 'Erro desconhecido' };
+  }
+};

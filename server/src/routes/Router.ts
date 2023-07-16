@@ -52,7 +52,7 @@ router.post(
 );
 router.post("/validarAjuda/:_id", PedidoController.validarPedido);
 router.put(
-  "/editarAjuda/:_id",
+  "/editarPedido/:_id",
   Multer.single("fotos"),
   uploadImage,
   PedidoController.editarPedido
