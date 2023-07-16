@@ -7,7 +7,6 @@ import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
 import { BiSolidUser } from 'react-icons/bi';
 import { BsCameraFill } from 'react-icons/bs';
-import { StylesProvider } from '@chakra-ui/react';
 
 const Conta = () => {
   const [userData, setUserData] = useState<IUserData>();
@@ -18,28 +17,32 @@ const Conta = () => {
   const [resFromServer, setResFromServer] = useState({});
   const [error, setError] = useState(false);
   const inputFile = useRef<HTMLInputElement>(null);
+  console.log(userData);
 
   useEffect(() => {
     const getUserDataFromStorage = () => {
-      const getFromStorage = localStorage.getItem('userData');
+      const getFromStorage = localStorage.getItem('user');
       const parseUserData = getFromStorage && JSON.parse(getFromStorage);
       setNome(parseUserData?.userName);
       setEmail(parseUserData?.userEmail);
       setTelefone(parseUserData?.userPhoneNumber);
       setUserData(parseUserData);
-      console.log(parseUserData);
     };
     getUserDataFromStorage();
-  }, [resFromServer]);
+  }, []);
 
   const selectImage = () => {
     inputFile.current?.click();
   };
 
   const handleEditarUsuario = async () => {
-    const { data, error } = await editarUsuario({ nome, email, telefone, _id: userData?._id! });
+    const formData = new FormData();
+    const userUpdate = { nome, email, telefone, profilePicture: foto };
+    Object.entries(userUpdate).forEach(([key, value]) => {
+      return formData.append(key, value!);
+    });
+    const { data, error } = await editarUsuario(formData, { _id: userData?._id! });
     try {
-      console.log(data);
       setResFromServer(data!);
     } catch (err) {
       console.error(error);
@@ -52,7 +55,7 @@ const Conta = () => {
       <Header />
       <div className={styles.contaPageProfile}>
         <div className={styles.contaPagePhoto}>
-          {foto ? (
+          {foto || userData?.profilePicture ? (
             <div className={styles.contaPageSelectedPhoto}>
               <input
                 type="file"
@@ -65,7 +68,7 @@ const Conta = () => {
                 onClick={selectImage}
                 onChange={(e: any) => setFoto(e.target.files[0])}
                 className={styles.contaPagePhotoWrapper}
-                src={foto ? URL.createObjectURL(foto) : ''}
+                src={foto ? URL.createObjectURL(foto) : userData?.profilePicture}
                 alt="Seleção de imagem"
               />
               <BsCameraFill className={styles.contaPageChangePhoto} color="#f5f5f5" />

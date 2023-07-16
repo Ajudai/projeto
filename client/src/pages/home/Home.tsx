@@ -7,12 +7,10 @@ import { getAllPedidos } from '../../api/pedidos';
 import { IPedidoModel } from '../../@types/pedido';
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 import { getUserById } from '../../api/usuario';
-import useUser from '../../hooks/useUser';
 
 const Home = () => {
   const [data, setData] = useState<IPedidoModel[]>();
   const scrollContainerRef: any = useRef(null);
-  const { setUser } = useUser();
 
   useEffect(() => {
     const getUserDataFromStorage = async () => {
@@ -20,7 +18,7 @@ const Home = () => {
       const parseUserData = getFromStorage && JSON.parse(getFromStorage);
       const { data, error } = await getUserById(parseUserData?._id ? parseUserData._id : '');
       try {
-        setUser([data]);
+        localStorage.setItem('user', JSON.stringify(data));
       } catch (err) {
         console.error(error);
       }

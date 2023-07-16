@@ -9,6 +9,7 @@ import Ajuda from './pages/ajuda/Ajuda';
 import useAuth from './hooks/useAuth';
 import { AuthRedirect } from './components/AuthRedirect/AuthRedirect';
 import MyRequests from './pages/myRequests/MyRequests';
+import Conta from './pages/conta/Conta';
 
 function App() {
   const { isAuthenticated } = useAuth();

@@ -36,11 +36,7 @@ router.get("/user/:_id", UserController.buscarUserPorId);
 router.put("/address/:_id", UserController.editarEnderecoUsuario);
 router.put(
   "/editarDados/:_id",
-  userNameValidation,
-  emailValidator,
-  transformPhoneNumber,
-  passwordValidator,
-  Multer.single("fotos"),
+  Multer.single("profilePicture"),
   uploadImage,
   UserController.editarDadosUsuario
 );

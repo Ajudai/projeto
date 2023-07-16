@@ -6,7 +6,6 @@ interface IAjuda {
 }
 
 export const pedirAjuda = async (formData: FormData, _id: IAjuda) => {
-  console.log(_id._id);
   try {
     const res = await api.post<IAjuda>(`/ajuda/${_id._id}`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
