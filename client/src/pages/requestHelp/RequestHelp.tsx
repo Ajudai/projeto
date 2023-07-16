@@ -5,10 +5,11 @@ import styles from './requestHelp.module.scss';
 import { PiMountainsFill } from 'react-icons/pi';
 import Button from '../../components/button/Button';
 import Header from '../../components/header/Header';
-import { Select } from '@chakra-ui/react';
+import { Select, useDisclosure } from '@chakra-ui/react';
 import { IUserData } from '../../@types/user';
 import { pedirAjuda } from '../../api/pedidos';
 import { handlePhoneNumberChange } from '../../utils/formatPhoneNumber';
+import ModalComponent from '../../components/modal/ModalComponent';
 
 const RequestHelp = () => {
   const [titulo, setTitulo] = useState('');
@@ -19,6 +20,7 @@ const RequestHelp = () => {
   const [categoria, setCategoria] = useState('');
   const [resFromServer, setResFromServer] = useState({});
   const inputFile = useRef<HTMLInputElement>(null);
+  const { isOpen: isRequestOpen, onOpen: onRequestOpen, onClose: onRequestClose } = useDisclosure();
 
   useEffect(() => {
     const getUserDataFromStorage = () => {
@@ -48,6 +50,7 @@ const RequestHelp = () => {
     });
     const { data, error } = await pedirAjuda(formData, { _id: userData?._id! });
     try {
+      onRequestOpen();
       setResFromServer(data!);
     } catch (err) {
       console.error(error);
@@ -143,6 +146,14 @@ const RequestHelp = () => {
       <div className={styles.requestHelpHomeButton}>
         <Button size="medium" rounded disabled={false} onClick={() => handlePedirAjuda()} label="Salvar" />
       </div>
+      <ModalComponent
+        modalTitle="Pedido realizado com sucesso!"
+        modalBody="Você acabou de fazer um pedido :)"
+        buttonSuccessLabel="Página inicial"
+        buttonCloseLabel="Fazer outro pedido"
+        isOpen={isRequestOpen}
+        onClose={onRequestClose}
+      />
     </main>
   );
 };

@@ -9,6 +9,8 @@ import Ajuda from './pages/ajuda/Ajuda';
 import useAuth from './hooks/useAuth';
 import { AuthRedirect } from './components/AuthRedirect/AuthRedirect';
 import MyRequests from './pages/myRequests/MyRequests';
+import Conta from './pages/conta/Conta';
+import Adress from './pages/conta/Adress';
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -64,6 +66,14 @@ function App() {
           element={
             <AuthRedirect>
               <Conta />
+            </AuthRedirect>
+          }
+        />
+        <Route
+          path="/editarEndereco/:_id"
+          element={
+            <AuthRedirect>
+              <Adress />
             </AuthRedirect>
           }
         />

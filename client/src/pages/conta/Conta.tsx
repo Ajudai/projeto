@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import styles from './conta.module.scss';
 import { useEffect, useState, useRef } from 'react';
 import { editarUsuario } from '../../api/usuario';
@@ -8,6 +9,8 @@ import Button from '../../components/button/Button';
 import { BiSolidUser } from 'react-icons/bi';
 import { BsCameraFill } from 'react-icons/bs';
 import { StylesProvider } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import { handlePhoneNumberChange } from '../../utils/formatPhoneNumber';
 
 const Conta = () => {
   const [userData, setUserData] = useState<IUserData>();
@@ -16,7 +19,6 @@ const Conta = () => {
   const [telefone, setTelefone] = useState('');
   const [foto, setFoto] = useState(null);
   const [resFromServer, setResFromServer] = useState({});
-  const [error, setError] = useState(false);
   const inputFile = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -37,15 +39,30 @@ const Conta = () => {
   };
 
   const handleEditarUsuario = async () => {
-    const { data, error } = await editarUsuario({ nome, email, telefone, _id: userData?._id! });
+    const formData = new FormData();
+
+    const dadosData = {
+      nome,
+      email,
+      telefone,
+      foto,
+    };
+    Object.entries(dadosData).forEach(([key, value]) => {
+      return formData.append(key, value!);
+    });
+    const { data, error } = await editarUsuario(formData, { _id: userData?._id! });
     try {
-      console.log(data);
       setResFromServer(data!);
     } catch (err) {
       console.error(error);
-      setError(true);
     }
   };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    handlePhoneNumberChange(event, setTelefone);
+  };
+
+  const navigate = useNavigate();
 
   return (
     <main className={styles.contaPageMain}>
@@ -86,24 +103,17 @@ const Conta = () => {
         <p className={styles.contaPageUserData}>{userData?.userName}</p>
       </div>
       <div className={styles.contaPageData}>
-        <Input value={nome} error={error} label="Nome" type="text" onChange={(e) => setNome(e.target.value)} />
-        <Input value={email} error={error} label="Email" type="text" onChange={(e) => setEmail(e.target.value)} />
-        <Input
-          value={telefone}
-          error={error}
-          label="Telefone"
-          type="text"
-          onChange={(e) => setTelefone(e.target.value)}
-        />
+        <Input value={nome} label="Nome" type="text" onChange={(e) => setNome(e.target.value)} />
+        <Input value={email} label="Email" type="text" onChange={(e) => setEmail(e.target.value)} />
+        <Input value={telefone} label="Telefone" type="text" onChange={handleChange} />
         <div className={styles.contaPageButton}>
           <Button
             size="medium"
-            disabled={false}
             rounded
-            onClick={() => console.log('Alterar endereço')}
+            onClick={() => navigate(`/editarEndereco/${userData?._id}`)}
             label="Editar endereço"
           />
-          <Button size="medium" disabled={false} rounded onClick={handleEditarUsuario} label="Salvar" />
+          <Button size="medium" rounded onClick={handleEditarUsuario} label="Salvar dados" />
         </div>
       </div>
     </main>
