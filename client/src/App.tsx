@@ -10,6 +10,7 @@ import useAuth from './hooks/useAuth';
 import { AuthRedirect } from './components/AuthRedirect/AuthRedirect';
 import MyRequests from './pages/myRequests/MyRequests';
 import Conta from './pages/conta/Conta';
+import Adress from './pages/conta/Adress';
 
 function App() {
   const { isAuthenticated } = useAuth();

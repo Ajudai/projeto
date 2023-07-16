@@ -8,6 +8,8 @@ import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
 import { BiSolidUser } from 'react-icons/bi';
 import { BsCameraFill } from 'react-icons/bs';
+import { handlePhoneNumberChange } from '../../utils/formatPhoneNumber';
+import { useNavigate } from 'react-router-dom';
 
 const Conta = () => {
   const [userData, setUserData] = useState<IUserData>();
@@ -29,15 +31,6 @@ const Conta = () => {
       setUserData(parseUserData);
     };
     getUserDataFromStorage();
-    const fetchUserData = async () => {
-      const { data, error } = await getUserById(userData?._id ? userData._id : '');
-      try {
-        localStorage.setItem('user', JSON.stringify(data));
-      } catch (err) {
-        console.error(error);
-      }
-    };
-    fetchUserData();
   }, [resFromServer]);
 
   const selectImage = () => {

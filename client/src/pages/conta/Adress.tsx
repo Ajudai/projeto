@@ -1,52 +1,65 @@
 import styles from './conta.module.scss';
 import { useEffect, useState } from 'react';
 import { IUserData } from '../../@types/user';
-import { editarEndereco } from '../../api/usuario';
 import Header from '../../components/header/Header';
 import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
-import { handleCEPChange } from '../../utils/formatCep';
+import { editarEndereco } from '../../api/usuario';
+import axios from 'axios';
 
-const Adress = () => {
+const Address = () => {
   const [userData, setUserData] = useState<IUserData>();
-  const [estado, setEstado] = useState('');
-  const [cidade, setCidade] = useState('');
   const [CEP, setCEP] = useState('');
-  const [bairro, setBairro] = useState('');
-  const [rua, setRua] = useState('');
   const [numero, setNumero] = useState('');
   const [complemento, setComplemento] = useState('');
   const [resFromServer, setResFromServer] = useState({});
+  const [endereco, setEndereco] = useState({
+    cidade: '',
+    estado: '',
+    bairro: '',
+    rua: '',
+    cep: CEP,
+    numero: numero,
+    complemento: complemento,
+  });
 
   useEffect(() => {
     const getUserDataFromStorage = () => {
       const getFromStorage = localStorage.getItem('userData');
       const parseUserData = getFromStorage && JSON.parse(getFromStorage);
-      setEstado(parseUserData?.endereco);
-      setCidade(parseUserData?.endereco);
-      setCEP(parseUserData?.endereco);
-      setBairro(parseUserData?.endereco);
-      setRua(parseUserData?.endereco);
-      setNumero(parseUserData?.endereco);
-      setComplemento(parseUserData?.endereco);
+      setCEP(parseUserData?.endereco?.CEP);
+      setNumero(parseUserData?.endereco?.numero);
+      setComplemento(parseUserData?.endereco?.complemento);
       setUserData(parseUserData);
       console.log(parseUserData);
     };
     getUserDataFromStorage();
   }, [resFromServer]);
 
+  const consultarCEP = async (cep: string) => {
+    try {
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+      if (response.data.erro) {
+        throw new Error('CEP não encontrado');
+      }
+      return response.data;
+    } catch (error) {
+      throw new Error('Erro ao consultar o CEP');
+    }
+  };
+
   const handleEditarEndereco = async () => {
     const enderecoData = {
-      estado,
-      cidade,
-      CEP,
-      bairro,
-      rua,
-      numero,
-      complemento,
+      estado: endereco.estado,
+      cidade: endereco.cidade,
+      CEP: CEP,
+      bairro: endereco.bairro,
+      rua: endereco.rua,
+      numero: numero,
+      complemento: complemento,
     };
-
-    const { data, error } = await editarEndereco(enderecoData, userData?._id!);
+    console.log(CEP, numero, complemento);
+    const { data, error } = await editarEndereco(userData?._id!, enderecoData);
     try {
       setResFromServer(data!);
       console.log(data);
@@ -55,21 +68,65 @@ const Adress = () => {
     }
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    handleCEPChange(event, setCEP);
+  const handleChangeCEP = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputCEP = event.target.value;
+    let formattedCEP = inputCEP.replace(/\D/g, '');
+
+    if (formattedCEP.length > 5) {
+      formattedCEP = formattedCEP.replace(/(\d{5})(\d{0,3})/, '$1-$2');
+    }
+
+    setCEP(formattedCEP);
+
+    if (formattedCEP.length === 9) {
+      try {
+        const data = await consultarCEP(formattedCEP);
+        setEndereco({
+          cidade: data.localidade,
+          estado: data.uf,
+          bairro: data.bairro,
+          rua: data.logradouro,
+          cep: data.cep,
+          numero: data.numero,
+          complemento: data.complemento,
+        });
+      } catch (error: any) {
+        console.error(error.message);
+      }
+    }
   };
 
   return (
     <main className={styles.contaPageMain}>
       <Header />
       <div className={styles.contaPageData}>
-        <Input value={estado} label="Estado" type="text" onChange={(e) => setEstado(e.target.value)} />
-        <Input value={cidade} label="Cidade" type="text" onChange={(e) => setCidade(e.target.value)} />
-        <Input value={CEP} label="CEP" type="text" onChange={handleChange} />
-        <Input value={bairro} label="Bairro" type="text" onChange={(e) => setBairro(e.target.value)} />
-        <Input value={rua} label="Rua" type="text" onChange={(e) => setRua(e.target.value)} />
-        <Input value={numero} label="Número" type="number" onChange={(e) => setNumero(e.target.value)} />
+        <Input value={CEP} label="CEP" type="text" onChange={handleChangeCEP} />
+        <Input
+          value={endereco.rua}
+          label="Rua"
+          type="text"
+          onChange={(e) => setEndereco({ ...endereco, rua: e.target.value })}
+        />
+        <Input value={numero} label="Número" type="text" onChange={(e) => setNumero(e.target.value)} />
         <Input value={complemento} label="Complemento" type="text" onChange={(e) => setComplemento(e.target.value)} />
+        <Input
+          value={endereco.cidade}
+          label="Cidade"
+          type="text"
+          onChange={(e) => setEndereco({ ...endereco, cidade: e.target.value })}
+        />
+        <Input
+          value={endereco.bairro}
+          label="Bairro"
+          type="text"
+          onChange={(e) => setEndereco({ ...endereco, bairro: e.target.value })}
+        />
+        <Input
+          value={endereco.estado}
+          label="Estado"
+          type="text"
+          onChange={(e) => setEndereco({ ...endereco, estado: e.target.value })}
+        />
       </div>
       <div className={styles.contaPageButton}>
         <Button size="medium" rounded onClick={handleEditarEndereco} label="Salvar endereço" />
@@ -78,4 +135,4 @@ const Adress = () => {
   );
 };
 
-export default Adress;
+export default Address;
