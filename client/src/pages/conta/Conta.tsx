@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Conta = () => {
   const [userData, setUserData] = useState<IUserData>();
+  console.log(userData);
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');

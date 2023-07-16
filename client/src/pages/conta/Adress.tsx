@@ -8,7 +8,8 @@ import { editarEndereco } from '../../api/usuario';
 import axios from 'axios';
 
 const Address = () => {
-  const [userData, setUserData] = useState<IUserData>();
+  const [userData, setUserData] = useState<IUserData[]>([]);
+  console.log(userData?.[0]?._id);
   const [CEP, setCEP] = useState('');
   const [numero, setNumero] = useState('');
   const [complemento, setComplemento] = useState('');
@@ -25,13 +26,9 @@ const Address = () => {
 
   useEffect(() => {
     const getUserDataFromStorage = () => {
-      const getFromStorage = localStorage.getItem('userData');
+      const getFromStorage = localStorage.getItem('user');
       const parseUserData = getFromStorage && JSON.parse(getFromStorage);
-      setCEP(parseUserData?.endereco?.CEP);
-      setNumero(parseUserData?.endereco?.numero);
-      setComplemento(parseUserData?.endereco?.complemento);
-      setUserData(parseUserData);
-      console.log(parseUserData);
+      setUserData([parseUserData]);
     };
     getUserDataFromStorage();
   }, [resFromServer]);
@@ -49,17 +46,16 @@ const Address = () => {
   };
 
   const handleEditarEndereco = async () => {
-    const enderecoData = {
+    console.log(CEP, numero, complemento);
+    const { data, error } = await editarEndereco(userData?.[0]?._id!, {
       estado: endereco.estado,
       cidade: endereco.cidade,
-      CEP: CEP,
+      cep: CEP,
       bairro: endereco.bairro,
       rua: endereco.rua,
-      numero: numero,
-      complemento: complemento,
-    };
-    console.log(CEP, numero, complemento);
-    const { data, error } = await editarEndereco(userData?._id!, enderecoData);
+      numero,
+      complemento,
+    });
     try {
       setResFromServer(data!);
       console.log(data);

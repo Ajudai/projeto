@@ -1,4 +1,3 @@
-import { IEndereco } from '../@types/endereco';
 import { IUserData } from '../@types/user';
 import { api } from '../service/api';
 interface ILogin {
@@ -10,8 +9,14 @@ interface IUserDataUpdate {
   _id: string;
 }
 
-interface IEnderecoUpdate {
-  _id: string;
+interface IEndereco {
+  estado: string,
+  cidade: string,
+  cep: string,
+  bairro: string,
+  rua: string,
+  numero: string,
+  complemento: string,
 }
 
 export const userLogin = async ({ userEmail, userPassword }: ILogin) => {
@@ -45,10 +50,26 @@ export const editarUsuario = async (formData: FormData, _id: IUserDataUpdate) =>
   }
 };
 
-export const editarEndereco = async (_id: IUserData, enderecoData: IEnderecoUpdate) => {
+export const editarEndereco = async (_id: string,
+  { estado,
+    cidade,
+    cep,
+    bairro,
+    rua,
+    numero,
+    complemento, }: IEndereco
+
+) => {
   try {
-    console.log(enderecoData);
-    const res = await api.put<IEnderecoUpdate>(`address/${_id}`, enderecoData);
+    const res = await api.put(`address/${_id}`, {
+      estado,
+      cidade,
+      cep,
+      bairro,
+      rua,
+      numero,
+      complemento,
+    });
     return { data: res.data };
   } catch (error: any) {
     if (error.response?.data?.message) {
