@@ -28,6 +28,19 @@ const Address = () => {
     const getUserDataFromStorage = () => {
       const getFromStorage = localStorage.getItem('user');
       const parseUserData = getFromStorage && JSON.parse(getFromStorage);
+      const enderecoData = parseUserData?.endereco[0];
+      setCEP(enderecoData?.cep);
+      setNumero(enderecoData?.numero);
+      setComplemento(enderecoData?.complemento);
+      setEndereco({
+        cidade: enderecoData?.cidade,
+        estado: enderecoData?.estado,
+        bairro: enderecoData?.bairro,
+        rua: enderecoData?.rua,
+        cep: enderecoData?.cep,
+        numero: enderecoData?.numero,
+        complemento: enderecoData?.complemento,
+      });
       setUserData([parseUserData]);
     };
     getUserDataFromStorage();

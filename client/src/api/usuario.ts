@@ -10,13 +10,13 @@ interface IUserDataUpdate {
 }
 
 interface IEndereco {
-  estado: string,
-  cidade: string,
-  cep: string,
-  bairro: string,
-  rua: string,
-  numero: string,
-  complemento: string,
+  estado: string;
+  cidade: string;
+  cep: string;
+  bairro: string;
+  rua: string;
+  numero: string;
+  complemento: string;
 }
 
 export const userLogin = async ({ userEmail, userPassword }: ILogin) => {
@@ -50,15 +50,9 @@ export const editarUsuario = async (formData: FormData, _id: IUserDataUpdate) =>
   }
 };
 
-export const editarEndereco = async (_id: string,
-  { estado,
-    cidade,
-    cep,
-    bairro,
-    rua,
-    numero,
-    complemento, }: IEndereco
-
+export const editarEndereco = async (
+  _id: string,
+  { estado, cidade, cep, bairro, rua, numero, complemento }: IEndereco,
 ) => {
   try {
     const res = await api.put(`address/${_id}`, {

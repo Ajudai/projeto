@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -18,6 +20,7 @@ const Register = () => {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const { isOpen: isRegisterOpen, onOpen: onRegisterOpen, onClose: onRegisterClose } = useDisclosure();
+  const { isOpen: isModalOpen, onOpen: onModalOpen, onClose: onModalClose } = useDisclosure();
 
   const handleRegister = async () => {
     await axios
@@ -41,6 +44,14 @@ const Register = () => {
         setError(!error);
         setErrorMessage(errorMessageFromServer);
       });
+  };
+
+  const handleOpenModal = () => {
+    onModalOpen();
+  };
+
+  const handleCloseModal = () => {
+    onModalClose();
   };
 
   return (
@@ -86,9 +97,18 @@ const Register = () => {
           <div className={styles.registerPageRegisterButton}>
             <Button size="medium" disabled={false} rounded onClick={() => handleRegister()} label="Criar conta" />
           </div>
-          <p className={styles.registerPagePP}>Política de Privacidade</p>
+          <p className={styles.registerPagePP} onClick={handleOpenModal}>
+            Política de Privacidade
+          </p>
         </div>
       </div>
+      <ModalComponent
+        modalTitle="Sobre política de privacidade"
+        modalBody="Nós valorizamos sua privacidade e estamos comprometidos em proteger suas informações pessoais. Ao utilizar nosso aplicativo de caridade, coletamos as informações que você fornece durante o cadastro, como nome, e-mail, telefone e CPF. Utilizamos esses dados apenas para fornecer e melhorar nossos serviços, personalizando sua experiência e oferecendo recomendações com base em suas preferências. Suas informações são protegidas por medidas de segurança adequadas e não são compartilhadas com terceiros, exceto quando necessário para a prestação dos serviços ou por exigência legal. Ao concordar com nossa política de privacidade, você está ciente e concorda com nossas práticas de coleta e uso de dados. Mantemos o compromisso de proteger suas informações pessoais e respeitar sua privacidade."
+        buttonCloseLabel="Fechar"
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
       <ModalComponent
         modalTitle="Cadastro realizado!"
         modalBody="Deseja fazer login agora?"
