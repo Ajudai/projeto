@@ -1,4 +1,4 @@
-import { Route, BrowserRouter, Routes, Navigate } from 'react-router-dom';
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import './App.scss';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
@@ -10,7 +10,7 @@ import useAuth from './hooks/useAuth';
 import { AuthRedirect } from './components/AuthRedirect/AuthRedirect';
 import MyRequests from './pages/myRequests/MyRequests';
 import Conta from './pages/conta/Conta';
-import Adress from './pages/conta/Adress';
+import Address from './pages/conta/Address';
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -73,7 +73,7 @@ function App() {
           path="/editarEndereco/:_id"
           element={
             <AuthRedirect>
-              <Adress />
+              <Address />
             </AuthRedirect>
           }
         />

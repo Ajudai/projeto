@@ -1,11 +1,12 @@
 import styles from './ajuda.module.scss';
 import { useEffect, useState } from 'react';
 import { getPedidoById } from '../../api/pedidos';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { IPedidoModel } from '../../@types/pedido';
 import Button from '../../components/button/Button';
 import { MdArrowBackIosNew } from 'react-icons/md';
-import { FaWhatsapp, FaInstagram } from 'react-icons/fa';
+import { FaWhatsapp } from 'react-icons/fa';
+import { BiShare } from 'react-icons/bi';
 import Header from '../../components/header/Header';
 import formatarData from '../../utils/formatDate';
 
@@ -29,6 +30,16 @@ const Ajuda = () => {
   }, []);
 
   useEffect(() => {
+    const getUserDataFromStorage = () => {
+      const getFromStorage = localStorage.getItem('user');
+      const parseUserData = getFromStorage && JSON.parse(getFromStorage);
+      console.log(parseUserData);
+    };
+
+    getUserDataFromStorage();
+  }, []);
+
+  useEffect(() => {
     const FormatDate = async () => {
       try {
         const dateFormater = formatarData(data?.[0]?.createdAt);
@@ -43,13 +54,26 @@ const Ajuda = () => {
     }, 1000);
   }, [dataFormatada]);
 
+  const handleContatoWhatsapp = () => {
+    const contato = data?.[0]?.contato;
+    const linkWhatsApp = `https://wa.me/55${contato?.replace(/[^\d]+/g, '')}`;
+    window.open(linkWhatsApp, '_blank');
+  };
+
+  const copyLinkToClipboard = () => {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url);
+  };
+
+  const navigate = useNavigate();
+
   return (
     <main className={styles.ajudaPageMain}>
       <Header />
       <div className={styles.ajudaPageBanner}>
         <img className={styles.ajudaPageBannerImage} src={data?.[0]?.fotos} alt="" />
         <div className={styles.ajudaPageContentContainer}>
-          <MdArrowBackIosNew className={styles.ajudaPageArrow} color="#fff" size={40} />
+          <MdArrowBackIosNew className={styles.ajudaPageArrow} color="#fff" size={40} onClick={() => navigate(-1)} />
           <span className={styles.ajudaPageContent}>
             <p className={styles.ajudaPageContainerTitle}>{data?.[0]?.titulo}</p>
             {dataFormatada !== dataUndefinedNan && <p className={styles.ajudaPageContainerDate}>{dataFormatada}</p>}
@@ -70,8 +94,13 @@ const Ajuda = () => {
             onClick={() => console.log('Você clicou no botão de Quero Ajudar')}
             label="Quero ajudar"
           />
-          <FaWhatsapp className={styles.ajudaPageDetailsWhatsapp} color="fff" size={44} />
-          <FaInstagram className={styles.ajudaPageDetailsInstagram} color="#fff" size={44} />
+          <FaWhatsapp
+            className={styles.ajudaPageDetailsWhatsapp}
+            onClick={handleContatoWhatsapp}
+            color="fff"
+            size={44}
+          />
+          <BiShare className={styles.ajudaPageDetailsShare} color="#fff" size={44} onClick={copyLinkToClipboard()} />
         </div>
       </section>
     </main>

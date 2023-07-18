@@ -6,8 +6,8 @@ interface ModalComponent {
   onClose: () => void;
   modalTitle: string;
   modalBody: string;
-  buttonSuccessLabel: string;
-  buttonCloseLabel: string;
+  buttonSuccessLabel?: string;
+  buttonCloseLabel?: string;
 }
 
 function ModalComponent({
@@ -37,9 +37,9 @@ function ModalComponent({
               <ModalBody>
                 <p>{modalBody}</p>
               </ModalBody>
-              <ModalFooter>
-                <Button onClick={handleLogin}>{buttonSuccessLabel}</Button>
-                <Button onClick={onClose}>{buttonCloseLabel}</Button>
+              <ModalFooter gap={5}>
+                {buttonSuccessLabel && <Button onClick={handleLogin}>{buttonSuccessLabel}</Button>}
+                {buttonCloseLabel && <Button onClick={onClose}>{buttonCloseLabel}</Button>}
               </ModalFooter>
             </div>
           </ModalContent>

@@ -46,11 +46,8 @@ const Conta = () => {
     getUserDataFromStorage();
   }, [isLoading]);
 
-  const selectImage = () => {
-    inputFile.current?.click();
-  };
-
   const handleEditarUsuario = async () => {
+    console.log(nome, email, telefone, foto);
     const formData = new FormData();
     const userUpdate = { userName: nome, userEmail: email, userPhoneNumber: telefone, profilePicture: foto };
     Object.entries(userUpdate).forEach(([key, value]) => {
@@ -63,6 +60,10 @@ const Conta = () => {
     } catch (err) {
       console.error(error);
     }
+  };
+
+  const selectImage = () => {
+    inputFile.current?.click();
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

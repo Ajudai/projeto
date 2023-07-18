@@ -50,8 +50,8 @@ const RequestHelp = () => {
     });
     const { data, error } = await pedirAjuda(formData, { _id: userData?._id! });
     try {
-      onRequestOpen();
       setResFromServer(data!);
+      onRequestOpen();
     } catch (err) {
       console.error(error);
     }
@@ -146,14 +146,16 @@ const RequestHelp = () => {
       <div className={styles.requestHelpHomeButton}>
         <Button size="medium" rounded disabled={false} onClick={() => handlePedirAjuda()} label="Salvar" />
       </div>
-      <ModalComponent
-        modalTitle="Pedido realizado com sucesso!"
-        modalBody="Você acabou de fazer um pedido :)"
-        buttonSuccessLabel="Página inicial"
-        buttonCloseLabel="Fazer outro pedido"
-        isOpen={isRequestOpen}
-        onClose={onRequestClose}
-      />
+      {resFromServer && Object.keys(resFromServer).length !== 0 && (
+        <ModalComponent
+          modalTitle="Pedido realizado com sucesso!"
+          modalBody="Você acabou de fazer um pedido :)"
+          buttonSuccessLabel="Página inicial"
+          buttonCloseLabel="Fazer outro pedido"
+          isOpen={isRequestOpen}
+          onClose={onRequestClose}
+        />
+      )}
     </main>
   );
 };
