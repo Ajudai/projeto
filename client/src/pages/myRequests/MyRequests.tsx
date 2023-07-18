@@ -4,7 +4,7 @@ import styles from './myRequest.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import { IUserData } from '../../@types/user';
 import { Button, Select, useDisclosure } from '@chakra-ui/react';
-import { deletarPedido, editarPedido, getPedidoById } from '../../api/pedidos';
+import { deletarPedido, editarPedido } from '../../api/pedidos';
 import {
   Modal,
   ModalOverlay,
