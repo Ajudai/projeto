@@ -39,7 +39,7 @@ function ModalComponent({
               </ModalBody>
               <ModalFooter gap={5}>
                 {buttonSuccessLabel && <Button onClick={handleLogin}>{buttonSuccessLabel}</Button>}
-                <Button onClick={onClose}>{buttonCloseLabel}</Button>
+                {buttonCloseLabel && <Button onClick={onClose}>{buttonCloseLabel}</Button>}
               </ModalFooter>
             </div>
           </ModalContent>

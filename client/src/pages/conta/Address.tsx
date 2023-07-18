@@ -6,6 +6,8 @@ import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
 import { editarEndereco } from '../../api/usuario';
 import axios from 'axios';
+import { useDisclosure } from '@chakra-ui/react';
+import ModalComponent from '../../components/modal/ModalComponent';
 
 const Address = () => {
   const [userData, setUserData] = useState<IUserData[]>([]);
@@ -23,23 +25,25 @@ const Address = () => {
     numero: numero,
     complemento: complemento,
   });
+  const { isOpen: isAddressOpen, onOpen: onAddressOpen, onClose: onAddressClose } = useDisclosure();
 
   useEffect(() => {
     const getUserDataFromStorage = () => {
       const getFromStorage = localStorage.getItem('user');
       const parseUserData = getFromStorage && JSON.parse(getFromStorage);
-      const enderecoData = parseUserData?.endereco[0];
-      setCEP(enderecoData?.cep);
-      setNumero(enderecoData?.numero);
-      setComplemento(enderecoData?.complemento);
+      const enderecos = parseUserData?.endereco;
+      const ultimoEndereco = enderecos[enderecos.length - 1];
+      setCEP(ultimoEndereco?.cep);
+      setNumero(ultimoEndereco?.numero);
+      setComplemento(ultimoEndereco?.complemento);
       setEndereco({
-        cidade: enderecoData?.cidade,
-        estado: enderecoData?.estado,
-        bairro: enderecoData?.bairro,
-        rua: enderecoData?.rua,
-        cep: enderecoData?.cep,
-        numero: enderecoData?.numero,
-        complemento: enderecoData?.complemento,
+        cidade: ultimoEndereco?.cidade,
+        estado: ultimoEndereco?.estado,
+        bairro: ultimoEndereco?.bairro,
+        rua: ultimoEndereco?.rua,
+        cep: ultimoEndereco?.cep,
+        numero: ultimoEndereco?.numero,
+        complemento: ultimoEndereco?.complemento,
       });
       setUserData([parseUserData]);
     };
@@ -72,6 +76,8 @@ const Address = () => {
     try {
       setResFromServer(data!);
       console.log(data);
+      setResFromServer(data!);
+      onAddressOpen();
     } catch (err) {
       console.error(error);
     }
@@ -103,6 +109,11 @@ const Address = () => {
         console.error(error.message);
       }
     }
+  };
+
+  const handleModalClose = () => {
+    onAddressClose();
+    window.location.reload();
   };
 
   return (
@@ -140,6 +151,13 @@ const Address = () => {
       <div className={styles.contaPageButton}>
         <Button size="medium" rounded onClick={handleEditarEndereco} label="Salvar endereço" />
       </div>
+      <ModalComponent
+          modalTitle="Endereço atualizado com sucesso!"
+          modalBody="Você acabou de atualizar seu endereço :)"
+          buttonSuccessLabel="Página inicial"
+          isOpen={isAddressOpen}
+          onClose={onAddressClose}
+        />
     </main>
   );
 };

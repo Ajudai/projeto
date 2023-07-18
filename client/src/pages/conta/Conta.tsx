@@ -10,6 +10,8 @@ import { BiSolidUser } from 'react-icons/bi';
 import { BsCameraFill } from 'react-icons/bs';
 import { handlePhoneNumberChange } from '../../utils/formatPhoneNumber';
 import { useNavigate } from 'react-router-dom';
+import { useDisclosure } from '@chakra-ui/react';
+import ModalComponent from '../../components/modal/ModalComponent';
 
 const Conta = () => {
   const [userData, setUserData] = useState<IUserData>();
@@ -20,6 +22,8 @@ const Conta = () => {
   const [foto, setFoto] = useState(null);
   const [resFromServer, setResFromServer] = useState({});
   const inputFile = useRef<HTMLInputElement>(null);
+  const { isOpen: isContaOpen, onOpen: onContaOpen, onClose: onContaClose } = useDisclosure();
+
 
   useEffect(() => {
     const getUserDataFromStorage = () => {
@@ -33,11 +37,8 @@ const Conta = () => {
     getUserDataFromStorage();
   }, [resFromServer]);
 
-  const selectImage = () => {
-    inputFile.current?.click();
-  };
-
   const handleEditarUsuario = async () => {
+    console.log(nome, email, telefone, foto);
     const formData = new FormData();
     const userUpdate = { nome, email, telefone, profilePicture: foto };
     Object.entries(userUpdate).forEach(([key, value]) => {
@@ -46,9 +47,14 @@ const Conta = () => {
     const { data, error } = await editarUsuario(formData, { _id: userData?._id! });
     try {
       setResFromServer(data!);
+      onContaOpen();
     } catch (err) {
       console.error(error);
     }
+  };
+
+  const selectImage = () => {
+    inputFile.current?.click();
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +62,11 @@ const Conta = () => {
   };
 
   const navigate = useNavigate();
+
+  const handleModalClose = () => {
+    onContaClose();
+    window.location.reload();
+  };
 
   return (
     <main className={styles.contaPageMain}>
@@ -109,6 +120,13 @@ const Conta = () => {
           <Button size="medium" rounded onClick={handleEditarUsuario} label="Salvar dados" />
         </div>
       </div>
+      <ModalComponent
+          modalTitle="Seus dados foram atualizados com sucesso!"
+          modalBody="Você acabou de atualizar suas informações ;)"
+          buttonSuccessLabel="Página inicial"
+          isOpen={isContaOpen}
+          onClose={onContaClose}
+        />
     </main>
   );
 };
