@@ -48,7 +48,6 @@ const MyRequests = () => {
       const { data, error } = await getUserById(_id!);
       try {
         setGetUserDataServer([data!]);
-        console.log(data);
       } catch (err) {
         console.error(error);
       }
