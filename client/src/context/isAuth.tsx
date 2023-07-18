@@ -45,7 +45,7 @@ export function AuthContextProvider({ children }: IChildren) {
 
   const login = (value: boolean) => {
     setIsAuthenticated(value);
-    window.location.assign('/home');
+    window.location.assign('/');
   };
 
   const logout = () => {

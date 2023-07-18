@@ -19,16 +19,27 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
-        <Route path="/register" element={<Register />} />
         <Route
-          path="/home"
+          path="/"
+          element={
+            isAuthenticated ? (
+              <AuthRedirect>
+                <Home />
+              </AuthRedirect>
+            ) : (
+              <Login />
+            )
+          }
+        />
+        <Route path="/register" element={<Register />} />
+        {/* <Route
+          path="/"
           element={
             <AuthRedirect>
               <Home />
             </AuthRedirect>
           }
-        />
+        /> */}
         <Route
           path="/requestHelp/:_id"
           element={

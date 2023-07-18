@@ -9,7 +9,7 @@ export const MenuMockFunction = () => {
     {
       title: 'Home',
       id: 0,
-      onClick: () => navigate(`/home/`),
+      onClick: () => navigate(`/`),
     },
     {
       title: 'Pedir ajuda',
@@ -25,7 +25,7 @@ export const MenuMockFunction = () => {
       title: 'Logout',
       id: 3,
       onClick: () => {
-        logout()
+        logout();
       },
     },
   ];
