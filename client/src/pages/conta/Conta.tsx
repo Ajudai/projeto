@@ -54,6 +54,8 @@ const Conta = () => {
     });
     const { data, error } = await editarUsuario(formData, { _id: userData?._id! });
     try {
+      console.log(data);
+
       location.reload();
     } catch (err) {
       console.error(error);
