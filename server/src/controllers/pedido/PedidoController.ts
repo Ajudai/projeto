@@ -132,9 +132,9 @@ export default {
             return res.status(404).send({ message: "Usuário não encontrado" });
           }
 
-          usuario.meusPedidos = usuario.meusPedidos.filter((pedido) => {
-            pedido._id !== `ObjectId(${_id})`;
-          });
+          usuario.meusPedidos = usuario.meusPedidos.filter(
+            (pedido) => pedido._id.toString() !== _id
+          );
           await usuario.save();
           return res.status(200).send({ message: "Pedido de ajuda excluído!" });
         })
