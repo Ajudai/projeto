@@ -1,6 +1,7 @@
 import { IEnderecoModel } from "./endereco";
 
 export interface IPedidoModel {
+  _id: string;
   titulo: string;
   descricao: string;
   contato: string;

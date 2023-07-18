@@ -12,6 +12,7 @@ interface IHomeComponent {
   _id: string;
   myRequest?: boolean;
   openMyRequest?: (arg: any) => void;
+  deleteMyRequest?: (arg: any) => void;
 }
 
 const HomeComponent: React.FC<IHomeComponent> = ({
@@ -23,6 +24,7 @@ const HomeComponent: React.FC<IHomeComponent> = ({
   _id,
   myRequest,
   openMyRequest,
+  deleteMyRequest,
 }) => {
   const [dataFormatada, setDataFormatada] = useState('');
 
@@ -55,8 +57,8 @@ const HomeComponent: React.FC<IHomeComponent> = ({
       </div>
       {myRequest && (
         <div className={styles.myRequestHomeComponentButtons}>
-          <Button>Deletar</Button>
-          <Button onClick={openMyRequest}>editar</Button>
+          <Button onClick={deleteMyRequest}>Deletar</Button>
+          <Button onClick={openMyRequest}>Editar</Button>
         </div>
       )}
     </>

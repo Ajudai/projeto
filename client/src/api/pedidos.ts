@@ -48,8 +48,20 @@ export const editarPedido = async (formData: FormData, _id: string) => {
     const res = await api.put<IPedidoModel[]>(`editarPedido/${_id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
-      }
+      },
     });
+    return { data: res.data };
+  } catch (error: any) {
+    if (error.response.data.message) {
+      return { error: error.response.data.message };
+    }
+    return { error: 'Erro desconhecido' };
+  }
+};
+
+export const deletarPedido = async (_id: string): Promise<{ data?: any; error?: string }> => {
+  try {
+    const res = await api.delete(`deletarPedido/${_id}`);
     return { data: res.data };
   } catch (error: any) {
     if (error.response.data.message) {
