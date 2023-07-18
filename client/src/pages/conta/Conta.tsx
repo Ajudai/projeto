@@ -122,13 +122,6 @@ const Conta = () => {
           <Button size="medium" rounded onClick={handleEditarUsuario} label="Salvar dados" />
         </div>
       </div>
-      <ModalComponent
-          modalTitle="Seus dados foram atualizados com sucesso!"
-          modalBody="Você acabou de atualizar suas informações ;)"
-          buttonSuccessLabel="Página inicial"
-          isOpen={isContaOpen}
-          onClose={onContaClose}
-        />
     </main>
   );
 };

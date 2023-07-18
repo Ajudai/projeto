@@ -111,11 +111,6 @@ const Address = () => {
     }
   };
 
-  const handleModalClose = () => {
-    onAddressClose();
-    window.location.reload();
-  };
-
   return (
     <main className={styles.contaPageMain}>
       <Header />
