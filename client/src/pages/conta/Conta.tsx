@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import styles from './conta.module.scss';
 import { useEffect, useState, useRef } from 'react';
-import { editarUsuario } from '../../api/usuario';
+import { editarUsuario, getUserById } from '../../api/usuario';
 import { IUserData } from '../../@types/user';
 import Header from '../../components/header/Header';
 import Input from '../../components/input/Input';
@@ -9,19 +9,32 @@ import Button from '../../components/button/Button';
 import { BiSolidUser } from 'react-icons/bi';
 import { BsCameraFill } from 'react-icons/bs';
 import { handlePhoneNumberChange } from '../../utils/formatPhoneNumber';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Conta = () => {
   const [userData, setUserData] = useState<IUserData>();
-  console.log(userData);
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
   const [foto, setFoto] = useState(null);
   const [resFromServer, setResFromServer] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const inputFile = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+  const { _id } = useParams();
 
   useEffect(() => {
+    const getUserData = async () => {
+      const { data, error } = await getUserById(_id!);
+      try {
+        localStorage.setItem('user', JSON.stringify(data));
+        setIsLoading(false);
+      } catch (err) {
+        console.error(error);
+      }
+    };
+    getUserData();
+
     const getUserDataFromStorage = () => {
       const getFromStorage = localStorage.getItem('user');
       const parseUserData = getFromStorage && JSON.parse(getFromStorage);
@@ -31,7 +44,7 @@ const Conta = () => {
       setUserData(parseUserData);
     };
     getUserDataFromStorage();
-  }, [resFromServer]);
+  }, [isLoading]);
 
   const selectImage = () => {
     inputFile.current?.click();
@@ -39,13 +52,14 @@ const Conta = () => {
 
   const handleEditarUsuario = async () => {
     const formData = new FormData();
-    const userUpdate = { nome, email, telefone, profilePicture: foto };
+    const userUpdate = { userName: nome, userEmail: email, userPhoneNumber: telefone, profilePicture: foto };
     Object.entries(userUpdate).forEach(([key, value]) => {
       return formData.append(key, value!);
     });
     const { data, error } = await editarUsuario(formData, { _id: userData?._id! });
     try {
       setResFromServer(data!);
+      location.reload();
     } catch (err) {
       console.error(error);
     }
@@ -54,8 +68,6 @@ const Conta = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     handlePhoneNumberChange(event, setTelefone);
   };
-
-  const navigate = useNavigate();
 
   return (
     <main className={styles.contaPageMain}>

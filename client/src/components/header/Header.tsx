@@ -20,7 +20,7 @@ const Header = () => {
 
   useEffect(() => {
     const getUserDataFromStorage = () => {
-      const getFromStorage = localStorage.getItem('userData');
+      const getFromStorage = localStorage.getItem('user');
       const parseUserData = getFromStorage && JSON.parse(getFromStorage);
       setUserData(parseUserData);
     };
@@ -47,7 +47,11 @@ const Header = () => {
       <div className={openMenu ? styles.mobileHamburguerMenuOpened : styles.mobileHamburguerMenuClosed}>
         <div aria-hidden onClick={() => setOpenMenu(!openMenu)} className={styles.closeMenuOutside}></div>
         <nav className={openMenu ? styles.mobileHamburguerMenuNavOpened : styles.mobileHamburguerMenuNavClosed}>
-          {openMenu ? <AvatarComponent nome={userData?.userName} size="md" _id={userData?._id} /> : <></>}
+          {openMenu ? (
+            <AvatarComponent nome={userData?.userName} src={userData?.profilePicture} size="md" _id={userData?._id} />
+          ) : (
+            <></>
+          )}
           <ul className={openMenu ? styles.mobileHamburguerMenuUlOpened : styles.mobileHamburguerMenuUlClosed}>
             {menuMock.map((item) => (
               <li
