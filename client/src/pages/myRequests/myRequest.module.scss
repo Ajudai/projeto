@@ -1,3 +1,6 @@
+@import '../../styles/colors';
+@import '../../styles/fonts';
+
 .myRequestMainContainer {
   width: 100%;
 }
@@ -15,9 +18,69 @@
   flex-direction: column;
 }
 
+.requestHelpHomeRequest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 16px;
+}
+
+.requestHelpHomeMenuBanner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  height: 120px;
+  background-color: $background-disable-default;
+  border-radius: 8px;
+  width: 90%;
+}
+
+.requestHelpSelectedBanner {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.requestHelpHomeMenuBannerInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.requestHelpHomeMenuBannerP {
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: $font-family-principal;
+  color: $fonte-cor-primaria;
+}
+
+@media (min-width: 576px) {
+  .requestHelpHomeMenuBanner {
+    height: 150px;
+  }
+}
+
+@media (min-width: 768px) {
+  .requestHelpHomeRequest {
+    width: 70%;
+  }
+}
+
 @media (min-width: 992px) {
   .myRequestHomeComponentDiv {
     width: 100%;
     flex-direction: row;
+  }
+
+  .requestHelpHomeRequest {
+    width: 65%;
   }
 }

@@ -80,7 +80,8 @@ export default {
   async editarPedido(req: Request, res: Response) {
     try {
       const { _id } = req.params;
-      const { titulo, descricao, categoria, contato, userId }: IPedidoModel = req.body;
+      const { titulo, descricao, categoria, contato, userId }: IPedidoModel =
+        req.body;
       const { fireBaseUrl }: any = req.file ? req.file : "";
 
       await Pedido.findByIdAndUpdate(_id, {
@@ -91,15 +92,19 @@ export default {
         contato,
       });
 
-      await User.findByIdAndUpdate(userId, {
-        $set: {
-          'meusPedidos.$[pedido].titulo': titulo,
-          'meusPedidos.$[pedido].descricao': descricao,
-          'meusPedidos.$[pedido].fotos': fireBaseUrl,
-          'meusPedidos.$[pedido].categoria': categoria,
-          'meusPedidos.$[pedido].contato': contato,
+      await User.findByIdAndUpdate(
+        userId,
+        {
+          $set: {
+            "meusPedidos.$[pedido].titulo": titulo,
+            "meusPedidos.$[pedido].descricao": descricao,
+            "meusPedidos.$[pedido].fotos": fireBaseUrl,
+            "meusPedidos.$[pedido].categoria": categoria,
+            "meusPedidos.$[pedido].contato": contato,
+          },
         },
-      }, { arrayFilters: [{ 'pedido._id': _id }] });
+        { arrayFilters: [{ "pedido._id": _id }] }
+      );
 
       const pedidoAtualizado = await Pedido.findById(_id);
 
@@ -113,8 +118,24 @@ export default {
     try {
       const { _id } = req.params;
 
+      const pedido = await Pedido.findById(_id);
+
+      if (!pedido) {
+        return res.status(404).send({ message: "Pedido não encontrado" });
+      }
+
       await Pedido.findByIdAndDelete(_id)
-        .then(() => {
+        .then(async () => {
+          const usuario = await User.findById(pedido.userId);
+
+          if (!usuario) {
+            return res.status(404).send({ message: "Usuário não encontrado" });
+          }
+
+          usuario.meusPedidos = usuario.meusPedidos.filter((pedido) => {
+            pedido._id !== `ObjectId(${_id})`;
+          });
+          await usuario.save();
           return res.status(200).send({ message: "Pedido de ajuda excluído!" });
         })
         .catch((error) => {
