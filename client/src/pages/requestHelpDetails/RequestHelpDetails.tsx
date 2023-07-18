@@ -30,7 +30,7 @@ const Help = () => {
           <div key={pedido?._id}>
             <img
               style={{ width: '320px', height: '320px' }}
-              src={pedido.fotos?.[0]?.url ? pedido.fotos?.[0]?.url : logo}
+              src={pedido.fotos ? pedido.fotos : logo}
               alt={pedido.titulo}
             />
           </div>

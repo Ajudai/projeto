@@ -17,7 +17,6 @@ const Conta = () => {
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
   const [foto, setFoto] = useState(null);
-  const [resFromServer, setResFromServer] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const inputFile = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -55,7 +54,6 @@ const Conta = () => {
     });
     const { data, error } = await editarUsuario(formData, { _id: userData?._id! });
     try {
-      setResFromServer(data!);
       location.reload();
     } catch (err) {
       console.error(error);

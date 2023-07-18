@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 export const handlePhoneNumberChange = (
   event: React.ChangeEvent<HTMLInputElement>,
   setPhoneNumber: (e: string) => void,
