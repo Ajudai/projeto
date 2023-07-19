@@ -20,7 +20,6 @@ import { handlePhoneNumberChange } from '../../utils/formatPhoneNumber';
 import { PiMountainsFill } from 'react-icons/pi';
 import { getUserById } from '../../api/usuario';
 import { useParams } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
 
 const MyRequests = () => {
   const [userData, setUserData] = useState<IUserData[]>();
