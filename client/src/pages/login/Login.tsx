@@ -58,6 +58,12 @@ const Login = () => {
           <div className={styles.loginPageLoginButton}>
             <Button size="medium" disabled={false} rounded onClick={() => handleLogin()} label="Login" />
           </div>
+          <span className={styles.loginPageDesktopContentContainerSpanMobile}>
+            <p className={styles.loginPageDesktopContentContainerSpanPMobile}>Não tem uma conta?</p>
+            <p className={styles.loginPageDesktopContentContainerSpanAMobile}>
+              <Link to={'/register'}>Abra uma</Link>
+            </p>
+          </span>
         </div>
       </div>
     </main>

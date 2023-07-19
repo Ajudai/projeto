@@ -100,6 +100,12 @@ const Register = () => {
           <p className={styles.registerPagePP} onClick={handleOpenModal}>
             Política de Privacidade
           </p>
+          <span className={styles.registerPageDesktopContentContainerSpanMobile}>
+            <p className={styles.registerPageDesktopContentContainerSpanPMobile}>Já tem conta?</p>
+            <p className={styles.registerPageDesktopContentContainerSpanAMobile}>
+              <Link to={'/'}>Faça login</Link>
+            </p>
+          </span>
         </div>
       </div>
       <ModalComponent

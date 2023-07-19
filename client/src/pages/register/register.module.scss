@@ -47,13 +47,26 @@
   padding: 8px;
 }
 
-.registerPagePP{
+.registerPagePP {
   font-family: $font-family-principal;
   color: $fonte-cor-primaria;
   font-weight: 300;
   font-size: 0.8rem;
   cursor: pointer;
   align-self: center;
+}
+
+.registerPageDesktopContentContainerSpanMobile {
+  display: flex;
+  gap: 8px;
+  margin-top: 20%;
+}
+
+.registerPageDesktopContentContainerSpanAMobile {
+  font-family: $font-family-principal;
+  font-weight: 700;
+  border-bottom: 1px solid $fonte-cor-primaria;
+  letter-spacing: 1px;
 }
 
 @media (min-width: 576px) {
@@ -126,6 +139,10 @@
     background-color: $background-pages-default;
     height: 90vh;
     border-radius: 5px;
+  }
+
+  .registerPageDesktopContentContainerSpanMobile {
+    display: none;
   }
 }
 @media (min-width: 992px) {

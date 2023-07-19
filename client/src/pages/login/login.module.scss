@@ -47,6 +47,19 @@
   padding: 12px;
 }
 
+.loginPageDesktopContentContainerSpanMobile {
+  display: flex;
+  gap: 8px;
+  margin-top: 20%;
+}
+
+.loginPageDesktopContentContainerSpanAMobile {
+  font-family: $font-family-principal;
+  font-weight: 700;
+  border-bottom: 1px solid $fonte-cor-primaria;
+  letter-spacing: 1px;
+}
+
 @media (min-width: 576px) {
   .loginPageinputsBox {
     width: 100%;
@@ -106,6 +119,10 @@
 
   .loginPageDesktopContentContainerSpanA > a {
     color: $fonte-cor-primaria;
+  }
+
+  .loginPageDesktopContentContainerSpanMobile {
+    display: none;
   }
 
   .loginPageDesktopContentContainer {
