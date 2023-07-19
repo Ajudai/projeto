@@ -10,6 +10,8 @@ import { BsCameraFill } from 'react-icons/bs';
 import { handlePhoneNumberChange } from '../../utils/formatPhoneNumber';
 import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import ModalComponent from '../../components/modal/ModalComponent';
+import { useDisclosure } from '@chakra-ui/react';
 
 const Conta = () => {
   const [nome, setNome] = useState('');
@@ -21,6 +23,7 @@ const Conta = () => {
   const { setUser } = useAuth();
   const inputFile = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const { isOpen: isContaOpen, onOpen: onContaOpen, onClose: onContaClose } = useDisclosure();
   const { _id } = useParams();
 
   useEffect(() => {
@@ -61,6 +64,7 @@ const Conta = () => {
     const { data, error } = await editarUsuario(formData, { _id: userData?._id! });
     try {
       console.log(data);
+      onContaOpen();
     } catch (err) {
       console.error(error);
     }
@@ -126,6 +130,13 @@ const Conta = () => {
           <Button size="medium" rounded onClick={handleEditarUsuario} label="Salvar dados" />
         </div>
       </div>
+      <ModalComponent
+        modalTitle="Seus dados foram atualizados com sucesso!"
+        modalBody="Você acabou de atualizar seus dados :)"
+        buttonSuccessLabel="Página inicial"
+        isOpen={isContaOpen}
+        onClose={onContaClose}
+      />
     </main>
   );
 };

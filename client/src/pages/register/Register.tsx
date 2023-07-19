@@ -82,13 +82,14 @@ const Register = () => {
             onChange={(e) => setPhoneNumber(e.target.value)}
             type={'text'}
           />
-          <Input error={error} value={cpf} label="CPF" onChange={(e) => setCPF(e.target.value)} type={'text'} />
+          <Input error={error} value={cpf} label="CPF" onChange={(e) => setCPF(e.target.value)} type={'text'} placeholder="CPF deve conter 11 caracteres" />
           <Input
             value={password}
             error={error}
             type="password"
             label="Senha"
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Senha deve conter pelo menos uma letra maiúscula e caractere especial"
           />
           <div className={styles.registerCheckbox}>
             <input type="checkbox" id="registerCheckbox"></input>

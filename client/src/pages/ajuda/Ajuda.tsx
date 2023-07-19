@@ -11,6 +11,7 @@ import Header from '../../components/header/Header';
 import formatarData from '../../utils/formatDate';
 import useAuth from '../../hooks/useAuth';
 import { getUserById } from '../../api/usuario';
+import { useToast } from '@chakra-ui/react';
 
 const Ajuda = () => {
   const [data, setData] = useState<IPedidoModel[]>();
@@ -19,6 +20,7 @@ const Ajuda = () => {
   const { _id } = useParams();
   const { setUser } = useAuth();
   const dataUndefinedNan = 'undefined/NaN - NaN:NaN';
+  const toast = useToast();
 
   useEffect(() => {
     const getUserDataFromStorage = async () => {
@@ -68,6 +70,13 @@ const Ajuda = () => {
   const copyLinkToClipboard = () => {
     const url = window.location.href;
     navigator.clipboard.writeText(url);
+    toast({
+      title: 'Compartilhou a doação?',
+      description: 'Ajudaí a espalhar a solidariedade <3',
+      status: 'success',
+      duration: 5000,
+      isClosable: true,
+    });
   };
 
   const navigate = useNavigate();
@@ -105,7 +114,7 @@ const Ajuda = () => {
             color="fff"
             size={44}
           />
-          <BiShare className={styles.ajudaPageDetailsShare} color="#fff" size={44} onClick={copyLinkToClipboard()} />
+          <BiShare className={styles.ajudaPageDetailsShare} color="#fff" size={44} onClick={copyLinkToClipboard} />
         </div>
       </section>
     </main>

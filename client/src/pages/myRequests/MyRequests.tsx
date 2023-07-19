@@ -150,7 +150,7 @@ const MyRequests = () => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Editar Pedido</ModalHeader>
           <ModalCloseButton />
           <ModalBody display={'flex'} flexDirection={'column'} gap={4}>
             <Input value={titulo} placeholder="Título" onChange={(e) => setTitulo(e.target.value)} />
