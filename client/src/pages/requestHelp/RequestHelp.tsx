@@ -6,11 +6,9 @@ import { PiMountainsFill } from 'react-icons/pi';
 import Button from '../../components/button/Button';
 import Header from '../../components/header/Header';
 import { Select, useDisclosure } from '@chakra-ui/react';
-import { IUserData } from '../../@types/user';
 import { pedirAjuda } from '../../api/pedidos';
 import { handlePhoneNumberChange } from '../../utils/formatPhoneNumber';
 import ModalComponent from '../../components/modal/ModalComponent';
-import useAuth from '../../hooks/useAuth';
 import { getUserById } from '../../api/usuario';
 
 const RequestHelp = () => {

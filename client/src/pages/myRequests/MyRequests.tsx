@@ -23,7 +23,6 @@ import { useParams } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const MyRequests = () => {
-  const { user } = useAuth();
   const [userData, setUserData] = useState<IUserData[]>();
   const [getUserDataServer, setGetUserDataServer] = useState<any[]>([]);
   const [resFromServer, setResFromServer] = useState({});

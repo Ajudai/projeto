@@ -2,7 +2,6 @@
 import styles from './conta.module.scss';
 import { useEffect, useState, useRef } from 'react';
 import { editarUsuario, getUserById } from '../../api/usuario';
-import { IUserData } from '../../@types/user';
 import Header from '../../components/header/Header';
 import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
