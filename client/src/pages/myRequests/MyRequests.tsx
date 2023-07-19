@@ -20,8 +20,10 @@ import { handlePhoneNumberChange } from '../../utils/formatPhoneNumber';
 import { PiMountainsFill } from 'react-icons/pi';
 import { getUserById } from '../../api/usuario';
 import { useParams } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const MyRequests = () => {
+  const { user } = useAuth();
   const [userData, setUserData] = useState<IUserData[]>();
   const [getUserDataServer, setGetUserDataServer] = useState<any[]>([]);
   const [resFromServer, setResFromServer] = useState({});
@@ -127,7 +129,7 @@ const MyRequests = () => {
 
   return (
     <main className={styles.myRequestMainContainer}>
-      <Header />
+      <Header userData={getUserDataServer?.[0]} />
       <div className={styles.myRequestHomeComponentDiv}>
         {getUserDataServer?.[0]?.meusPedidos?.map((info: any) => (
           <div className={styles.myRequestCard}>

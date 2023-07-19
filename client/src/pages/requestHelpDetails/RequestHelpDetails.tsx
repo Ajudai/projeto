@@ -5,12 +5,26 @@ import { useParams } from 'react-router-dom';
 import { IPedidoModel } from '../../@types/pedido';
 import logo from '../../assets/logo.svg';
 import Header from '../../components/header/Header';
+import useAuth from '../../hooks/useAuth';
+import { getUserById } from '../../api/usuario';
 
 const Help = () => {
   const [data, setData] = useState<IPedidoModel[]>();
   const { _id } = useParams();
+  const [userData, setUserData] = useState<any>();
+  const { setUser } = useAuth();
 
   useEffect(() => {
+    const getUserDataFromStorage = async () => {
+      const getFromStorage = localStorage.getItem('userData');
+      const parseUserData = getFromStorage && JSON.parse(getFromStorage);
+      const { data, error } = await getUserById(parseUserData?._id ? parseUserData._id : '');
+      localStorage.setItem('user', JSON.stringify(data));
+      setUser(data);
+      setUserData(data);
+      error && console.error(error);
+    };
+    getUserDataFromStorage();
     const getPedidos = async () => {
       const { data, error } = await getPedidoById(_id!);
       try {
@@ -24,7 +38,7 @@ const Help = () => {
 
   return (
     <main className={styles.ajudaPageMain}>
-      <Header />
+      <Header userData={userData} />
       <div>
         {data?.map((pedido) => (
           <div key={pedido?._id}>

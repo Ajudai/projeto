@@ -7,9 +7,12 @@ import { getAllPedidos } from '../../api/pedidos';
 import { IPedidoModel } from '../../@types/pedido';
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 import { getUserById } from '../../api/usuario';
+import useAuth from '../../hooks/useAuth';
 
 const Home = () => {
   const [data, setData] = useState<IPedidoModel[]>();
+  const [userData, setUserData] = useState<any>();
+  const { setUser } = useAuth();
   const scrollContainerRef: any = useRef(null);
 
   useEffect(() => {
@@ -17,11 +20,10 @@ const Home = () => {
       const getFromStorage = localStorage.getItem('userData');
       const parseUserData = getFromStorage && JSON.parse(getFromStorage);
       const { data, error } = await getUserById(parseUserData?._id ? parseUserData._id : '');
-      try {
-        localStorage.setItem('user', JSON.stringify(data));
-      } catch (err) {
-        console.error(error);
-      }
+      localStorage.setItem('user', JSON.stringify(data));
+      setUser(data);
+      setUserData(data);
+      error && console.error(error);
     };
     getUserDataFromStorage();
 
@@ -62,7 +64,7 @@ const Home = () => {
 
   return (
     <main className={styles.mainHome}>
-      <Header />
+      <Header userData={userData} />
 
       <section className={styles.homeSectionContainer}>
         <div className={styles.homeItensContainer}>

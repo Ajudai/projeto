@@ -10,23 +10,28 @@ import { IUserData } from '../../@types/user';
 import { pedirAjuda } from '../../api/pedidos';
 import { handlePhoneNumberChange } from '../../utils/formatPhoneNumber';
 import ModalComponent from '../../components/modal/ModalComponent';
+import useAuth from '../../hooks/useAuth';
+import { getUserById } from '../../api/usuario';
 
 const RequestHelp = () => {
   const [titulo, setTitulo] = useState('');
   const [contato, setContato] = useState('');
   const [descricao, setDescricao] = useState('');
   const [fotos, setFotos] = useState(null);
-  const [userData, setUserData] = useState<IUserData>();
+  const [userData, setUserData] = useState<any>();
   const [categoria, setCategoria] = useState('');
   const [resFromServer, setResFromServer] = useState({});
   const inputFile = useRef<HTMLInputElement>(null);
   const { isOpen: isRequestOpen, onOpen: onRequestOpen, onClose: onRequestClose } = useDisclosure();
 
   useEffect(() => {
-    const getUserDataFromStorage = () => {
+    const getUserDataFromStorage = async () => {
       const getFromStorage = localStorage.getItem('userData');
       const parseUserData = getFromStorage && JSON.parse(getFromStorage);
-      setUserData(parseUserData);
+      const { data, error } = await getUserById(parseUserData?._id ? parseUserData._id : '');
+      localStorage.setItem('user', JSON.stringify(data));
+      setUserData(data);
+      error && console.error(error);
     };
     getUserDataFromStorage();
   }, [resFromServer]);
@@ -63,8 +68,7 @@ const RequestHelp = () => {
 
   return (
     <main className={styles.requestHelpPageMain}>
-      <Header />
-
+      <Header userData={userData} />
       <div className={styles.requestHelpHomeRequest}>
         <h1 className={styles.requestHelpHomeMenuH1}>Peça uma Ajudaí</h1>
         <div className={styles.requestHelpHomeMenuBanner}>

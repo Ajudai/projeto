@@ -4,13 +4,15 @@ import { IUserData } from '../../@types/user';
 import Header from '../../components/header/Header';
 import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
-import { editarEndereco } from '../../api/usuario';
+import { editarEndereco, getUserById } from '../../api/usuario';
 import axios from 'axios';
 import { useDisclosure } from '@chakra-ui/react';
 import ModalComponent from '../../components/modal/ModalComponent';
+import useAuth from '../../hooks/useAuth';
 
 const Address = () => {
   const [userData, setUserData] = useState<IUserData[]>([]);
+  const [userDataForHeader, setUserDataForHeader] = useState<any>();
   console.log(userData?.[0]?._id);
   const [CEP, setCEP] = useState('');
   const [numero, setNumero] = useState('');
@@ -26,6 +28,7 @@ const Address = () => {
     complemento: complemento,
   });
   const { isOpen: isAddressOpen, onOpen: onAddressOpen, onClose: onAddressClose } = useDisclosure();
+  const { setUser } = useAuth();
 
   useEffect(() => {
     const getUserDataFromStorage = () => {
@@ -48,6 +51,17 @@ const Address = () => {
       setUserData([parseUserData]);
     };
     getUserDataFromStorage();
+
+    const getUserDataFromStorageForHeader = async () => {
+      const getFromStorage = localStorage.getItem('userData');
+      const parseUserData = getFromStorage && JSON.parse(getFromStorage);
+      const { data, error } = await getUserById(parseUserData?._id ? parseUserData._id : '');
+      localStorage.setItem('user', JSON.stringify(data));
+      setUser(data);
+      setUserDataForHeader(data);
+      error && console.error(error);
+    };
+    getUserDataFromStorageForHeader();
   }, [resFromServer]);
 
   const consultarCEP = async (cep: string) => {
@@ -113,7 +127,7 @@ const Address = () => {
 
   return (
     <main className={styles.contaPageMain}>
-      <Header />
+      <Header userData={userDataForHeader} />
       <div className={styles.contaPageData}>
         <Input value={CEP} label="CEP" type="text" onChange={handleChangeCEP} />
         <Input
@@ -147,12 +161,12 @@ const Address = () => {
         <Button size="medium" rounded onClick={handleEditarEndereco} label="Salvar endereço" />
       </div>
       <ModalComponent
-          modalTitle="Endereço atualizado com sucesso!"
-          modalBody="Você acabou de atualizar seu endereço :)"
-          buttonSuccessLabel="Página inicial"
-          isOpen={isAddressOpen}
-          onClose={onAddressClose}
-        />
+        modalTitle="Endereço atualizado com sucesso!"
+        modalBody="Você acabou de atualizar seu endereço :)"
+        buttonSuccessLabel="Página inicial"
+        isOpen={isAddressOpen}
+        onClose={onAddressClose}
+      />
     </main>
   );
 };

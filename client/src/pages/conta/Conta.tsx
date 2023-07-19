@@ -10,14 +10,16 @@ import { BiSolidUser } from 'react-icons/bi';
 import { BsCameraFill } from 'react-icons/bs';
 import { handlePhoneNumberChange } from '../../utils/formatPhoneNumber';
 import { useNavigate, useParams } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const Conta = () => {
-  const [userData, setUserData] = useState<IUserData>();
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
   const [foto, setFoto] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [userData, setUserData] = useState<any>();
+  const { setUser } = useAuth();
   const inputFile = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const { _id } = useParams();
@@ -34,9 +36,14 @@ const Conta = () => {
     };
     getUserData();
 
-    const getUserDataFromStorage = () => {
+    const getUserDataFromStorage = async () => {
       const getFromStorage = localStorage.getItem('user');
       const parseUserData = getFromStorage && JSON.parse(getFromStorage);
+      const { data, error } = await getUserById(parseUserData?._id ? parseUserData._id : '');
+      localStorage.setItem('user', JSON.stringify(data));
+      setUser(data);
+      setUserData(data);
+      error && console.error(error);
       setNome(parseUserData?.userName);
       setEmail(parseUserData?.userEmail);
       setTelefone(parseUserData?.userPhoneNumber);
@@ -72,7 +79,7 @@ const Conta = () => {
 
   return (
     <main className={styles.contaPageMain}>
-      <Header />
+      <Header userData={userData} />
       <div className={styles.contaPageProfile}>
         <div className={styles.contaPagePhoto}>
           {foto || userData?.profilePicture ? (

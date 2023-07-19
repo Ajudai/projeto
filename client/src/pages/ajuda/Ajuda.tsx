@@ -9,14 +9,29 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { BiShare } from 'react-icons/bi';
 import Header from '../../components/header/Header';
 import formatarData from '../../utils/formatDate';
+import useAuth from '../../hooks/useAuth';
+import { getUserById } from '../../api/usuario';
 
 const Ajuda = () => {
   const [data, setData] = useState<IPedidoModel[]>();
   const [dataFormatada, setDataFormatada] = useState('');
+  const [userData, setUserData] = useState<any>();
   const { _id } = useParams();
+  const { setUser } = useAuth();
   const dataUndefinedNan = 'undefined/NaN - NaN:NaN';
 
   useEffect(() => {
+    const getUserDataFromStorage = async () => {
+      const getFromStorage = localStorage.getItem('userData');
+      const parseUserData = getFromStorage && JSON.parse(getFromStorage);
+      const { data, error } = await getUserById(parseUserData?._id ? parseUserData._id : '');
+      localStorage.setItem('user', JSON.stringify(data));
+      setUser(data);
+      setUserData(data);
+      error && console.error(error);
+    };
+    getUserDataFromStorage();
+
     const getPedido = async () => {
       const { data, error } = await getPedidoById(_id!);
       try {
@@ -27,16 +42,6 @@ const Ajuda = () => {
       }
     };
     getPedido();
-  }, []);
-
-  useEffect(() => {
-    const getUserDataFromStorage = () => {
-      const getFromStorage = localStorage.getItem('user');
-      const parseUserData = getFromStorage && JSON.parse(getFromStorage);
-      console.log(parseUserData);
-    };
-
-    getUserDataFromStorage();
   }, []);
 
   useEffect(() => {
@@ -69,7 +74,7 @@ const Ajuda = () => {
 
   return (
     <main className={styles.ajudaPageMain}>
-      <Header />
+      <Header userData={userData} />
       <div className={styles.ajudaPageBanner}>
         <img className={styles.ajudaPageBannerImage} src={data?.[0]?.fotos} alt="" />
         <div className={styles.ajudaPageContentContainer}>

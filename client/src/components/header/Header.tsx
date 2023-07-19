@@ -3,13 +3,11 @@ import styles from './header.module.scss';
 import logo from '../../assets/logo.svg';
 import { MdMenu, MdClose } from 'react-icons/md';
 import AvatarComponent from '../avatar/AvatarComponent';
-import { IUserData } from '../../@types/user';
 import { useNavigate } from 'react-router-dom';
 import { MenuMockFunction } from '../../utils/menuMock';
 
-const Header = () => {
+const Header = ({ userData }: any) => {
   const [openMenu, setOpenMenu] = useState(false);
-  const [userData, setUserData] = useState<IUserData>();
   const { menuMock } = MenuMockFunction();
 
   const navigate = useNavigate();
@@ -18,22 +16,13 @@ const Header = () => {
     else document.body.style.overflow = 'unset';
   }, [openMenu]);
 
-  useEffect(() => {
-    const getUserDataFromStorage = () => {
-      const getFromStorage = localStorage.getItem('user');
-      const parseUserData = getFromStorage && JSON.parse(getFromStorage);
-      setUserData(parseUserData);
-    };
-    getUserDataFromStorage();
-  }, []);
-
   return (
     <header className={styles.headerContainer}>
       <div className={styles.headerContainerDiv}>
         <img
           src={logo}
           aria-hidden
-          onClick={() => navigate('/home')}
+          onClick={() => navigate('/')}
           alt="Ajudaí logo"
           className={styles.headerContainerImg}
         />
